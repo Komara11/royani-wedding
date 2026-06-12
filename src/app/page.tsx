@@ -556,7 +556,7 @@ export default function Home() {
       {/* NAVIGATION BAR */}
       <nav className={navScrolled ? "scrolled" : ""}>
         <a href="#" onClick={(e) => scrollTo(e, "home")} className="nav-logo">
-          R<span>W</span>
+          <img src="/logo.png" alt="Royani Wedding" style={{ display: 'block', height: '42px', width: 'auto' }} />
         </a>
         <button
           className={`hamburger ${hamburgerActive ? "active" : ""}`}
@@ -1427,7 +1427,7 @@ export default function Home() {
           <div className="footer-grid">
             <div className="footer-brand">
               <a href="#" onClick={(e) => scrollTo(e, "home")} className="nav-logo">
-                R<span>W</span>
+                <img src="/logo.png" alt="Royani Wedding" style={{ display: 'block', height: '48px', width: 'auto' }} />
               </a>
               <p className="footer-tagline">
                 Mewujudkan hari spesial Anda menjadi kenangan indah yang sempurna, berkesan, dan elegan lewat layanan profesional kami.
