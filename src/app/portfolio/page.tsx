@@ -60,6 +60,27 @@ export default function PortfolioPage() {
     ? portfolioItems
     : portfolioItems.filter(item => item.category === selectedCategory);
 
+  // Reveal observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: "0px 0px -80px 0px" }
+    );
+
+    const elements = document.querySelectorAll(".reveal");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, [selectedCategory, portfolioItems]);
+
   // Lightbox
   const openLightbox = (id: number) => {
     const originalIndex = portfolioItems.findIndex(item => item.id === id);

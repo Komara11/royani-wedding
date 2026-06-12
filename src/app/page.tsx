@@ -712,7 +712,7 @@ export default function Home() {
     return () => {
       elements.forEach((el) => observer.unobserve(el));
     };
-  }, [selectedCategory]);
+  }, [selectedCategory, portfolioItems, akadPkgs, lengkapPkgs, activePriceTab]);
 
   // Particles generator (React implementation)
   const [particles, setParticles] = useState<{ left: string; size: string; duration: string; delay: string }[]>([]);
