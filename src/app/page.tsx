@@ -543,7 +543,7 @@ export default function Home() {
         if (!portSnap.empty) {
           const items = portSnap.docs
             .filter(d => d.data().is_active !== false)
-            .map((d, idx) => ({ ...d.data(), id: idx, src: d.data().image_url, gridClass: d.data().grid_class } as typeof fallbackPortfolioItems[0]));
+            .map((d, idx) => ({ ...d.data(), id: idx, src: d.data().image_url, gridClass: d.data().grid_class || "col-6" } as typeof fallbackPortfolioItems[0]));
           if (items.length > 0) setPortfolioItems(items);
         }
 
@@ -599,7 +599,6 @@ export default function Home() {
     fetchData();
   }, []);
 
-  // Portfolio filters and states
   const [selectedCategory, setSelectedCategory] = useState("Semua");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -1082,14 +1081,12 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Gallery Grid */}
-        <div
-          className="portfolio-grid"
-        >
+        {/* Portfolio Grid */}
+        <div className="portfolio-grid">
           {filteredPortfolio.map((item, idx) => (
             <div
               key={item.id}
-              className={`portfolio-item ${item.gridClass} reveal`}
+              className={`portfolio-item ${item.gridClass || "span-1"} reveal`}
               style={{ transitionDelay: `${idx * 0.1}s` }}
               onClick={() => openLightbox(item.id)}
             >
@@ -1102,6 +1099,19 @@ export default function Home() {
             </div>
           ))}
         </div>
+
+        {/* Load More Button (Hidden on Mobile via CSS) */}
+        {filteredPortfolio.length > 6 && (
+          <div className="load-more-container" style={{ textAlign: "center", marginTop: "40px" }}>
+            <Link 
+              href="/portfolio"
+              className="btn btn-outline" 
+              style={{ display: "inline-block", padding: "12px 32px", borderRadius: "30px", fontSize: "0.95rem", textDecoration: "none" }}
+            >
+              Lihat Semua Dokumentasi
+            </Link>
+          </div>
+        )}
       </section>
 
       {/* PORTFOLIO LIGHTBOX MODAL */}
