@@ -1698,35 +1698,7 @@ a.contact-minimal-item:hover {
 }
 
 /* ===== FOOTER ===== */
-footer {
-  text-align: center;
-  padding: 100px 60px 48px;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
-  background: #060606;
-  position: relative;
-  z-index: 2;
-}
-
-footer .nav-logo {
-  display: inline-block;
-  margin-bottom: 24px;
-}
-
-footer p {
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-
-footer a {
-  color: var(--text-muted);
-  transition: color 0.3s;
-}
-
-footer a:hover {
-  color: var(--gold);
-}
+/* Legacy footer styles removed to prevent conflicts with .footer-premium */
 
 /* ===== RESPONSIVE STYLES ===== */
 @media (max-width: 1024px) {
@@ -1879,8 +1851,20 @@ footer a:hover {
     max-width: 260px;
   }
   .about-metrics {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 30px;
+    padding-top: 30px;
+  }
+  .about-metrics .metric-item {
+    padding: 12px 6px;
+  }
+  .about-metrics .metric-num {
+    font-size: 1.6rem;
+  }
+  .about-metrics .metric-label {
+    font-size: 0.55rem;
+    letter-spacing: 1px;
   }
   .portfolio-filters {
     gap: 16px;
