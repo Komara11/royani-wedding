@@ -529,7 +529,8 @@ export default function Home() {
 
   const [footerContent, setFooterContent] = useState({
     description: "Wedding organizer profesional di Majalengka, Cirebon, Indramayu dan sekitarnya. Mewujudkan pernikahan impian dengan sentuhan elegan dan layanan paripurna.",
-    copyright: "© 2024 Royani Wedding. Seluruh hak cipta dilindungi."
+    copyright: "© 2024 Royani Wedding. Seluruh hak cipta dilindungi.",
+    logo_url: ""
   });
 
   // Fetch data from Firestore
@@ -541,8 +542,8 @@ export default function Home() {
         const portSnap = await getDocs(portQ);
         if (!portSnap.empty) {
           const items = portSnap.docs
-            .map((d, idx) => ({ ...d.data(), id: idx, src: d.data().image_url, gridClass: d.data().grid_class } as typeof fallbackPortfolioItems[0]))
-            .filter(i => i.is_active !== false);
+            .filter(d => d.data().is_active !== false)
+            .map((d, idx) => ({ ...d.data(), id: idx, src: d.data().image_url, gridClass: d.data().grid_class } as typeof fallbackPortfolioItems[0]));
           if (items.length > 0) setPortfolioItems(items);
         }
 
