@@ -1143,22 +1143,24 @@ export default function Home() {
           {faqs.map((faq, idx) => (
             <div
               key={idx}
-              className={`faq-item ${activeFaqIndex === idx ? "active" : ""} reveal`}
-              style={{ transitionDelay: `${idx * 0.08}s` }}
+              className="reveal"
+              style={{ transitionDelay: `${idx * 0.08}s`, width: "100%" }}
             >
-              <button
-                className="faq-question"
-                onClick={() => setActiveFaqIndex(activeFaqIndex === idx ? null : idx)}
-              >
-                <span>{faq.question}</span>
-                <div className="faq-icon-wrapper">
-                  <svg width="12" height="12" viewBox="0 0 12 12">
-                    <path d="M11 5H7V1c0-.55-.45-1-1-1s-1 .45-1 1v4H1c-.55 0-1 .45-1 1s.45 1 1 1h4v4c0 .55.45 1 1 1s1-.45 1-1V7h4c.55 0 1-.45 1-1s-.45-1-1-1z" />
-                  </svg>
+              <div className={`faq-item ${activeFaqIndex === idx ? "active" : ""}`}>
+                <button
+                  className="faq-question"
+                  onClick={() => setActiveFaqIndex(activeFaqIndex === idx ? null : idx)}
+                >
+                  <span>{faq.question}</span>
+                  <div className="faq-icon-wrapper">
+                    <svg width="12" height="12" viewBox="0 0 12 12">
+                      <path d="M11 5H7V1c0-.55-.45-1-1-1s-1 .45-1 1v4H1c-.55 0-1 .45-1 1s.45 1 1 1h4v4c0 .55.45 1 1 1s1-.45 1-1V7h4c.55 0 1-.45 1-1s-.45-1-1-1z" />
+                    </svg>
+                  </div>
+                </button>
+                <div className="faq-answer">
+                  <p>{faq.answer}</p>
                 </div>
-              </button>
-              <div className="faq-answer">
-                <p>{faq.answer}</p>
               </div>
             </div>
           ))}
