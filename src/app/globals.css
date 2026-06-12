@@ -1870,18 +1870,29 @@ select.form-input-premium option {
   }
   .pricing-grid.pricing-grid-lengkap.active,
   .pricing-grid.pricing-grid-akad.active {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
+    display: flex;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
     gap: 20px;
-    padding: 20px 0;
-    margin: 0;
-    width: 100%;
+    padding: 20px 40px 40px 40px;
+    margin-left: -40px;
+    margin-right: -40px;
+    width: calc(100% + 80px);
+    scrollbar-width: none; /* Firefox */
+  }
+  .pricing-grid.pricing-grid-lengkap.active::-webkit-scrollbar,
+  .pricing-grid.pricing-grid-akad.active::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
   }
   .pricing-grid.pricing-grid-lengkap.active .price-card,
   .pricing-grid.pricing-grid-akad.active .price-card {
+    flex: 0 0 310px !important;
+    scroll-snap-align: center;
     grid-column: auto;
     margin: 0;
-    width: 100%;
   }
   .lightbox-backdrop {
     padding: 20px;
@@ -2202,19 +2213,26 @@ select.form-input-premium option {
 }
 
 @media (max-width: 480px) {
-  /* Vertical Stack for Portfolio Grid on Mobile */
+  /* Horizontal Scroll for Portfolio Grid on Mobile */
   .portfolio-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 10px 0;
-    margin: 0;
-    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding: 10px 24px 30px 24px;
+    margin-left: -24px;
+    margin-right: -24px;
+    width: calc(100% + 48px);
+    scrollbar-width: none;
+  }
+  .portfolio-grid::-webkit-scrollbar {
+    display: none;
   }
   .portfolio-grid .portfolio-item {
-    width: 100% !important;
+    flex: 0 0 280px !important;
     height: 380px !important;
+    scroll-snap-align: start;
     grid-column: auto !important;
-    margin: 0;
   }
 }
