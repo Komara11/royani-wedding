@@ -425,6 +425,7 @@ export default function Home() {
       duration: Math.random() * 12 + 10 + "s",
       delay: Math.random() * 10 + "s",
     }));
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setParticles(generated);
   }, []);
 
@@ -438,6 +439,16 @@ export default function Home() {
     const originalIndex = portfolioItems.findIndex(item => item.id === id);
     if (originalIndex !== -1) {
       setLightboxIndex(originalIndex);
+      window.history.pushState({ lightboxOpen: true }, "");
+    }
+  };
+
+  // Helper to close lightbox
+  const closeLightbox = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setLightboxIndex(null);
+    if (window.history.state?.lightboxOpen) {
+      window.history.back();
     }
   };
 
