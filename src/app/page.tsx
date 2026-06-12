@@ -481,8 +481,8 @@ const faqs = [
     answer: "Mekanisme pembayaran sangat mudah dan bertahap. Untuk mengamankan tanggal pernikahan (booking date), Anda cukup membayar Down Payment (DP) awal yang disepakati. Sisa pembayaran dapat dicicil hingga pelunasan menjelang hari H."
   },
   {
-    question: "Apakah melayani jasa pernikahan di luar wilayah Cirebon?",
-    answer: "Ya, kami melayani wilayah Cirebon Raya (Kota & Kabupaten) serta wilayah sekitar seperti Kuningan, Majalengka, Indramayu (CIAYUMAJAKUNING), dan daerah sekitarnya. Tergantung lokasi, mungkin terdapat sedikit penyesuaian biaya transportasi."
+    question: "Apakah melayani jasa pernikahan di luar wilayah Majalengka?",
+    answer: "Ya, kami melayani wilayah Majalengka serta wilayah sekitar seperti Cirebon, Kuningan, Indramayu, dan daerah sekitarnya. Tergantung lokasi, mungkin terdapat sedikit penyesuaian biaya transportasi."
   },
   {
     question: "Berapa lama persiapan minimal sebelum memesan (booking)?",
@@ -907,7 +907,7 @@ export default function Home() {
               Menciptakan Momen <span>Abadi</span>
             </h2>
             <p>
-              Royani Wedding adalah mitra wedding organizer profesional di Cirebon yang berdedikasi tinggi untuk mewujudkan konsep pernikahan impian Anda. Kami memadukan nilai artistik dan detail organisasi terbaik demi kenyamanan seluruh rangkaian acara Anda.
+              Royani Wedding adalah mitra wedding organizer profesional di Majalengka yang berdedikasi tinggi untuk mewujudkan konsep pernikahan impian Anda. Kami memadukan nilai artistik dan detail organisasi terbaik demi kenyamanan seluruh rangkaian acara Anda.
             </p>
             <p>
               Dari konsep tata rias anggun, dekorasi megah, hingga pengaturan alur acara di lapangan, kami memberikan sentuhan elegan dan perhatian penuh di setiap detiknya.
@@ -1570,7 +1570,7 @@ export default function Home() {
                   className="form-input-premium"
                   value={contactPackage}
                   onChange={(e) => setContactPackage(e.target.value)}
-                  style={{ background: "#0f0f0f", color: "var(--text-primary)" }}
+                  style={{ background: "var(--background)", color: "var(--text-primary)" }}
                 >
                   <option value="" disabled hidden></option>
                   <option value="Paket Akad 1 (Rp 2.500.000)">Paket Akad 1 (Rp 2.500.000)</option>
