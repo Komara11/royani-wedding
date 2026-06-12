@@ -529,7 +529,9 @@ export default function Home() {
       {/* PRELOADER */}
       <div className={`preloader ${!isLoading ? "fade-out" : ""}`}>
         <div className="preloader-content">
-          <div className="preloader-logo">R</div>
+          <div className="preloader-logo">
+            <img src="/logo.png" alt="Royani Wedding Logo" />
+          </div>
           <div className="preloader-title">Royani Wedding</div>
           <div className="preloader-spinner">
             <div className="spinner-line" />
