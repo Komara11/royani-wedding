@@ -602,7 +602,6 @@ export default function Home() {
   // Portfolio filters and states
   const [selectedCategory, setSelectedCategory] = useState("Semua");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [showAllPortfolio, setShowAllPortfolio] = useState(false);
 
   // Pricing tabs
   const [activePriceTab, setActivePriceTab] = useState<"akad" | "lengkap">("akad");
@@ -729,11 +728,9 @@ export default function Home() {
   }, []);
 
   // Filtered portfolio
-  const rawFilteredPortfolio = selectedCategory === "Semua"
+  const filteredPortfolio = selectedCategory === "Semua"
     ? portfolioItems
     : portfolioItems.filter(item => item.category === selectedCategory);
-
-  const filteredPortfolio = showAllPortfolio ? rawFilteredPortfolio : rawFilteredPortfolio.slice(0, 6);
 
   // Helper to open lightbox
   const openLightbox = (id: number) => {
@@ -1105,19 +1102,6 @@ export default function Home() {
             </div>
           ))}
         </div>
-
-        {/* Load More Button */}
-        {!showAllPortfolio && rawFilteredPortfolio.length > 6 && (
-          <div style={{ textAlign: "center", marginTop: "40px" }}>
-            <button 
-              className="btn btn-outline" 
-              onClick={() => setShowAllPortfolio(true)}
-              style={{ padding: "12px 32px", borderRadius: "30px", fontSize: "0.95rem" }}
-            >
-              Lihat Semua Dokumentasi
-            </button>
-          </div>
-        )}
       </section>
 
       {/* PORTFOLIO LIGHTBOX MODAL */}
