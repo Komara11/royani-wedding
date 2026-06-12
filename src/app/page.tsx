@@ -1,41 +1,15 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { db } from "@/lib/firebase";
+import { collection, getDocs, doc, getDoc, query, orderBy } from "firebase/firestore";
 
-// Portfolio definition
-const portfolioItems = [
-  {
-    id: 0,
-    src: "/images/porto-1.jpg",
-    title: "Pernikahan Andi & Sari",
-    category: "Resepsi",
-    location: "Grand Ballroom",
-    gridClass: "col-4"
-  },
-  {
-    id: 1,
-    src: "/images/porto-2.jpg",
-    title: "Pernikahan Rian & Dewi",
-    category: "Outdoor",
-    location: "Outdoor Garden",
-    gridClass: "col-8"
-  },
-  {
-    id: 2,
-    src: "/images/porto-3.jpg",
-    title: "Pernikahan Yoga & Putri",
-    category: "Akad",
-    location: "Gedung Serbaguna",
-    gridClass: "col-6"
-  },
-  {
-    id: 3,
-    src: "/images/porto-4.jpg",
-    title: "Pernikahan Dimas & Rina",
-    category: "Resepsi",
-    location: "Hotel Bintang 5",
-    gridClass: "col-6"
-  }
+// Portfolio definition (fallback data)
+const fallbackPortfolioItems = [
+  { id: 0, src: "/images/porto-1.jpg", title: "Pernikahan Andi & Sari", category: "Resepsi", location: "Grand Ballroom", gridClass: "col-4" },
+  { id: 1, src: "/images/porto-2.jpg", title: "Pernikahan Rian & Dewi", category: "Outdoor", location: "Outdoor Garden", gridClass: "col-8" },
+  { id: 2, src: "/images/porto-3.jpg", title: "Pernikahan Yoga & Putri", category: "Akad", location: "Gedung Serbaguna", gridClass: "col-6" },
+  { id: 3, src: "/images/porto-4.jpg", title: "Pernikahan Dimas & Rina", category: "Resepsi", location: "Hotel Bintang 5", gridClass: "col-6" },
 ];
 
 // Pricing definitions
@@ -496,9 +470,138 @@ export default function Home() {
   const [navScrolled, setNavScrolled] = useState(false);
   const [hamburgerActive, setHamburgerActive] = useState(false);
 
+  // Dynamic data from Firestore (with fallbacks)
+  const [portfolioItems, setPortfolioItems] = useState(fallbackPortfolioItems);
+  const [akadPkgs, setAkadPkgs] = useState<PricingPackage[]>(akadPackages);
+  const [lengkapPkgs, setLengkapPkgs] = useState<PricingPackage[]>(lengkapPackages);
+  const [faqItems, setFaqItems] = useState(faqs);
+
+  const [heroContent, setHeroContent] = useState({
+    subtitle: "WEDDING ORGANIZER TERPERCAYA DI MAJALENGKA",
+    title_first: "Pernikahan Impian,",
+    title_second: "Elegan & Penuh Makna",
+    description: "Mewujudkan hari spesial Anda menjadi sempurna, berkesan, dan elegan lewat layanan profesional kami.",
+    cta_text: "Konsultasi Gratis",
+    scroll_text: "Scroll untuk melihat galeri"
+  });
+
+  const [aboutContent, setAboutContent] = useState({
+    tag: "TENTANG KAMI",
+    title_first: "Mewujudkan Momen",
+    title_highlight: "Paling Berharga",
+    paragraph_1: "Royani Wedding adalah mitra wedding organizer profesional di Majalengka yang berdedikasi tinggi untuk mewujudkan konsep pernikahan impian Anda. Kami memadukan nilai artistik dan detail organisasi terbaik demi kenyamanan seluruh rangkaian acara Anda.",
+    paragraph_2: "Dari konsep tata rias anggun, dekorasi megah, hingga pengaturan alur acara di lapangan, kami memberikan sentuhan elegan dan perhatian penuh di setiap detiknya.",
+    quote: "\"Pernikahan adalah simfoni cinta yang diabadikan dalam janji suci. Kami hadir untuk memastikan simfoni tersebut mengalun sempurna.\"",
+    image_url: "/images/hero-1.jpg",
+    metrics: [
+      { value: "500+", label: "Acara Sukses" },
+      { value: "50+", label: "Mitra Vendor Terbaik" },
+      { value: "8+", label: "Tahun Pengalaman" }
+    ]
+  });
+
+  const [contactContent, setContactContent] = useState({
+    tag: "KONSULTASI GRATIS",
+    title_first: "Mari Rencanakan",
+    title_highlight: "Hari Spesial Anda",
+    description: "Konsultasikan konsep pernikahan impian Anda bersama tim kami. Kami siap memberikan solusi terbaik sesuai dengan anggaran dan kebutuhan Anda.",
+    whatsapp_number: "+62 878 4722 2209",
+    address: "Blok Rabu RT.03/RW.02 No.81, Beusi, Ligung, Majalengka",
+    maps_url: "https://maps.app.goo.gl/kioYwz4396tGzD8b9",
+    maps_embed_url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1154.5123991206124!2d108.2721081!3d-6.6669931!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6ede115166299b%3A0xe54c86e245a4ecb4!2sRoyani%20Wedding!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid",
+    form_tag: "HUBUNGI KAMI",
+    form_title: "Tinggalkan Pesan",
+    form_description: "Isi form di bawah ini dan tim kami akan segera menghubungi Anda melalui WhatsApp."
+  });
+
+  const [socialMedia, setSocialMedia] = useState({
+    tag: "SOSIAL MEDIA",
+    title_first: "Ikuti",
+    title_highlight: "Perjalanan Kami",
+    description: "Lihat lebih banyak karya dan momen indah pernikahan klien kami di berbagai platform sosial media.",
+    items: [
+      { platform: "Instagram", url: "https://instagram.com/royaniwedding", icon: "instagram" },
+      { platform: "TikTok", url: "https://tiktok.com/@royaniwedding", icon: "tiktok" },
+      { platform: "Facebook", url: "https://facebook.com/royaniwedding", icon: "facebook" },
+      { platform: "WhatsApp", url: "https://wa.me/6287847222209", icon: "whatsapp" }
+    ]
+  });
+
+  const [footerContent, setFooterContent] = useState({
+    description: "Wedding organizer profesional di Majalengka, Cirebon, Indramayu dan sekitarnya. Mewujudkan pernikahan impian dengan sentuhan elegan dan layanan paripurna.",
+    copyright: "© 2024 Royani Wedding. Seluruh hak cipta dilindungi."
+  });
+
+  // Fetch data from Firestore
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // Portfolio
+        const portQ = query(collection(db, "portfolio_items"), orderBy("sort_order"));
+        const portSnap = await getDocs(portQ);
+        if (!portSnap.empty) {
+          const items = portSnap.docs
+            .map((d, idx) => ({ ...d.data(), id: idx, src: d.data().image_url, gridClass: d.data().grid_class } as typeof fallbackPortfolioItems[0]))
+            .filter(i => i.is_active !== false);
+          if (items.length > 0) setPortfolioItems(items);
+        }
+
+        // Pricing packages
+        const pkgQ = query(collection(db, "pricing_packages"), orderBy("sort_order"));
+        const pkgSnap = await getDocs(pkgQ);
+        if (!pkgSnap.empty) {
+          const allPkgs = pkgSnap.docs
+            .map(d => d.data())
+            .filter(p => p.is_active !== false);
+          const akad = allPkgs.filter(p => p.type === "akad").map(p => ({
+            name: p.name, price: p.price, featured: p.featured || false,
+            sections: (p.sections || []).map((s: { title: string; is_bonus: boolean; features: string[] }) => ({ title: s.title, free: s.is_bonus, features: s.features })),
+          })) as PricingPackage[];
+          const lengkap = allPkgs.filter(p => p.type === "lengkap").map(p => ({
+            name: p.name, price: p.price, featured: p.featured || false,
+            sections: (p.sections || []).map((s: { title: string; is_bonus: boolean; features: string[] }) => ({ title: s.title, free: s.is_bonus, features: s.features })),
+          })) as PricingPackage[];
+          if (akad.length > 0) setAkadPkgs(akad);
+          if (lengkap.length > 0) setLengkapPkgs(lengkap);
+        }
+
+        // FAQs
+        const faqQ = query(collection(db, "faqs"), orderBy("sort_order"));
+        const faqSnap = await getDocs(faqQ);
+        if (!faqSnap.empty) {
+          const items = faqSnap.docs
+            .map(d => d.data())
+            .filter(f => f.is_active !== false)
+            .map(f => ({ question: f.question, answer: f.answer }));
+          if (items.length > 0) setFaqItems(items);
+        }
+
+        // Site Content
+        const [heroSnap, aboutSnap, contactSnap, socialSnap, footerSnap] = await Promise.all([
+          getDoc(doc(db, "site_content", "hero")),
+          getDoc(doc(db, "site_content", "about")),
+          getDoc(doc(db, "site_content", "contact")),
+          getDoc(doc(db, "site_content", "social_media")),
+          getDoc(doc(db, "site_content", "footer"))
+        ]);
+
+        if (heroSnap.exists()) setHeroContent(heroSnap.data() as typeof heroContent);
+        if (aboutSnap.exists()) setAboutContent(aboutSnap.data() as typeof aboutContent);
+        if (contactSnap.exists()) setContactContent(contactSnap.data() as typeof contactContent);
+        if (socialSnap.exists()) setSocialMedia(socialSnap.data() as typeof socialMedia);
+        if (footerSnap.exists()) setFooterContent(footerSnap.data() as typeof footerContent);
+
+      } catch (err) {
+        console.warn("Firestore fetch failed, using fallback data:", err);
+      }
+    }
+    fetchData();
+  }, []);
+
   // Portfolio filters and states
   const [selectedCategory, setSelectedCategory] = useState("Semua");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [showAllPortfolio, setShowAllPortfolio] = useState(false);
 
   // Pricing tabs
   const [activePriceTab, setActivePriceTab] = useState<"akad" | "lengkap">("akad");
@@ -609,7 +712,7 @@ export default function Home() {
     return () => {
       elements.forEach((el) => observer.unobserve(el));
     };
-  }, []);
+  }, [selectedCategory]);
 
   // Particles generator (React implementation)
   const [particles, setParticles] = useState<{ left: string; size: string; duration: string; delay: string }[]>([]);
@@ -625,9 +728,11 @@ export default function Home() {
   }, []);
 
   // Filtered portfolio
-  const filteredPortfolio = selectedCategory === "Semua"
+  const rawFilteredPortfolio = selectedCategory === "Semua"
     ? portfolioItems
     : portfolioItems.filter(item => item.category === selectedCategory);
+
+  const filteredPortfolio = showAllPortfolio ? rawFilteredPortfolio : rawFilteredPortfolio.slice(0, 6);
 
   // Helper to open lightbox
   const openLightbox = (id: number) => {
@@ -683,7 +788,8 @@ export default function Home() {
       `*Catatan/Permintaan:* ${bookingNotes || "-"}\n\n` +
       `Mohon diinformasikan langkah selanjutnya. Terima kasih!`;
 
-    const waUrl = `https://wa.me/6287847222209?text=${encodeURIComponent(formattedMessage)}`;
+    const parsedWaNumber = contactContent.whatsapp_number.replace(/[^0-9]/g, "").replace(/^0/, "62").startsWith("62") ? contactContent.whatsapp_number.replace(/[^0-9]/g, "").replace(/^0/, "62") : contactContent.whatsapp_number;
+    const waUrl = `https://wa.me/${parsedWaNumber}?text=${encodeURIComponent(formattedMessage)}`;
     window.open(waUrl, "_blank");
     closeBookingModal();
   };
@@ -699,7 +805,8 @@ export default function Home() {
       `*Pertanyaan/Catatan:* ${contactNotes}\n\n` +
       `Mohon informasinya lebih lanjut. Terima kasih!`;
 
-    const waUrl = `https://wa.me/6287847222209?text=${encodeURIComponent(formattedMessage)}`;
+    const parsedWaNumber = contactContent.whatsapp_number.replace(/[^0-9]/g, "").replace(/^0/, "62").startsWith("62") ? contactContent.whatsapp_number.replace(/[^0-9]/g, "").replace(/^0/, "62") : contactContent.whatsapp_number;
+    const waUrl = `https://wa.me/${parsedWaNumber}?text=${encodeURIComponent(formattedMessage)}`;
     window.open(waUrl, "_blank");
 
     // Reset form
@@ -753,7 +860,7 @@ export default function Home() {
       {/* NAVIGATION BAR */}
       <nav className={navScrolled ? "scrolled" : ""}>
         <a href="#" onClick={(e) => scrollTo(e, "home")} className="nav-logo">
-          <img src="/logo.png" alt="Royani Wedding" style={{ display: 'block', height: '42px', width: 'auto' }} />
+          <img src={footerContent.logo_url || "/logo.png"} alt="Royani Wedding Logo" style={{ display: 'block', height: '42px', width: 'auto' }} />
         </a>
         <button
           className={`hamburger ${hamburgerActive ? "active" : ""}`}
@@ -843,12 +950,12 @@ export default function Home() {
         </div>
         <div className="hero-overlay" />
         <div className="hero-content">
-          <p className="hero-subtitle">Wedding Organizer</p>
+          <p className="hero-subtitle">{heroContent.subtitle}</p>
           <h1 className="hero-title">
-            Royani <span>Wedding</span>
+            {heroContent.title_first} <span>{heroContent.title_second}</span>
           </h1>
           <p className="hero-desc">
-            Mewujudkan hari spesial Anda menjadi sempurna, berkesan, dan elegan lewat layanan profesional kami.
+            {heroContent.description}
           </p>
           <div className="hero-cta">
             <a
@@ -856,7 +963,7 @@ export default function Home() {
               onClick={(e) => scrollTo(e, "harga")}
               className="btn btn-primary"
             >
-              Daftar Harga
+              {heroContent.cta_text}
             </a>
           </div>
         </div>
@@ -866,7 +973,7 @@ export default function Home() {
           onClick={(e) => scrollTo(e, "tentang")}
           className="hero-scroll-indicator"
         >
-          <span className="scroll-text">Gulir ke bawah</span>
+          <span className="scroll-text">{heroContent.scroll_text}</span>
           <div className="scroll-arrow">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="7 13 12 18 17 13" />
@@ -890,40 +997,34 @@ export default function Home() {
             ref={(el) => { if (el) revealRefs.current[0] = el; }}
           >
             <div className="about-frame">
-              <img src="/images/about.jpg" alt="Royani Wedding Setup" />
+              <img src={aboutContent.image_url} alt="Royani Wedding Setup" />
             </div>
             {/* Elegant overlapping quote card */}
             <div className="about-floating-quote">
-              <p>&ldquo;Hari terindah adalah ketika janji suci terucap dan disaksikan oleh semesta dengan keanggunan abadi.&rdquo;</p>
+              <p>&ldquo;{aboutContent.quote}&rdquo;</p>
             </div>
           </div>
           <div
             className="about-text reveal"
             ref={(el) => { if (el) revealRefs.current[1] = el; }}
           >
-            <span className="section-tag">Tentang Kami</span>
+            <span className="section-tag">{aboutContent.tag}</span>
             <h2 className="section-title">
-              Menciptakan Momen <span>Abadi</span>
+              {aboutContent.title_first} <span>{aboutContent.title_highlight}</span>
             </h2>
-            <p>
-              Royani Wedding adalah mitra wedding organizer profesional di Majalengka yang berdedikasi tinggi untuk mewujudkan konsep pernikahan impian Anda. Kami memadukan nilai artistik dan detail organisasi terbaik demi kenyamanan seluruh rangkaian acara Anda.
+            <p style={{ textAlign: "justify" }}>
+              {aboutContent.paragraph_1}
             </p>
-            <p>
-              Dari konsep tata rias anggun, dekorasi megah, hingga pengaturan alur acara di lapangan, kami memberikan sentuhan elegan dan perhatian penuh di setiap detiknya.
+            <p style={{ textAlign: "justify" }}>
+              {aboutContent.paragraph_2}
             </p>
             <div className="about-metrics">
-              <div className="metric-item reveal" style={{ transitionDelay: "0.1s" }}>
-                <div className="metric-num">500+</div>
-                <div className="metric-label">Acara Sukses</div>
-              </div>
-              <div className="metric-item reveal" style={{ transitionDelay: "0.2s" }}>
-                <div className="metric-num">8+</div>
-                <div className="metric-label">Tahun Kerja</div>
-              </div>
-              <div className="metric-item reveal" style={{ transitionDelay: "0.3s" }}>
-                <div className="metric-num">99%</div>
-                <div className="metric-label">Rating Puas</div>
-              </div>
+              {aboutContent.metrics.map((metric, idx) => (
+                <div key={idx} className="metric-item reveal" style={{ transitionDelay: `${0.1 * (idx + 1)}s` }}>
+                  <div className="metric-num">{metric.value}</div>
+                  <div className="metric-label">{metric.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -1003,6 +1104,19 @@ export default function Home() {
             </div>
           ))}
         </div>
+
+        {/* Load More Button */}
+        {!showAllPortfolio && rawFilteredPortfolio.length > 6 && (
+          <div style={{ textAlign: "center", marginTop: "40px" }}>
+            <button 
+              className="btn btn-outline" 
+              onClick={() => setShowAllPortfolio(true)}
+              style={{ padding: "12px 32px", borderRadius: "30px", fontSize: "0.95rem" }}
+            >
+              Lihat Semua Dokumentasi
+            </button>
+          </div>
+        )}
       </section>
 
       {/* PORTFOLIO LIGHTBOX MODAL */}
@@ -1081,7 +1195,7 @@ export default function Home() {
 
           {/* Akad Grid */}
           <div className={`pricing-grid pricing-grid-akad ${activePriceTab === "akad" ? "active" : ""}`}>
-            {akadPackages.map((pkg, idx) => {
+            {akadPkgs.map((pkg, idx) => {
               const isExpanded = !!expandedCards[pkg.name];
               const totalFeaturesCount = pkg.sections.flatMap((s) => s.features).length;
               return (
@@ -1164,7 +1278,7 @@ export default function Home() {
 
           {/* Lengkap Grid */}
           <div className={`pricing-grid pricing-grid-lengkap ${activePriceTab === "lengkap" ? "active" : ""}`}>
-            {lengkapPackages.map((pkg, idx) => {
+            {lengkapPkgs.map((pkg, idx) => {
               const isExpanded = !!expandedCards[pkg.name];
               const totalFeaturesCount = pkg.sections.flatMap((s) => s.features).length;
               return (
@@ -1347,7 +1461,7 @@ export default function Home() {
         </div>
 
         <div className="faq-grid">
-          {faqs.map((faq, idx) => (
+          {faqItems.map((faq, idx) => (
             <div
               key={idx}
               className="reveal"
@@ -1391,63 +1505,53 @@ export default function Home() {
           className="section-title reveal"
           ref={(el) => { if (el) revealRefs.current[25] = el; }}
         >
-          Kunjungi Galeri <span>Digital</span>
+          {socialMedia.title_first} <span>{socialMedia.title_highlight}</span>
         </h2>
         <p
           className="section-desc reveal"
           style={{ margin: "0 auto 80px" }}
           ref={(el) => { if (el) revealRefs.current[26] = el; }}
         >
-          Ikuti akun sosial media resmi kami untuk info update, tips pranikah, dan portofolio harian terlengkap.
+          {socialMedia.description}
         </p>
 
-        <div
-          className="sosial-grid"
-        >
-          <a
-            href="https://www.instagram.com/royani_wedding2"
-            className="sosial-card reveal"
-            style={{ transitionDelay: "0.1s" }}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div className="sosial-card-icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather-icon">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-              </svg>
-            </div>
-            <span>Instagram</span>
-          </a>
-          <a
-            href="https://www.tiktok.com/@ceuroy"
-            className="sosial-card reveal"
-            style={{ transitionDelay: "0.2s" }}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div className="sosial-card-icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="feather-icon">
-                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
-              </svg>
-            </div>
-            <span>TikTok</span>
-          </a>
-          <a
-            href="https://www.facebook.com/ceu.roy"
-            className="sosial-card reveal"
-            style={{ transitionDelay: "0.3s" }}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div className="sosial-card-icon-wrapper">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather-icon">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-              </svg>
-            </div>
-            <span>Facebook</span>
-          </a>
+        <div className="sosial-grid">
+          {socialMedia.items.map((item, idx) => (
+            <a
+              key={idx}
+              href={item.url}
+              className="sosial-card reveal"
+              style={{ transitionDelay: `${0.1 * (idx + 1)}s` }}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="sosial-card-icon-wrapper">
+                {item.platform.toLowerCase() === "instagram" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather-icon">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </svg>
+                )}
+                {item.platform.toLowerCase() === "tiktok" && (
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="feather-icon">
+                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
+                  </svg>
+                )}
+                {item.platform.toLowerCase() === "facebook" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather-icon">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                  </svg>
+                )}
+                {item.platform.toLowerCase() === "whatsapp" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather-icon">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                  </svg>
+                )}
+              </div>
+              <span>{item.platform}</span>
+            </a>
+          ))}
         </div>
       </section>
 
@@ -1464,17 +1568,17 @@ export default function Home() {
             className="contact-info-wrapper reveal"
             ref={(el) => { if (el) revealRefs.current[28] = el; }}
           >
-            <span className="section-tag">Hubungi Kami</span>
+            <span className="section-tag">{contactContent.tag}</span>
             <h2 className="section-title">
-              Mulai Konsultasi <span>Pernikahan Anda</span>
+              {contactContent.title_first} <span>{contactContent.title_highlight}</span>
             </h2>
             <p className="contact-intro-text">
-              Kami percaya setiap detail menceritakan kisah cinta unik Anda. Ceritakan konsep pernikahan impian Anda, dan mari kita wujudkan hari bahagia Anda menjadi kenyataan yang anggun dan tak terlupakan.
+              {contactContent.description}
             </p>
 
             <div className="contact-minimal-list">
               <a
-                href="https://wa.me/6287847222209"
+                href={contactContent.whatsapp_number.replace(/[^0-9]/g, "").replace(/^0/, "62").startsWith("62") ? `https://wa.me/${contactContent.whatsapp_number.replace(/[^0-9]/g, "").replace(/^0/, "62")}` : `https://wa.me/${contactContent.whatsapp_number}`}
                 className="contact-minimal-item reveal"
                 style={{ transitionDelay: "0.1s" }}
                 target="_blank"
@@ -1487,11 +1591,11 @@ export default function Home() {
                 </div>
                 <div className="contact-minimal-text">
                   <span className="contact-item-label">WhatsApp Chat</span>
-                  <span className="contact-item-value">+62 878-4722-2209</span>
+                  <span className="contact-item-value">{contactContent.whatsapp_number}</span>
                 </div>
               </a>
               <a
-                href="https://www.google.com/maps/place/Royani+wedding+gallery/@-6.631259,108.3431362,17z/data=!4m6!3m5!1s0x2e6edd131e725ead:0x46b77e412f815e01!8m2!3d-6.6312202!4d108.3431383!16s%2Fg%2F11h9fjcljr?hl=id&entry=ttu&g_ep=EgoyMDI2MDYwOS4wIKXMDSoASAFQAw%3D%3D"
+                href={contactContent.maps_url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact-minimal-item reveal"
@@ -1505,7 +1609,7 @@ export default function Home() {
                 </div>
                 <div className="contact-minimal-text">
                   <span className="contact-item-label">Lokasi Galeri</span>
-                  <span className="contact-item-value">Desa Kedungsari, Kec. Ligung, Kab. Majalengka</span>
+                  <span className="contact-item-value">{contactContent.address}</span>
                 </div>
               </a>
             </div>
@@ -1516,7 +1620,7 @@ export default function Home() {
                 <iframe
                   title="Royani Wedding Gallery Majalengka Map"
                   className="map-premium-iframe"
-                  src="https://maps.google.com/maps?q=Royani%20wedding%20gallery%20Majalengka&hl=id&z=16&output=embed"
+                  src={contactContent.maps_embed_url}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -1535,9 +1639,9 @@ export default function Home() {
             ref={(el) => { if (el) revealRefs.current[29] = el; }}
           >
             <div className="form-premium-header">
-              <span className="form-premium-subtitle">Rencana Hari Bahagia</span>
-              <h3>Kirim Pesan</h3>
-              <p>Rencanakan konsep pernikahan impian Anda bersama konsultan wedding planner kami.</p>
+              <span className="form-premium-subtitle">{contactContent.form_tag}</span>
+              <h3>{contactContent.form_title}</h3>
+              <p>{contactContent.form_description}</p>
             </div>
             <form onSubmit={handleContactSubmit}>
               <div className="form-group-premium">
@@ -1608,7 +1712,7 @@ export default function Home() {
 
       {/* FLOATING WHATSAPP BUTTON */}
       <a
-        href="https://wa.me/6287847222209?text=Halo%20Royani%20Wedding%2C%20saya%20ingin%20berkonsultasi%20mengenai%20rencana%20pernikahan%20saya."
+        href={`https://wa.me/${contactContent.whatsapp_number.replace(/[^0-9]/g, "").replace(/^0/, "62").startsWith("62") ? contactContent.whatsapp_number.replace(/[^0-9]/g, "").replace(/^0/, "62") : contactContent.whatsapp_number}?text=Halo%20Royani%20Wedding%2C%20saya%20ingin%20berkonsultasi%20mengenai%20rencana%20pernikahan%20saya.`}
         target="_blank"
         rel="noopener noreferrer"
         className="wa-float"
@@ -1626,10 +1730,10 @@ export default function Home() {
           <div className="footer-grid">
             <div className="footer-brand">
               <a href="#" onClick={(e) => scrollTo(e, "home")} className="nav-logo">
-                <img src="/logo.png" alt="Royani Wedding" style={{ display: 'block', height: '48px', width: 'auto' }} />
+                <img src={footerContent.logo_url || "/logo.png"} alt="Royani Wedding" style={{ display: 'block', height: '48px', width: 'auto' }} />
               </a>
               <p className="footer-tagline">
-                Mewujudkan hari spesial Anda menjadi kenangan indah yang sempurna, berkesan, dan elegan lewat layanan profesional kami.
+                {footerContent.description}
               </p>
             </div>
 
@@ -1645,13 +1749,13 @@ export default function Home() {
 
             <div className="footer-contact">
               <h4>Hubungi Kami</h4>
-              <p>Majalengka, Jawa Barat, Indonesia</p>
-              <p>WhatsApp: +62 878-4722-2209</p>
+              <p>{contactContent.address}</p>
+              <p>WhatsApp: {contactContent.whatsapp_number}</p>
             </div>
           </div>
 
           <div className="footer-bottom">
-            <p>&copy; {new Date().getFullYear()} Royani Wedding. Hak Cipta Dilindungi.</p>
+            <p>{footerContent.copyright}</p>
             <p className="footer-attribution">
               Premium Design by{" "}
               <a
