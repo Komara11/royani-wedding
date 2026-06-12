@@ -701,7 +701,7 @@ export default function Home() {
 
     const waUrl = `https://wa.me/6287847222209?text=${encodeURIComponent(formattedMessage)}`;
     window.open(waUrl, "_blank");
-    
+
     // Reset form
     setContactName("");
     setContactDate("");
@@ -895,7 +895,6 @@ export default function Home() {
             {/* Elegant overlapping quote card */}
             <div className="about-floating-quote">
               <p>&ldquo;Hari terindah adalah ketika janji suci terucap dan disaksikan oleh semesta dengan keanggunan abadi.&rdquo;</p>
-              <span>— Rian & Dewi</span>
             </div>
           </div>
           <div
@@ -1473,7 +1472,7 @@ export default function Home() {
               Kami percaya setiap detail menceritakan kisah cinta unik Anda. Ceritakan konsep pernikahan impian Anda, dan mari kita wujudkan hari bahagia Anda menjadi kenyataan yang anggun dan tak terlupakan.
             </p>
 
-             <div className="contact-minimal-list">
+            <div className="contact-minimal-list">
               <a
                 href="https://wa.me/6287847222209"
                 className="contact-minimal-item reveal"
@@ -1633,7 +1632,7 @@ export default function Home() {
                 Mewujudkan hari spesial Anda menjadi kenangan indah yang sempurna, berkesan, dan elegan lewat layanan profesional kami.
               </p>
             </div>
-            
+
             <div className="footer-links">
               <h4>Navigasi</h4>
               <ul>
