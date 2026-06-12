@@ -6,17 +6,18 @@
 }
 
 :root {
-  --background: #090909;
-  --bg-secondary: #0f0f0f;
-  --bg-card: rgba(18, 18, 18, 0.6);
-  --border-color: rgba(255, 255, 255, 0.06);
-  --gold: #c9a96e;
-  --gold-light: #e0be82;
-  --gold-dark: #a8884c;
-  --gold-glow: rgba(201, 169, 110, 0.12);
-  --text-primary: #f5f0eb;
-  --text-secondary: rgba(245, 240, 235, 0.7);
-  --text-muted: rgba(245, 240, 235, 0.45);
+  --background: #fcfbf9;
+  --bg-secondary: #f6f4ee;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --border-color: rgba(171, 137, 79, 0.18);
+  --nav-bg: rgba(252, 251, 249, 0.9);
+  --gold: #ab894f;
+  --gold-light: #c9a96e;
+  --gold-dark: #8a6a34;
+  --gold-glow: rgba(171, 137, 79, 0.12);
+  --text-primary: #2a2723;
+  --text-secondary: rgba(42, 39, 35, 0.75);
+  --text-muted: rgba(42, 39, 35, 0.5);
   
   --ff-inter: var(--font-inter), 'Inter', sans-serif;
   --ff-playfair: var(--font-playfair), 'Playfair Display', serif;
@@ -25,7 +26,7 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
+  color-scheme: light;
   overflow-x: hidden;
 }
 
@@ -45,7 +46,7 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #090909;
+  background: var(--background);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--gold);
@@ -180,11 +181,11 @@ nav {
 }
 
 nav.scrolled {
-  background: rgba(9, 9, 9, 0.9);
+  background: var(--nav-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   padding: 16px 60px;
-  border-bottom: 1px solid rgba(201, 169, 110, 0.08);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .nav-logo {
@@ -304,10 +305,65 @@ nav.scrolled {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(9, 9, 9, 0.2) 0%,
-    rgba(9, 9, 9, 0.5) 50%,
-    rgba(9, 9, 9, 0.95) 100%
+    rgba(252, 251, 249, 0.15) 0%,
+    rgba(252, 251, 249, 0.45) 50%,
+    var(--background) 100%
   );
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.3s, transform 0.3s;
+  text-decoration: none;
+}
+
+.hero-scroll-indicator:hover {
+  opacity: 1;
+  transform: translate(-50%, 3px);
+}
+
+.scroll-text {
+  font-family: var(--ff-inter);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.scroll-arrow {
+  animation: bounceDown 2s infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-arrow svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--gold);
+}
+
+@keyframes bounceDown {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
 }
 
 .hero-content {
@@ -402,7 +458,7 @@ nav.scrolled {
 
 .btn-primary {
   background: var(--gold);
-  color: #090909;
+  color: var(--background);
   border: 1px solid var(--gold);
 }
 
@@ -511,8 +567,8 @@ section {
 .about-frame {
   position: relative;
   z-index: 2;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 40px 80px rgba(42, 39, 35, 0.12);
+  border: 1px solid var(--border-color);
 }
 
 .about-frame img {
@@ -597,8 +653,8 @@ section {
 .metric-item {
   text-align: center;
   padding: 16px;
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
 }
 
 .metric-num {
@@ -623,7 +679,7 @@ section {
   gap: 32px;
   margin-bottom: 60px;
   justify-content: flex-start;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 12px;
 }
 
@@ -670,8 +726,8 @@ section {
   overflow: hidden;
   cursor: pointer;
   height: 480px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 15px 35px rgba(42, 39, 35, 0.08);
 }
 
 .portfolio-item.col-4 { grid-column: span 4; }
@@ -877,7 +933,7 @@ section {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, #090909 0%, rgba(9, 9, 9, 0.2) 50%, #090909 100%);
+  background: linear-gradient(to bottom, var(--background) 0%, rgba(252, 251, 249, 0.15) 50%, var(--background) 100%);
   z-index: 1;
 }
 
@@ -896,7 +952,7 @@ section {
 
 /* ===== PRICING SECTION (BROCHURE OVERHAUL) ===== */
 .pricing {
-  background: linear-gradient(180deg, #090909 0%, #0c0c0c 50%, #090909 100%);
+  background: linear-gradient(180deg, var(--background) 0%, var(--bg-secondary) 50%, var(--background) 100%);
   overflow-x: hidden;
 }
 
@@ -918,7 +974,7 @@ section {
 .pricing-tab {
   padding: 14px 36px;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-color);
   color: var(--text-muted);
   font-size: 0.8rem;
   letter-spacing: 3px;
@@ -932,7 +988,7 @@ section {
 .pricing-tab:hover, .pricing-tab.active {
   border-color: var(--gold);
   color: var(--text-primary);
-  background: rgba(201, 169, 110, 0.04);
+  background: rgba(171, 137, 79, 0.04);
 }
 
 .pricing-grid {
@@ -959,8 +1015,8 @@ section {
 
 .price-card {
   grid-column: span 4;
-  background: linear-gradient(180deg, rgba(20, 20, 20, 0.7) 0%, rgba(12, 12, 12, 0.9) 100%);
-  border: 1px solid rgba(201, 169, 110, 0.15);
+  background: var(--bg-card);
+  border: 1px solid rgba(171, 137, 79, 0.2);
   padding: 50px 40px;
   transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
@@ -970,8 +1026,8 @@ section {
 
 .price-card:hover {
   transform: translateY(-12px);
-  border-color: rgba(201, 169, 110, 0.5);
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7), 0 0 50px rgba(201, 169, 110, 0.04);
+  border-color: rgba(171, 137, 79, 0.5);
+  box-shadow: 0 40px 80px rgba(42, 39, 35, 0.08), 0 0 50px rgba(171, 137, 79, 0.04);
 }
 
 .price-card.featured {
@@ -986,7 +1042,7 @@ section {
   top: -14px; left: 50%;
   transform: translateX(-50%);
   background: var(--gold);
-  color: #090909;
+  color: var(--background);
   padding: 6px 28px;
   font-size: 0.65rem;
   letter-spacing: 4px;
@@ -1176,7 +1232,7 @@ section {
 
 .btn-price:hover {
   background: var(--gold);
-  color: #090909;
+  color: var(--background);
   border-color: var(--gold);
 }
 
@@ -1184,7 +1240,7 @@ section {
 .booking-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(6, 6, 6, 0.94);
+  background: rgba(42, 39, 35, 0.5);
   backdrop-filter: blur(12px);
   z-index: 9999;
   display: flex;
@@ -1194,13 +1250,13 @@ section {
 }
 
 .booking-modal {
-  background: #0f0f0f;
-  border: 1px solid rgba(201, 169, 110, 0.3);
+  background: var(--background);
+  border: 1px solid var(--border-color);
   max-width: 520px;
   width: 100%;
   padding: 50px;
   position: relative;
-  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 40px 100px rgba(42, 39, 35, 0.15);
 }
 
 .booking-modal h3 {
@@ -1240,15 +1296,15 @@ section {
 }
 
 .faq-item {
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-left: 2px solid transparent;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .faq-item:hover, .faq-item.active {
-  border-color: rgba(201, 169, 110, 0.15);
-  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(171, 137, 79, 0.4);
+  background: var(--bg-secondary);
 }
 
 .faq-item.active {
@@ -1278,7 +1334,7 @@ section {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1335,8 +1391,8 @@ section {
 .sosial-card {
   width: 220px;
   height: 220px;
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1440,14 +1496,14 @@ section {
   gap: 20px;
   text-decoration: none;
   padding: 16px 20px;
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.02);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 a.contact-minimal-item:hover {
-  background: rgba(201, 169, 110, 0.03);
-  border-color: rgba(201, 169, 110, 0.2);
+  background: rgba(171, 137, 79, 0.04);
+  border-color: rgba(171, 137, 79, 0.4);
   transform: translateX(4px);
 }
 
@@ -1503,11 +1559,11 @@ a.contact-minimal-item:hover {
 
 /* Postcard Map frame layout */
 .contact-map-card {
-  background: rgba(12, 12, 12, 0.6);
+  background: var(--bg-card);
   border: 1px solid rgba(201, 169, 110, 0.15);
   padding: 16px;
   position: relative;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 40px 80px rgba(42, 39, 35, 0.08);
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1534,7 +1590,7 @@ a.contact-minimal-item:hover {
   width: 100%;
   height: 250px;
   border: none;
-  filter: grayscale(1) invert(0.95) contrast(1.1) brightness(0.85);
+  filter: grayscale(0.8) contrast(1.05) brightness(0.98);
   display: block;
   transition: all 0.6s;
 }
@@ -1617,7 +1673,7 @@ a.contact-minimal-item:hover {
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid var(--border-color);
   padding: 12px 0;
   color: var(--text-primary);
   font-family: var(--ff-inter);
@@ -1683,7 +1739,7 @@ a.contact-minimal-item:hover {
   right: 80px; top: 50%;
   transform: translateY(-50%);
   background: var(--text-primary);
-  color: #090909;
+  color: var(--background);
   padding: 10px 18px;
   border-radius: 4px;
   font-size: 0.72rem;
@@ -1769,7 +1825,7 @@ a.contact-minimal-item:hover {
     top: 0; right: 0;
     width: 80%; max-width: 380px;
     height: 100vh;
-    background: rgba(9, 9, 9, 0.98);
+    background: rgba(252, 251, 249, 0.98);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     flex-direction: column;
@@ -1778,8 +1834,8 @@ a.contact-minimal-item:hover {
     gap: 40px;
     transform: translateX(100%);
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: -15px 0 50px rgba(0, 0, 0, 0.6);
-    border-left: 1px solid rgba(201, 169, 110, 0.1);
+    box-shadow: -15px 0 50px rgba(42, 39, 35, 0.1);
+    border-left: 1px solid var(--border-color);
   }
   .nav-links.active {
     transform: translateX(0);
@@ -1923,7 +1979,7 @@ a.contact-minimal-item:hover {
 .preloader {
   position: fixed;
   inset: 0;
-  background: #090909;
+  background: var(--background);
   z-index: 99999;
   display: flex;
   align-items: center;
@@ -1999,8 +2055,8 @@ a.contact-minimal-item:hover {
 
 /* ===== PREMIUM FOOTER ===== */
 .footer-premium {
-  background: #090909;
-  border-top: 1px solid rgba(201, 169, 110, 0.1);
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
   padding: 80px 0 40px;
   position: relative;
   z-index: 2;
@@ -2070,7 +2126,7 @@ a.contact-minimal-item:hover {
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--border-color);
   padding-top: 30px;
   display: flex;
   justify-content: space-between;

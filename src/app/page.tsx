@@ -57,7 +57,7 @@ const akadPackages: PricingPackage[] = [
     sections: [
       {
         title: "Make-up & Busana",
-        features: ["Makeup Pengantin", "Busana Akad + Aksesoris", "Jas Pengantin Pria", "Sepatu Pria & Wanita", "Melati Segar"]
+        features: ["Makeup Pengantin", "Busana Akad + Acc", "Jas Pengantin Pria", "Sepatu Pria & Wanita", "Melati Fresh"]
       },
       {
         title: "Dokumentasi",
@@ -76,7 +76,7 @@ const akadPackages: PricingPackage[] = [
     sections: [
       {
         title: "Make-up & Busana",
-        features: ["Makeup Pengantin", "Busana Akad + Aksesoris", "Jas Pengantin Pria", "Sepatu Pria & Wanita", "Melati Segar"]
+        features: ["Makeup Pengantin", "Busana Akad + Acc", "Jas Pengantin Pria", "Sepatu Pria & Wanita", "Melati Fresh"]
       },
       {
         title: "Bonus Free",
@@ -94,20 +94,27 @@ const lengkapPackages: PricingPackage[] = [
     sections: [
       {
         title: "Dekorasi",
-        features: ["Dekorasi Pelaminan Indoor"]
+        features: ["Dekorasi Indoor"]
       },
       {
         title: "Make-up & Busana",
-        features: ["1x Sepasang Busana Akad", "1x Gaun Resepsi Wanita", "1x Jas Resepsi Pria", "Sepasang Sepatu (Akad & Resepsi)", "1 Set Melati Segar", "1x Makeup Pengantin + Touch Up"]
+        features: [
+          "1x sepasang busana akad",
+          "1x gaun resepsi",
+          "1x jas resepsi",
+          "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+          "1 set melati fresh",
+          "1x makeup pengantin + touch up"
+        ]
       },
       {
         title: "Dokumentasi",
-        features: ["Cetak 1 Album Magnetik 70 Lembar + Semua File Foto"]
+        features: ["Cetak 1 album magnetik 70 lembar + file"]
       },
       {
         title: "Bonus Free",
         free: true,
-        features: ["Softlens Pengantin", "Henna + Nail Art Pengantin", "Makeup Ibu Hajat"]
+        features: ["Softlens pengantin", "Henna + nail art pengantin", "Makeup ibu hajat"]
       }
     ]
   },
@@ -117,20 +124,38 @@ const lengkapPackages: PricingPackage[] = [
     sections: [
       {
         title: "Dekorasi",
-        features: ["Pelaminan 4-5 Meter + 3 Kursi", "2 Kotak Uang Standar", "1 Meja Penerima Tamu", "4 Lokal Tenda", "100 Pcs Kursi Tamu", "1 Set Alat Prasmanan (100 Piring & Sendok)"]
+        features: [
+          "Pelaminan 4–5 meter",
+          "kursi 3",
+          "2 kotak uang standar",
+          "1 meja penerima tamu",
+          "4 lokal tenda (model menyesuaikan tema)",
+          "100 pcs kursi tamu",
+          "1 set alat-alat prasmanan berikut 100 piring rotan & 100 sendok"
+        ]
       },
       {
         title: "Make-up & Busana",
-        features: ["1x Sepasang Busana Akad", "1x Gaun Resepsi Wanita", "1x Jas Resepsi Pria", "Sepasang Sepatu (Akad & Resepsi)", "1 Set Melati Segar", "1x Makeup Pengantin + Touch Up", "1x Makeup & Busana Ibu Hajat", "Beskap Bapa Hajat", "4 Makeup & Busana Pagar Ayu"]
+        features: [
+          "1x sepasang busana akad",
+          "1x gaun resepsi",
+          "1x jas resepsi",
+          "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+          "1 set melati fresh",
+          "1x makeup pengantin + touch up",
+          "1x makeup dan busana ibu hajat",
+          "Beskap bapa hajat",
+          "4 makeup dan busana pagar ayu"
+        ]
       },
       {
         title: "Dokumentasi",
-        features: ["Cetak 1 Album Magnetik 70 Lembar + Semua File Foto"]
+        features: ["Cetak 1 album magnetik 70 lembar + file"]
       },
       {
         title: "Bonus Free",
         free: true,
-        features: ["Softlens Pengantin", "Henna + Nail Art Pengantin"]
+        features: ["Softlens pengantin", "Henna + nail art pengantin"]
       }
     ]
   },
@@ -140,20 +165,38 @@ const lengkapPackages: PricingPackage[] = [
     sections: [
       {
         title: "Dekorasi",
-        features: ["Pelaminan 6 Meter + 5 Kursi", "2 Kotak Uang Standar", "1 Meja Penerima Tamu", "1 Gapura Pintu Masuk", "2 Set Tenda", "100 Pcs Kursi Tamu", "1 Set Alat Prasmanan"]
+        features: [
+          "Pelaminan 6 meter",
+          "kursi 5",
+          "2 kotak uang ukuran standar",
+          "1 meja penerima tamu",
+          "1 gapura pintu masuk",
+          "2 set tenda",
+          "100 pcs kursi tamu",
+          "1 set alat-alat prasmanan berikut 100 piring rotan & 100 sendok"
+        ]
       },
       {
         title: "Make-up & Busana",
-        features: ["1x Sepasang Busana Akad", "2x Gaun Resepsi Wanita", "Sepasang Sepatu (Akad & Resepsi)", "1 Set Melati Segar", "1x Makeup Pengantin + Touch Up", "1x Makeup & Busana Ibu Hajat + Besan", "Beskap Bapa Hajat & Besan", "4 Makeup & Busana Pagar Ayu"]
+        features: [
+          "1x sepasang busana akad",
+          "2x gaun resepsi",
+          "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+          "1 set melati fresh",
+          "1x makeup pengantin + touch up",
+          "1x makeup dan busana ibu hajat + besan",
+          "Beskap bapa hajat & besan",
+          "4 makeup dan busana pagar ayu"
+        ]
       },
       {
         title: "Dokumentasi",
-        features: ["1 Album Wedding Magnetik", "Cetak Foto 70 Lembar + File Foto"]
+        features: ["1 album wedding magnetik", "Cetak foto 70 lembar + file foto"]
       },
       {
         title: "Bonus Free",
         free: true,
-        features: ["Softlens Pengantin", "Henna + Nail Art Pengantin", "Makeup Anak (2 orang)"]
+        features: ["Softlens pengantin", "Henna + nail art khusus pengantin", "Makeup anak 2"]
       }
     ]
   },
@@ -163,20 +206,42 @@ const lengkapPackages: PricingPackage[] = [
     sections: [
       {
         title: "Dekorasi",
-        features: ["Pelaminan 6 Meter + 5 Kursi", "Bunga Imitasi Premium", "2 Kotak Uang Standar", "1 Meja Penerima Tamu", "1 Gapura Pintu Masuk", "2 Set Tenda", "100 Kursi Tamu + Sarung Kursi", "1 Set Alat Prasmanan", "Lampu Penerang + Jenset (2 Malam)", "Set Meja Akad Lengkap", "1 Kipas Blower"]
+        features: [
+          "Pelaminan 6 meter",
+          "kursi 5",
+          "Rangkaian bunga imitasi premium",
+          "2 kotak uang ukuran standar",
+          "1 meja penerima tamu",
+          "1 gapura pintu masuk",
+          "2 set tenda",
+          "100 pcs kursi tamu + 100 pcs sarung kursi",
+          "1 set alat-alat prasmanan berikut 100 piring rotan & 100 sendok",
+          "2 malam lampu penerang + jenset",
+          "Set meja akad",
+          "1 kipas blower"
+        ]
       },
       {
         title: "Make-up & Busana",
-        features: ["1x Sepasang Busana Akad", "2x Gaun Resepsi Wanita", "Sepasang Sepatu (Akad & Resepsi)", "1 Set Melati Segar", "1x Makeup Pengantin + Touch Up", "1x Makeup & Busana Ibu Hajat + Besan", "Beskap Bapa Hajat & Besan", "4 Makeup & Busana Pagar Ayu"]
+        features: [
+          "1x sepasang busana akad",
+          "2x gaun resepsi",
+          "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+          "1 set melati fresh",
+          "1x makeup pengantin + touch up",
+          "1x makeup dan busana ibu hajat + besan",
+          "Beskap bapa hajat & besan",
+          "4 makeup dan busana pagar ayu"
+        ]
       },
       {
         title: "Dokumentasi",
-        features: ["1 Album Wedding Magnetik", "Cetak 100 Foto + File Foto"]
+        features: ["1 album wedding magnetik", "Cetak foto 100 lembar + file foto"]
       },
       {
         title: "Bonus Free",
         free: true,
-        features: ["Softlens Pengantin", "Henna + Nail Art Pengantin", "Makeup Anak (2 orang)"]
+        features: ["Softlens pengantin", "Henna + nail art khusus pengantin", "Makeup anak 2"]
       }
     ]
   },
@@ -186,20 +251,42 @@ const lengkapPackages: PricingPackage[] = [
     sections: [
       {
         title: "Dekorasi",
-        features: ["Pelaminan 8 Meter + 5 Kursi", "Bunga Imitasi Premium", "2 Kotak Uang", "1 Meja Penerima Tamu", "1 Gapura Pintu Masuk", "7 Lokal Tenda", "100 Kursi Tamu + Sarung Kursi", "1 Set Alat Prasmanan Roll Top (100 Pcs)", "Lampu Penerang + Jenset (2 Malam)", "Set Meja Akad Lengkap", "1 Kipas Blower"]
+        features: [
+          "Pelaminan 8 meter",
+          "kursi 5",
+          "Rangkaian bunga imitasi premium",
+          "2 kotak uang",
+          "1 meja penerima tamu",
+          "1 gapura pintu masuk",
+          "7 lokal tenda (model menyesuaikan tema)",
+          "100 pcs kursi tamu + 100 pcs sarung kursi",
+          "1 set alat-alat prasmanan (roll toup) berikut 100 piring rotan & 100 sendok",
+          "2 malam lampu penerang + jenset",
+          "Set meja akad",
+          "1 kipas blower"
+        ]
       },
       {
         title: "Make-up & Busana",
-        features: ["1x Sepasang Busana Akad", "2x Gaun Resepsi Wanita", "Sepasang Sepatu (Akad & Resepsi)", "1 Set Melati Segar", "1x Makeup Pengantin + Touch Up", "1x Makeup & Busana Ibu Hajat + Besan", "Beskap Bapa Hajat & Besan", "4 Makeup & Busana Pagar Ayu"]
+        features: [
+          "1x sepasang busana akad",
+          "2x gaun resepsi",
+          "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+          "1 set melati fresh",
+          "1x makeup pengantin + touch up",
+          "1x makeup dan busana ibu hajat + besan",
+          "Beskap bapa hajat & besan",
+          "4 makeup dan busana pagar ayu"
+        ]
       },
       {
         title: "Dokumentasi",
-        features: ["1 Album Wedding Magnetik", "Cetak 100 Foto + File Foto"]
+        features: ["1 album wedding magnetik", "Cetak 100 foto + file"]
       },
       {
         title: "Bonus Free",
         free: true,
-        features: ["Softlens Pengantin", "Henna + Nail Art Pengantin", "Makeup Dewasa (2 orang)", "Makeup Anak (2 orang)"]
+        features: ["Softlens pengantin", "Henna + nail art pengantin", "Makeup dewasa 2", "Makeup anak 2"]
       }
     ]
   },
@@ -210,20 +297,45 @@ const lengkapPackages: PricingPackage[] = [
     sections: [
       {
         title: "Dekorasi",
-        features: ["Pelaminan 8 Meter", "Bunga Imitasi Premium", "Lorong Masuk + Photo Booth", "2 Kotak Uang", "1 Meja Penerima Tamu", "1 Gapura Pintu Masuk", "8 Lokal Tenda", "100 Kursi Tamu + Sarung Kursi", "1 Set Alat Prasmanan Roll Top (100 Pcs)", "Lampu Penerang + Jenset (2 Malam)", "Set Meja Akad Lengkap", "2 Kipas Blower", "Karpet Jalan 20 Meter"]
+        features: [
+          "Pelaminan 8 meter",
+          "Rangkaian bunga imitasi premium",
+          "Lorong masuk",
+          "Foto booth",
+          "2 kotak uang",
+          "1 meja penerima tamu",
+          "1 gapura pintu masuk",
+          "8 lokal tenda (model menyesuaikan tema)",
+          "100 pcs kursi tamu + 100 pcs sarung kursi",
+          "1 set alat-alat prasmanan (roll toup) berikut 100 piring rotan & 100 sendok",
+          "2 malam lampu penerang + jenset",
+          "Set meja akad",
+          "2 kipas blower",
+          "Karpet jalan 20 meter"
+        ]
       },
       {
         title: "Make-up & Busana",
-        features: ["1x Sepasang Busana Akad", "2x Gaun Resepsi Wanita", "Sepasang Sepatu (Akad & Resepsi)", "1 Set Melati Segar", "1x Makeup Pengantin + Touch Up", "1x Makeup & Busana Ibu Hajat + Besan", "Beskap Bapa Hajat & Besan", "4 Makeup & Busana Pagar Ayu", "2 Pagar Bagus"]
+        features: [
+          "1x sepasang busana akad",
+          "2x gaun resepsi",
+          "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+          "1 set melati fresh",
+          "1x makeup pengantin + touch up",
+          "1x makeup dan busana ibu hajat + besan",
+          "Beskap bapa hajat & besan",
+          "4 makeup dan busana pagar ayu",
+          "2 pagar bagus"
+        ]
       },
       {
         title: "Dokumentasi",
-        features: ["1 Album Wedding Magnetik", "Cetak 100 Foto + File Foto", "Video Liputan 2 Disk"]
+        features: ["1 album wedding magnetik", "Cetak 100 foto + file", "Video liputan 2 disk"]
       },
       {
         title: "Include & Bonus",
         free: true,
-        features: ["1 MC Akad", "Softlens Pengantin", "Henna + Nail Art Pengantin", "Makeup Dewasa (2 orang)", "Pelepasan Balon"]
+        features: ["1 MC Akad", "Softlens pengantin", "Henna + nail art pengantin", "Makeup dewasa 2", "Pelepasan balon"]
       }
     ]
   },
@@ -233,20 +345,60 @@ const lengkapPackages: PricingPackage[] = [
     sections: [
       {
         title: "Dekorasi",
-        features: ["Pelaminan 8 Meter", "Bunga Imitasi Premium", "Lorong Masuk + Photo Booth", "2 Kotak Uang", "2 Meja Penerima Tamu", "1 Gapura Pintu Masuk", "9 Lokal Tenda", "100 Kursi Tamu + Sarung Kursi", "1 Set Alat Prasmanan Roll Top (100 Pcs)", "Lampu Penerang + Jenset (2 Malam)", "Set Meja Akad Lengkap", "2 Kipas Blower", "Karpet Merah 30 Meter", "2 Meja VIP"]
+        features: [
+          "Pelaminan 8 meter",
+          "Rangkaian bunga imitasi premium",
+          "Lorong masuk",
+          "Foto booth",
+          "2 kotak uang",
+          "2 meja penerima tamu",
+          "1 gapura pintu masuk",
+          "9 lokal tenda (model menyesuaikan tema)",
+          "100 pcs kursi tamu + 100 pcs sarung kursi",
+          "1 set alat-alat prasmanan (roll toup) berikut 100 piring rotan & 100 sendok",
+          "2 malam lampu penerang + jenset",
+          "Set meja akad",
+          "2 kipas blower",
+          "Karpet merah 30 meter",
+          "2 meja VIP"
+        ]
       },
       {
         title: "Make-up & Busana",
-        features: ["1x Sepasang Busana Akad", "2x Gaun Resepsi Wanita", "Sepasang Sepatu (Akad & Resepsi)", "1 Set Melati Segar", "1x Makeup Pengantin + Touch Up", "1x Makeup & Busana Ibu Hajat + Besan", "Beskap Bapa Hajat & Besan", "6 Makeup & Busana Pagar Ayu", "2 Pagar Bagus"]
+        features: [
+          "1x sepasang busana akad",
+          "2x gaun resepsi",
+          "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+          "1 set melati fresh",
+          "1x makeup pengantin + touch up",
+          "1x makeup dan busana ibu hajat + besan",
+          "Beskap bapa hajat & besan",
+          "6 makeup dan busana pagar ayu",
+          "2 pagar bagus"
+        ]
       },
       {
         title: "Dokumentasi",
-        features: ["Cetak 1 Album Magazine + File (Flashdisk)", "Cetak 1 Album Magnetik", "Video Sinematik", "Video Liputan", "Video di Flashdisk"]
+        features: [
+          "Cetak 1 album magazine + file editing (1 flashdisk)",
+          "Cetak 1 album magnetik",
+          "Video sinematik",
+          "Video liputan",
+          "Video on flashdisk"
+        ]
       },
       {
         title: "Include & Bonus",
         free: true,
-        features: ["1 MC Akad", "4 Crew WO", "Softlens Pengantin", "Henna + Nail Art Pengantin", "Makeup Dewasa (2 orang)", "Makeup Anak (2 orang)", "Pelepasan Balon"]
+        features: [
+          "1 MC Akad",
+          "4 Crew WO",
+          "Softlens pengantin",
+          "Henna + nail art pengantin",
+          "Makeup dewasa 2",
+          "Makeup anak 2",
+          "Pelepasan balon"
+        ]
       }
     ]
   },
@@ -256,20 +408,63 @@ const lengkapPackages: PricingPackage[] = [
     sections: [
       {
         title: "Dekorasi",
-        features: ["Pelaminan 10 Meter", "Bunga Imitasi Premium", "Lorong Masuk + Photo Booth", "2 Kotak Uang", "2 Meja Penerima Tamu", "1 Gapura Pintu Masuk", "10 Lokal Tenda", "100 Kursi Tamu + Sarung Kursi", "1 Set Alat Prasmanan Roll Top (150 Pcs)", "Lampu Penerang + Jenset (2 Malam)", "Set Meja Akad Exclusive", "3 Kipas Blower", "Karpet Jalan 40 Meter", "2 Meja VIP", "2 Meja Hidangan Tambahan"]
+        features: [
+          "Pelaminan 10 meter",
+          "Rangkaian bunga imitasi premium",
+          "Lorong masuk",
+          "Foto booth",
+          "2 kotak uang",
+          "2 meja penerima tamu",
+          "1 gapura pintu masuk",
+          "10 lokal tenda (model menyesuaikan tema)",
+          "100 pcs kursi tamu + 100 pcs sarung kursi",
+          "1 set alat-alat prasmanan (roll toup) berikut 150 piring rotan & 150 sendok",
+          "2 malam lampu penerang + jenset",
+          "1 Set meja akad Exclusive",
+          "3 kipas blower",
+          "Karpet jalan 40 meter",
+          "2 meja VIP",
+          "2 meja hidangan tambahan"
+        ]
       },
       {
         title: "Make-up & Busana",
-        features: ["1x Sepasang Busana Akad", "2x Gaun Resepsi Wanita", "Sepasang Sepatu (Akad & Resepsi)", "1 Set Melati Segar", "1x Makeup Pengantin + Touch Up", "1x Makeup & Busana Ibu Hajat + Besan", "Beskap Bapa Hajat & Besan", "6 Makeup & Busana Pagar Ayu", "4 Makeup Keluarga", "2 Pagar Bagus"]
+        features: [
+          "1x sepasang busana akad",
+          "2x gaun resepsi",
+          "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+          "1 set melati fresh",
+          "1x makeup pengantin + touch up",
+          "1x makeup dan busana ibu hajat + besan",
+          "Beskap bapa hajat & besan",
+          "6 makeup dan busana pagar ayu",
+          "4 makeup keluarga",
+          "2 pagar bagus"
+        ]
       },
       {
         title: "Dokumentasi",
-        features: ["Cetak 1 Album Magazine + File (Flashdisk)", "Cetak 1 Album Magnetik", "Video Sinematik", "Video Liputan", "Video di Flashdisk"]
+        features: [
+          "Cetak 1 album magazine + file editing (1 flashdisk)",
+          "Cetak 1 album magnetik",
+          "Video sinematik",
+          "Video liputan",
+          "Video on flashdisk"
+        ]
       },
       {
         title: "Include & Bonus",
         free: true,
-        features: ["1 MC Akad", "4 Crew WO", "Pemandu Acara Siraman", "Softlens Pengantin", "Henna + Nail Art Pengantin", "Makeup Dewasa (2 orang)", "Makeup Anak (2 orang)", "Pelepasan Balon"]
+        features: [
+          "1 MC Akad",
+          "4 Crew WO",
+          "Pemandu siraman",
+          "Softlens pengantin",
+          "Henna + nail art pengantin",
+          "Makeup dewasa 2",
+          "Makeup anak 2",
+          "Pelepasan balon"
+        ]
       }
     ]
   }
@@ -665,7 +860,20 @@ export default function Home() {
             </a>
           </div>
         </div>
-
+        {/* Scroll Down Indicator */}
+        <a
+          href="#tentang"
+          onClick={(e) => scrollTo(e, "tentang")}
+          className="hero-scroll-indicator"
+        >
+          <span className="scroll-text">Gulir ke bawah</span>
+          <div className="scroll-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="7 13 12 18 17 13" />
+              <polyline points="7 6 12 11 17 6" />
+            </svg>
+          </div>
+        </a>
       </section>
 
       {/* SECTION DIVIDER ♦ */}
@@ -1283,25 +1491,13 @@ export default function Home() {
                   <span className="contact-item-value">+62 878-4722-2209</span>
                 </div>
               </a>
-
               <a
-                href="mailto:royaniwedding2026@gmail.com"
+                href="https://www.google.com/maps/place/Royani+wedding+gallery/@-6.631259,108.3431362,17z/data=!4m6!3m5!1s0x2e6edd131e725ead:0x46b77e412f815e01!8m2!3d-6.6312202!4d108.3431383!16s%2Fg%2F11h9fjcljr?hl=id&entry=ttu&g_ep=EgoyMDI2MDYwOS4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="contact-minimal-item reveal"
                 style={{ transitionDelay: "0.2s" }}
               >
-                <div className="contact-minimal-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                    <polyline points="22,6 12,13 2,6" />
-                  </svg>
-                </div>
-                <div className="contact-minimal-text">
-                  <span className="contact-item-label">Surel / Email</span>
-                  <span className="contact-item-value">royaniwedding2026@gmail.com</span>
-                </div>
-              </a>
-
-              <div className="contact-minimal-item reveal" style={{ transitionDelay: "0.3s" }}>
                 <div className="contact-minimal-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
@@ -1310,18 +1506,18 @@ export default function Home() {
                 </div>
                 <div className="contact-minimal-text">
                   <span className="contact-item-label">Lokasi Galeri</span>
-                  <span className="contact-item-value">Cirebon, Jawa Barat, Indonesia</span>
+                  <span className="contact-item-value">Desa Kedungsari, Kec. Ligung, Kab. Majalengka</span>
                 </div>
-              </div>
+              </a>
             </div>
 
             {/* Location Map Premium Wrapper */}
-            <div className="contact-map-card reveal" style={{ transitionDelay: "0.4s" }}>
+            <div className="contact-map-card reveal" style={{ transitionDelay: "0.3s" }}>
               <div className="map-frame">
                 <iframe
-                  title="Royani Wedding Location Cirebon Map"
+                  title="Royani Wedding Gallery Majalengka Map"
                   className="map-premium-iframe"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126743.5862788339!2d108.47895055000002!3d-6.722622749999992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2b68e1da415bd347%3A0xa193d0f0c0ae2f12!2sCirebon%2C%20Cirebon%20City%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
+                  src="https://maps.google.com/maps?q=Royani%20wedding%20gallery%20Majalengka&hl=id&z=16&output=embed"
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -1450,9 +1646,8 @@ export default function Home() {
 
             <div className="footer-contact">
               <h4>Hubungi Kami</h4>
-              <p>Cirebon, Jawa Barat, Indonesia</p>
+              <p>Majalengka, Jawa Barat, Indonesia</p>
               <p>WhatsApp: +62 878-4722-2209</p>
-              <p>Email: royaniwedding2026@gmail.com</p>
             </div>
           </div>
 
