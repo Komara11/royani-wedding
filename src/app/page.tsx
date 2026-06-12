@@ -332,8 +332,28 @@ export default function Home() {
   const [contactPackage, setContactPackage] = useState("");
   const [contactNotes, setContactNotes] = useState("");
 
-  // Refs for reveal elements
+  // Preloader loading state
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Refs for reveal elements (kept for backward compatibility, but we now use automatic query)
   const revealRefs = useRef<(HTMLElement | null)[]>([]);
+
+  // Preloader timer
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000); // 1s loading display for smooth premium feeling
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Handle mobile back button for lightbox preview
+  useEffect(() => {
+    const handlePopState = () => {
+      setLightboxIndex(null);
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   // Scroll to top/home on page refresh/load
   useEffect(() => {
@@ -358,14 +378,13 @@ export default function Home() {
       const sections = ["home", "tentang", "dokumentasi", "harga", "faq", "sosial", "kontak"];
       const scrollPos = window.scrollY + 200;
 
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
+      for (const section of sections) {
+        const el = document.getElementById(section);
         if (el) {
-          const offsetTop = el.offsetTop;
-          const offsetHeight = el.offsetHeight;
-          if (scrollPos >= offsetTop && scrollPos < offsetTop + offsetHeight) {
-            setActiveSection(sectionId);
-            break;
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveSection(section);
           }
         }
       }
@@ -375,7 +394,7 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Reveal observer (Scroll entrance animation)
+  // Reveal observer (Scroll entrance animation - dynamic class query)
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -385,18 +404,15 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px -80px 0px" }
     );
 
-    const currentRefs = revealRefs.current;
-    currentRefs.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
+    // Automatically observe all elements with .reveal class
+    const elements = document.querySelectorAll(".reveal");
+    elements.forEach((el) => observer.observe(el));
 
     return () => {
-      currentRefs.forEach((ref) => {
-        if (ref) observer.unobserve(ref);
-      });
+      elements.forEach((el) => observer.unobserve(el));
     };
   }, []);
 
@@ -499,6 +515,17 @@ export default function Home() {
 
   return (
     <>
+      {/* PRELOADER */}
+      <div className={`preloader ${!isLoading ? "fade-out" : ""}`}>
+        <div className="preloader-content">
+          <div className="preloader-logo">R</div>
+          <div className="preloader-title">Royani Wedding</div>
+          <div className="preloader-spinner">
+            <div className="spinner-line" />
+          </div>
+        </div>
+      </div>
+
       {/* BACKGROUND FLOATING PARTICLES */}
       <div className="particles">
         {particles.map((p, idx) => (
@@ -598,10 +625,14 @@ export default function Home() {
 
       {/* HERO SECTION (PRESERVED) */}
       <section className="hero" id="home">
-        <div
-          className="hero-bg"
-          style={{ backgroundImage: "url('/images/bg-hero.jpg')" }}
-        />
+        <div className="hero-bg">
+          <img
+            src="/images/bg-hero.jpg"
+            alt="Royani Wedding Background"
+            fetchPriority="high"
+            loading="eager"
+          />
+        </div>
         <div className="hero-overlay" />
         <div className="hero-content">
           <p className="hero-subtitle">Wedding Organizer</p>
@@ -661,15 +692,15 @@ export default function Home() {
               Dari konsep tata rias anggun, dekorasi megah, hingga pengaturan alur acara di lapangan, kami memberikan sentuhan elegan dan perhatian penuh di setiap detiknya.
             </p>
             <div className="about-metrics">
-              <div className="metric-item">
+              <div className="metric-item reveal" style={{ transitionDelay: "0.1s" }}>
                 <div className="metric-num">500+</div>
                 <div className="metric-label">Acara Sukses</div>
               </div>
-              <div className="metric-item">
+              <div className="metric-item reveal" style={{ transitionDelay: "0.2s" }}>
                 <div className="metric-num">8+</div>
                 <div className="metric-label">Tahun Kerja</div>
               </div>
-              <div className="metric-item">
+              <div className="metric-item reveal" style={{ transitionDelay: "0.3s" }}>
                 <div className="metric-num">99%</div>
                 <div className="metric-label">Rating Puas</div>
               </div>
@@ -734,13 +765,13 @@ export default function Home() {
 
         {/* Gallery Grid */}
         <div
-          className="portfolio-grid reveal"
-          ref={(el) => { if (el) revealRefs.current[6] = el; }}
+          className="portfolio-grid"
         >
-          {filteredPortfolio.map((item) => (
+          {filteredPortfolio.map((item, idx) => (
             <div
               key={item.id}
-              className={`portfolio-item ${item.gridClass}`}
+              className={`portfolio-item ${item.gridClass} reveal`}
+              style={{ transitionDelay: `${idx * 0.1}s` }}
               onClick={() => openLightbox(item.id)}
             >
               <img src={item.src} alt={item.title} />
@@ -756,12 +787,12 @@ export default function Home() {
 
       {/* PORTFOLIO LIGHTBOX MODAL */}
       {lightboxIndex !== null && (
-        <div className="lightbox-backdrop" onClick={() => setLightboxIndex(null)}>
-          <button className="lightbox-close" onClick={() => setLightboxIndex(null)}>
-            <svg viewBox="0 0 24 24" style={{ marginRight: '6px' }}>
-              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
+        <div className="lightbox-backdrop" onClick={closeLightbox}>
+          <button className="lightbox-close" onClick={closeLightbox}>
+            <svg viewBox="0 0 24 24" style={{ marginRight: '8px' }}>
+              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
             </svg>
-            Tutup
+            Kembali
           </button>
           <button className="lightbox-nav prev" onClick={prevLightbox}>
             <svg viewBox="0 0 24 24">
@@ -1095,14 +1126,12 @@ export default function Home() {
           </p>
         </div>
 
-        <div
-          className="faq-grid reveal"
-          ref={(el) => { if (el) revealRefs.current[23] = el; }}
-        >
+        <div className="faq-grid">
           {faqs.map((faq, idx) => (
             <div
               key={idx}
-              className={`faq-item ${activeFaqIndex === idx ? "active" : ""}`}
+              className={`faq-item ${activeFaqIndex === idx ? "active" : ""} reveal`}
+              style={{ transitionDelay: `${idx * 0.08}s` }}
             >
               <button
                 className="faq-question"
@@ -1151,12 +1180,12 @@ export default function Home() {
         </p>
 
         <div
-          className="sosial-grid reveal"
-          ref={(el) => { if (el) revealRefs.current[27] = el; }}
+          className="sosial-grid"
         >
           <a
             href="https://www.instagram.com/royani_wedding2"
-            className="sosial-card"
+            className="sosial-card reveal"
+            style={{ transitionDelay: "0.1s" }}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -1171,7 +1200,8 @@ export default function Home() {
           </a>
           <a
             href="https://www.tiktok.com/@ceuroy"
-            className="sosial-card"
+            className="sosial-card reveal"
+            style={{ transitionDelay: "0.2s" }}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -1184,7 +1214,8 @@ export default function Home() {
           </a>
           <a
             href="https://www.facebook.com/ceu.roy"
-            className="sosial-card"
+            className="sosial-card reveal"
+            style={{ transitionDelay: "0.3s" }}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -1219,10 +1250,11 @@ export default function Home() {
               Kami percaya setiap detail menceritakan kisah cinta unik Anda. Ceritakan konsep pernikahan impian Anda, dan mari kita wujudkan hari bahagia Anda menjadi kenyataan yang anggun dan tak terlupakan.
             </p>
 
-            <div className="contact-minimal-list">
+             <div className="contact-minimal-list">
               <a
                 href="https://wa.me/6287847222209"
-                className="contact-minimal-item"
+                className="contact-minimal-item reveal"
+                style={{ transitionDelay: "0.1s" }}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -1239,7 +1271,8 @@ export default function Home() {
 
               <a
                 href="mailto:royaniwedding2026@gmail.com"
-                className="contact-minimal-item"
+                className="contact-minimal-item reveal"
+                style={{ transitionDelay: "0.2s" }}
               >
                 <div className="contact-minimal-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -1253,7 +1286,7 @@ export default function Home() {
                 </div>
               </a>
 
-              <div className="contact-minimal-item">
+              <div className="contact-minimal-item reveal" style={{ transitionDelay: "0.3s" }}>
                 <div className="contact-minimal-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
@@ -1268,7 +1301,7 @@ export default function Home() {
             </div>
 
             {/* Location Map Premium Wrapper */}
-            <div className="contact-map-card">
+            <div className="contact-map-card reveal" style={{ transitionDelay: "0.4s" }}>
               <div className="map-frame">
                 <iframe
                   title="Royani Wedding Location Cirebon Map"
@@ -1378,22 +1411,50 @@ export default function Home() {
       </a>
 
       {/* FOOTER */}
-      <footer>
-        <a href="#" onClick={(e) => scrollTo(e, "home")} className="nav-logo" style={{ color: "#f5f0eb" }}>
-          R<span style={{ color: "#c9a96e" }}>W</span>
-        </a>
-        <p>&copy; {new Date().getFullYear()} Royani Wedding. Hak Cipta Dilindungi.</p>
-        <p style={{ marginTop: "12px", fontSize: "0.75rem", color: "var(--text-muted)", letterSpacing: "1px" }}>
-          Desain Premium oleh{" "}
-          <a
-            href="https://www.clovercode.shop"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "var(--gold)", textDecoration: "none", opacity: 0.8 }}
-          >
-            CloverCode
-          </a>
-        </p>
+      <footer className="footer-premium">
+        <div className="footer-container">
+          <div className="footer-grid">
+            <div className="footer-brand">
+              <a href="#" onClick={(e) => scrollTo(e, "home")} className="nav-logo">
+                R<span>W</span>
+              </a>
+              <p className="footer-tagline">
+                Mewujudkan hari spesial Anda menjadi kenangan indah yang sempurna, berkesan, dan elegan lewat layanan profesional kami.
+              </p>
+            </div>
+            
+            <div className="footer-links">
+              <h4>Navigasi</h4>
+              <ul>
+                <li><a href="#home" onClick={(e) => scrollTo(e, "home")}>Beranda</a></li>
+                <li><a href="#tentang" onClick={(e) => scrollTo(e, "tentang")}>Tentang</a></li>
+                <li><a href="#dokumentasi" onClick={(e) => scrollTo(e, "dokumentasi")}>Dokumentasi</a></li>
+                <li><a href="#harga" onClick={(e) => scrollTo(e, "harga")}>Paket Harga</a></li>
+              </ul>
+            </div>
+
+            <div className="footer-contact">
+              <h4>Hubungi Kami</h4>
+              <p>Cirebon, Jawa Barat, Indonesia</p>
+              <p>WhatsApp: +62 878-4722-2209</p>
+              <p>Email: royaniwedding2026@gmail.com</p>
+            </div>
+          </div>
+
+          <div className="footer-bottom">
+            <p>&copy; {new Date().getFullYear()} Royani Wedding. Hak Cipta Dilindungi.</p>
+            <p className="footer-attribution">
+              Premium Design by{" "}
+              <a
+                href="https://www.clovercode.shop"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                CloverCode
+              </a>
+            </p>
+          </div>
+        </div>
       </footer>
     </>
   );
