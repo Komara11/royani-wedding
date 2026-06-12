@@ -188,17 +188,21 @@ nav.scrolled {
 }
 
 .nav-logo {
-  font-family: var(--ff-cormorant);
-  font-size: 2.2rem;
-  font-weight: 500;
-  color: var(--text-primary);
   text-decoration: none;
-  letter-spacing: 6px;
-  transition: transform 0.4s;
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.nav-logo span {
-  color: var(--gold);
+.nav-logo:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.nav-logo img {
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(201, 169, 110, 0.2));
 }
 
 .nav-links {
