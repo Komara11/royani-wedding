@@ -478,9 +478,9 @@ export default function Home() {
   const [faqItems, setFaqItems] = useState(faqs);
 
   const [heroContent, setHeroContent] = useState({
-    subtitle: "WEDDING ORGANIZER TERPERCAYA DI MAJALENGKA",
-    title_first: "Pernikahan Impian,",
-    title_second: "Elegan & Penuh Makna",
+    subtitle: "WEDDING ORGANIZER",
+    title_first: "Royani",
+    title_second: "Wedding",
     description: "Mewujudkan hari spesial Anda menjadi sempurna, berkesan, dan elegan lewat layanan profesional kami.",
     cta_text: "Konsultasi Gratis",
     scroll_text: "Scroll untuk melihat galeri"

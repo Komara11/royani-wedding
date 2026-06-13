@@ -2238,17 +2238,3 @@ select.form-input-premium option {
     grid-column: auto !important;
   }
 }
-
-/* Desktop Portfolio Limit */
-@media (min-width: 769px) {
-  .portfolio-grid:not(.show-all) .portfolio-item:nth-child(n+7) {
-    display: none;
-  }
-}
-
-/* Hide Load More Button on Mobile (since it scrolls horizontally) */
-@media (max-width: 768px) {
-  .load-more-container {
-    display: none !important;
-  }
-}
