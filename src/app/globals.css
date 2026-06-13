@@ -6,18 +6,18 @@
 }
 
 :root {
-  --background: #fcfbf9;
-  --bg-secondary: #f6f4ee;
-  --bg-card: rgba(255, 255, 255, 0.85);
-  --border-color: rgba(171, 137, 79, 0.18);
-  --nav-bg: rgba(252, 251, 249, 0.9);
-  --gold: #ab894f;
-  --gold-light: #c9a96e;
-  --gold-dark: #8a6a34;
-  --gold-glow: rgba(171, 137, 79, 0.12);
-  --text-primary: #2a2723;
-  --text-secondary: rgba(42, 39, 35, 0.75);
-  --text-muted: rgba(42, 39, 35, 0.5);
+  --background: #0f0f0f;
+  --bg-secondary: #161616;
+  --bg-card: rgba(22, 22, 22, 0.85);
+  --border-color: rgba(201, 169, 110, 0.18);
+  --nav-bg: rgba(15, 15, 15, 0.9);
+  --gold: #c9a96e;
+  --gold-light: #e0ca9c;
+  --gold-dark: #ab894f;
+  --gold-glow: rgba(201, 169, 110, 0.12);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.75);
+  --text-muted: rgba(255, 255, 255, 0.5);
   
   --ff-inter: var(--font-inter), 'Inter', sans-serif;
   --ff-playfair: var(--font-playfair), 'Playfair Display', serif;
@@ -26,7 +26,7 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: light;
+  color-scheme: dark;
   overflow-x: hidden;
 }
 
