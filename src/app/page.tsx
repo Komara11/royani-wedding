@@ -1084,10 +1084,10 @@ export default function Home() {
 
         {/* Portfolio Grid */}
         <div className="portfolio-grid">
-          {filteredPortfolio.slice(0, 6).map((item, idx) => (
+          {filteredPortfolio.map((item, idx) => (
             <div
               key={item.id}
-              className={`portfolio-item ${item.gridClass || "span-1"} reveal`}
+              className={`portfolio-item ${item.gridClass || "span-1"} reveal ${idx >= 6 ? "hide-on-desktop" : ""}`}
               style={{ transitionDelay: `${idx * 0.1}s` }}
               onClick={() => openLightbox(item.id)}
             >

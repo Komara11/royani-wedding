@@ -1785,6 +1785,12 @@ select.form-input-premium option {
 /* Legacy footer styles removed to prevent conflicts with .footer-premium */
 
 /* ===== RESPONSIVE STYLES ===== */
+@media (min-width: 769px) {
+  .hide-on-desktop {
+    display: none !important;
+  }
+}
+
 @media (max-width: 1024px) {
   section {
     padding: 120px 40px;
