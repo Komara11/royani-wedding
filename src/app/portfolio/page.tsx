@@ -28,6 +28,7 @@ export default function PortfolioPage() {
   const [portfolioItems, setPortfolioItems] = useState<PortfolioItemType[]>(fallbackPortfolioItems);
   const [selectedCategory, setSelectedCategory] = useState("Semua");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [visibleCount, setVisibleCount] = useState(12);
 
   // Fetch from Firebase
   useEffect(() => {
@@ -56,9 +57,16 @@ export default function PortfolioPage() {
   // Filter Categories
   const categories = ["Semua", ...Array.from(new Set(portfolioItems.map(item => item.category)))];
   
-  const filteredPortfolio = selectedCategory === "Semua"
+  const rawFilteredPortfolio = selectedCategory === "Semua"
     ? portfolioItems
     : portfolioItems.filter(item => item.category === selectedCategory);
+
+  const filteredPortfolio = rawFilteredPortfolio.slice(0, visibleCount);
+
+  // Reset visible count when category changes
+  useEffect(() => {
+    setVisibleCount(12);
+  }, [selectedCategory]);
 
   // Reveal observer
   useEffect(() => {
@@ -147,7 +155,20 @@ export default function PortfolioPage() {
           ))}
         </div>
 
-        {filteredPortfolio.length === 0 && (
+        {/* Load More Button */}
+        {visibleCount < rawFilteredPortfolio.length && (
+          <div style={{ textAlign: "center", marginTop: "40px" }}>
+            <button 
+              className="btn btn-outline" 
+              onClick={() => setVisibleCount(prev => prev + 12)}
+              style={{ padding: "12px 32px", borderRadius: "30px", fontSize: "0.95rem" }}
+            >
+              Tampilkan Lebih Banyak
+            </button>
+          </div>
+        )}
+
+        {rawFilteredPortfolio.length === 0 && (
           <div style={{ textAlign: "center", padding: "60px", color: "var(--text-muted)" }}>
             Belum ada dokumentasi untuk kategori ini.
           </div>
