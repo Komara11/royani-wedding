@@ -107,7 +107,7 @@ export default function PortfolioPage() {
   return (
     <>
       <nav style={{ background: "var(--nav-bg)", borderBottom: "1px solid var(--border-color)", padding: "16px 40px", position: "sticky", top: 0, zIndex: 100, backdropFilter: "blur(10px)" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ maxWidth: 1280, width: "100%", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
           <Link href="/" style={{ color: "var(--gold)", textDecoration: "none", fontSize: "0.95rem", display: "flex", alignItems: "center", gap: "8px", fontWeight: 500 }}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 18, height: 18 }}>
               <line x1="19" y1="12" x2="5" y2="12" />
@@ -124,7 +124,7 @@ export default function PortfolioPage() {
       <main style={{ padding: "60px 40px", maxWidth: 1280, margin: "0 auto", minHeight: "80vh" }}>
         
         {/* Filter */}
-        <div className="portfolio-filter" style={{ marginBottom: "40px" }}>
+        <div className="portfolio-filters" style={{ marginBottom: "40px" }}>
           {categories.map((cat) => (
             <button
               key={cat}
@@ -141,7 +141,7 @@ export default function PortfolioPage() {
           {filteredPortfolio.map((item, idx) => (
             <div
               key={item.id}
-              className={`portfolio-item ${item.gridClass || "span-1"} reveal`}
+              className={`portfolio-item ${item.gridClass || "col-4"} reveal`}
               style={{ transitionDelay: `${idx * 0.05}s` }}
               onClick={() => openLightbox(item.id)}
             >
