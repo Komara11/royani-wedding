@@ -1071,7 +1071,7 @@ export default function Home() {
           className="portfolio-filters reveal"
           ref={(el) => { if (el) revealRefs.current[5] = el; }}
         >
-          {["Semua", "Akad", "Resepsi", "Outdoor"].map((cat) => (
+          {["Semua", "Akad", "Resepsi", "Outdoor", "Kimono"].map((cat) => (
             <button
               key={cat}
               className={`filter-btn ${selectedCategory === cat ? "active" : ""}`}

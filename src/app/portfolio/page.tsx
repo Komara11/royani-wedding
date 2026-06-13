@@ -55,7 +55,7 @@ export default function PortfolioPage() {
   }, []);
 
   // Filter Categories
-  const categories = ["Semua", ...Array.from(new Set(portfolioItems.map(item => item.category)))];
+  const categories = Array.from(new Set(["Semua", "Akad", "Resepsi", "Outdoor", "Kimono", ...portfolioItems.map(item => item.category)]));
   
   const rawFilteredPortfolio = selectedCategory === "Semua"
     ? portfolioItems
