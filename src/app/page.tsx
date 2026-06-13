@@ -1084,7 +1084,7 @@ export default function Home() {
 
         {/* Portfolio Grid */}
         <div className="portfolio-grid">
-          {filteredPortfolio.map((item, idx) => (
+          {filteredPortfolio.slice(0, 6).map((item, idx) => (
             <div
               key={item.id}
               className={`portfolio-item ${item.gridClass || "span-1"} reveal`}
@@ -1101,18 +1101,16 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Load More Button (Hidden on Mobile via CSS) */}
-        {filteredPortfolio.length > 6 && (
-          <div className="load-more-container" style={{ textAlign: "center", marginTop: "40px" }}>
-            <Link 
-              href="/portfolio"
-              className="btn btn-outline" 
-              style={{ display: "inline-block", padding: "12px 32px", borderRadius: "30px", fontSize: "0.95rem", textDecoration: "none" }}
-            >
-              Lihat Semua Dokumentasi
-            </Link>
-          </div>
-        )}
+        {/* Load More Button */}
+        <div className="load-more-container" style={{ textAlign: "center", marginTop: "40px" }}>
+          <Link 
+            href="/portfolio"
+            className="btn btn-outline" 
+            style={{ display: "inline-block", padding: "12px 32px", borderRadius: "30px", fontSize: "0.95rem", textDecoration: "none" }}
+          >
+            Lihat Semua Dokumentasi
+          </Link>
+        </div>
       </section>
 
       {/* PORTFOLIO LIGHTBOX MODAL */}
