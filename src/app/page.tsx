@@ -1066,7 +1066,7 @@ export default function Home() {
           className="section-desc reveal"
           ref={(el) => { if (el) revealRefs.current[4] = el; }}
         >
-          Tiap pernikahan menyimpan cerita unik. Berikut adalah beberapa momen penuh sukacita dan keindahan yang berhasil kami abadikan.
+          Setiap pernikahan menyimpan cerita unik. Berikut adalah beberapa momen penuh sukacita dan keindahan yang berhasil kami abadikan.
         </p>
 
         {/* Minimalist filters */}
@@ -1106,9 +1106,9 @@ export default function Home() {
 
         {/* Load More Button */}
         <div className="load-more-container" style={{ textAlign: "center", marginTop: "40px" }}>
-          <Link 
+          <Link
             href="/portfolio"
-            className="btn btn-outline" 
+            className="btn btn-outline"
             style={{ display: "inline-block", padding: "12px 32px", borderRadius: "30px", fontSize: "0.95rem", textDecoration: "none" }}
           >
             Lihat Semua Dokumentasi
