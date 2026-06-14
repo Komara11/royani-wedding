@@ -483,7 +483,10 @@ export default function Home() {
     title_second: "Wedding",
     description: "Mewujudkan hari spesial Anda menjadi sempurna, berkesan, dan elegan lewat layanan profesional kami.",
     cta_text: "Konsultasi Gratis",
-    scroll_text: "Scroll untuk melihat galeri"
+    scroll_text: "Scroll untuk melihat galeri",
+    bg_image_url: "/images/hero-bg.jpg",
+    parallax_image_url: "/images/bg-divider.jpg",
+    parallax_quote: "Cinta tidak hanya tentang saling memandang, melainkan bersama-sama melihat ke satu arah yang sama dengan komitmen dan ketulusan abadi."
   });
 
   const [aboutContent, setAboutContent] = useState({
@@ -940,7 +943,7 @@ export default function Home() {
       <section className="hero" id="home">
         <div className="hero-bg">
           <img
-            src="/images/bg-hero.jpg"
+            src={heroContent.bg_image_url || "/images/bg-hero.jpg"}
             alt="Royani Wedding Background"
             fetchPriority="high"
             loading="eager"
@@ -1032,10 +1035,10 @@ export default function Home() {
       <div className="parallax-divider">
         <div
           className="parallax-bg"
-          style={{ backgroundImage: "url('/images/bg-divider.jpg')" }}
+          style={{ backgroundImage: `url('${heroContent.parallax_image_url || "/images/bg-divider.jpg"}')` }}
         />
         <p>
-          &ldquo;Cinta tidak hanya tentang saling memandang, melainkan bersama-sama melihat ke satu arah yang sama dengan komitmen dan ketulusan abadi.&rdquo;
+          &ldquo;{heroContent.parallax_quote || "Cinta tidak hanya tentang saling memandang, melainkan bersama-sama melihat ke satu arah yang sama dengan komitmen dan ketulusan abadi."}&rdquo;
         </p>
       </div>
 
@@ -1087,7 +1090,7 @@ export default function Home() {
           {filteredPortfolio.map((item, idx) => (
             <div
               key={item.id}
-              className={`portfolio-item ${item.gridClass || "span-1"} reveal ${idx >= 6 ? "hide-on-desktop" : ""}`}
+              className={`portfolio-item ${item.gridClass || "col-4"} reveal ${idx >= 6 ? "hide-on-desktop" : ""}`}
               style={{ transitionDelay: `${idx * 0.1}s` }}
               onClick={() => openLightbox(item.id)}
             >
