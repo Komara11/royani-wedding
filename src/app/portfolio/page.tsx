@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { db } from "@/lib/firebase";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { collection, getDocs, query, orderBy, doc, getDoc } from "firebase/firestore";
 
 // Shared Types
 type PortfolioItemType = {
@@ -17,10 +17,10 @@ type PortfolioItemType = {
 
 // Fallback data
 const fallbackPortfolioItems: PortfolioItemType[] = [
-  { id: 1, src: "/portfolio/1.jpg", category: "Akad", title: "Intimate Akad", location: "Bandung", gridClass: "col-4" },
+  { id: 1, src: "/portfolio/1.jpg", category: "Adat", title: "Intimate Adat", location: "Bandung", gridClass: "col-4" },
   { id: 2, src: "/portfolio/2.jpg", category: "Resepsi", title: "Grand Reception", location: "Jakarta", gridClass: "col-8" },
   { id: 3, src: "/portfolio/3.jpg", category: "Pre-Wedding", title: "Nature Pre-Wedding", location: "Bali", gridClass: "col-6" },
-  { id: 4, src: "/portfolio/4.jpg", category: "Akad", title: "Traditional Akad", location: "Yogyakarta", gridClass: "col-6" },
+  { id: 4, src: "/portfolio/4.jpg", category: "Adat", title: "Traditional Adat", location: "Yogyakarta", gridClass: "col-6" },
   { id: 5, src: "/portfolio/5.jpg", category: "Resepsi", title: "Garden Party", location: "Bogor", gridClass: "col-12" },
 ];
 
@@ -29,13 +29,18 @@ export default function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState("Semua");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [visibleCount, setVisibleCount] = useState(12);
+  const [portfolioCategories, setPortfolioCategories] = useState<string[]>(["Semua", "Adat", "Resepsi", "Outdoor", "Kimono", "Dekorasi"]);
 
   // Fetch from Firebase
   useEffect(() => {
     async function fetchPortfolio() {
       try {
         const portQ = query(collection(db, "portfolio_items"), orderBy("sort_order"));
-        const portSnap = await getDocs(portQ);
+        const [portSnap, catSnap] = await Promise.all([
+          getDocs(portQ),
+          getDoc(doc(db, "site_content", "portfolio_categories"))
+        ]);
+        
         if (!portSnap.empty) {
           const items = portSnap.docs
             .filter(d => d.data().is_active !== false)
@@ -47,6 +52,10 @@ export default function PortfolioPage() {
             } as PortfolioItemType));
           if (items.length > 0) setPortfolioItems(items);
         }
+
+        if (catSnap.exists() && catSnap.data().list) {
+          setPortfolioCategories(["Semua", ...catSnap.data().list]);
+        }
       } catch (err) {
         console.warn("Firestore fetch failed, using fallback data:", err);
       }
@@ -55,7 +64,7 @@ export default function PortfolioPage() {
   }, []);
 
   // Filter Categories
-  const categories = Array.from(new Set(["Semua", "Akad", "Resepsi", "Outdoor", "Kimono", ...portfolioItems.map(item => item.category)]));
+  const categories = portfolioCategories;
   
   const rawFilteredPortfolio = selectedCategory === "Semua"
     ? portfolioItems

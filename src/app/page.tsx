@@ -9,7 +9,7 @@ import { collection, getDocs, doc, getDoc, query, orderBy } from "firebase/fires
 const fallbackPortfolioItems = [
   { id: 0, src: "/images/porto-1.jpg", title: "Pernikahan Andi & Sari", category: "Resepsi", location: "Grand Ballroom", gridClass: "col-4" },
   { id: 1, src: "/images/porto-2.jpg", title: "Pernikahan Rian & Dewi", category: "Outdoor", location: "Outdoor Garden", gridClass: "col-8" },
-  { id: 2, src: "/images/porto-3.jpg", title: "Pernikahan Yoga & Putri", category: "Akad", location: "Gedung Serbaguna", gridClass: "col-6" },
+  { id: 2, src: "/images/porto-3.jpg", title: "Pernikahan Yoga & Putri", category: "Adat", location: "Gedung Serbaguna", gridClass: "col-6" },
   { id: 3, src: "/images/porto-4.jpg", title: "Pernikahan Dimas & Rina", category: "Resepsi", location: "Hotel Bintang 5", gridClass: "col-6" },
 ];
 
@@ -582,12 +582,13 @@ export default function Home() {
         }
 
         // Site Content
-        const [heroSnap, aboutSnap, contactSnap, socialSnap, footerSnap] = await Promise.all([
+        const [heroSnap, aboutSnap, contactSnap, socialSnap, footerSnap, catSnap] = await Promise.all([
           getDoc(doc(db, "site_content", "hero")),
           getDoc(doc(db, "site_content", "about")),
           getDoc(doc(db, "site_content", "contact")),
           getDoc(doc(db, "site_content", "social_media")),
-          getDoc(doc(db, "site_content", "footer"))
+          getDoc(doc(db, "site_content", "footer")),
+          getDoc(doc(db, "site_content", "portfolio_categories"))
         ]);
 
         if (heroSnap.exists()) setHeroContent(heroSnap.data() as typeof heroContent);
@@ -595,6 +596,9 @@ export default function Home() {
         if (contactSnap.exists()) setContactContent(contactSnap.data() as typeof contactContent);
         if (socialSnap.exists()) setSocialMedia(socialSnap.data() as typeof socialMedia);
         if (footerSnap.exists()) setFooterContent(footerSnap.data() as typeof footerContent);
+        if (catSnap.exists() && catSnap.data().list) {
+          setPortfolioCategories(["Semua", ...catSnap.data().list]);
+        }
 
       } catch (err) {
         console.warn("Firestore fetch failed, using fallback data:", err);
@@ -609,6 +613,7 @@ export default function Home() {
   // Pricing tabs
   const [activePriceTab, setActivePriceTab] = useState<"akad" | "lengkap">("akad");
   const [expandedCards, setExpandedCards] = useState<Record<string, boolean>>({});
+  const [portfolioCategories, setPortfolioCategories] = useState<string[]>(["Semua", "Adat", "Resepsi", "Outdoor", "Kimono", "Dekorasi"]);
 
   const toggleCard = (pkgName: string) => {
     setExpandedCards((prev) => ({
@@ -622,6 +627,7 @@ export default function Home() {
   const [bookingName, setBookingName] = useState("");
   const [bookingDate, setBookingDate] = useState("");
   const [bookingLocation, setBookingLocation] = useState("");
+  const [bookingAddress, setBookingAddress] = useState("");
   const [bookingNotes, setBookingNotes] = useState("");
 
   // FAQ states
@@ -773,6 +779,7 @@ export default function Home() {
     setBookingName("");
     setBookingDate("");
     setBookingLocation("");
+    setBookingAddress("");
     setBookingNotes("");
   };
 
@@ -786,6 +793,7 @@ export default function Home() {
       `*Nama Lengkap:* ${bookingName}\n` +
       `*Tanggal Acara:* ${bookingDate}\n` +
       `*Lokasi Acara:* ${bookingLocation}\n` +
+      `*Alamat Lengkap:* ${bookingAddress}\n` +
       `*Catatan/Permintaan:* ${bookingNotes || "-"}\n\n` +
       `Mohon diinformasikan langkah selanjutnya. Terima kasih!`;
 
@@ -1074,7 +1082,7 @@ export default function Home() {
           className="portfolio-filters reveal"
           ref={(el) => { if (el) revealRefs.current[5] = el; }}
         >
-          {["Semua", "Akad", "Resepsi", "Outdoor", "Kimono"].map((cat) => (
+          {portfolioCategories.map((cat) => (
             <button
               key={cat}
               className={`filter-btn ${selectedCategory === cat ? "active" : ""}`}
@@ -1406,6 +1414,19 @@ export default function Home() {
                   onChange={(e) => setBookingLocation(e.target.value)}
                 />
                 <label htmlFor="modal-location" className="form-label-premium">Lokasi Rencana Acara</label>
+              </div>
+              <div className="form-group-premium">
+                <textarea
+                  id="modal-address"
+                  className="form-input-premium"
+                  required
+                  rows={2}
+                  placeholder=" "
+                  value={bookingAddress}
+                  onChange={(e) => setBookingAddress(e.target.value)}
+                  style={{ resize: "none" }}
+                />
+                <label htmlFor="modal-address" className="form-label-premium">Alamat Lengkap Biodata Pengantin</label>
               </div>
               <div className="form-group-premium">
                 <textarea
