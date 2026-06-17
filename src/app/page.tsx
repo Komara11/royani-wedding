@@ -484,7 +484,7 @@ export default function Home() {
     description: "Mewujudkan hari spesial Anda menjadi sempurna, berkesan, dan elegan lewat layanan profesional kami.",
     cta_text: "Konsultasi Gratis",
     scroll_text: "Scroll untuk melihat galeri",
-    bg_image_url: "/images/hero-premium.jpg",
+    bg_image_url: "/images/bg-hero.jpg",
     parallax_image_url: "/images/bg-divider.jpg",
     parallax_quote: "Cinta tidak hanya tentang saling memandang, melainkan bersama-sama melihat ke satu arah yang sama dengan komitmen dan ketulusan abadi."
   });
@@ -540,8 +540,10 @@ export default function Home() {
   // Fetch data from Firestore
   useEffect(() => {
     async function fetchData() {
-      try {
-        // Portfolio
+      const minDelay = new Promise(resolve => setTimeout(resolve, 1000));
+      const dataFetch = (async () => {
+        try {
+          // Portfolio
         const portQ = query(collection(db, "portfolio_items"), orderBy("sort_order"));
         const portSnap = await getDocs(portQ);
         if (!portSnap.empty) {
@@ -600,9 +602,13 @@ export default function Home() {
           setPortfolioCategories(["Semua", ...catSnap.data().list]);
         }
 
-      } catch (err) {
-        console.warn("Firestore fetch failed, using fallback data:", err);
-      }
+        } catch (err) {
+          console.warn("Firestore fetch failed, using fallback data:", err);
+        }
+      })();
+
+      await Promise.all([minDelay, dataFetch]);
+      setIsLoading(false);
     }
     fetchData();
   }, []);
@@ -645,13 +651,7 @@ export default function Home() {
   // Refs for reveal elements (kept for backward compatibility, but we now use automatic query)
   const revealRefs = useRef<(HTMLElement | null)[]>([]);
 
-  // Preloader timer
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000); // 1s loading display for smooth premium feeling
-    return () => clearTimeout(timer);
-  }, []);
+  // Preloader timer is now handled in the main fetchData useEffect
 
   // Handle mobile back button for lightbox preview
   useEffect(() => {
@@ -950,16 +950,11 @@ export default function Home() {
       {/* HERO SECTION (PRESERVED) */}
       <section className="hero" id="home">
         <div className="hero-bg">
-          <div 
-            className="hero-bg-blur" 
-            style={{ backgroundImage: `url('${heroContent.bg_image_url || "/images/hero-premium.jpg"}')` }}
-          />
           <img
-            src={heroContent.bg_image_url || "/images/hero-premium.jpg"}
+            src={heroContent.bg_image_url || "/images/bg-hero.jpg"}
             alt="Royani Wedding Background"
             fetchPriority="high"
             loading="eager"
-            className="hero-bg-img"
           />
         </div>
         <div className="hero-overlay" />
