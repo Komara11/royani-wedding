@@ -950,11 +950,16 @@ export default function Home() {
       {/* HERO SECTION (PRESERVED) */}
       <section className="hero" id="home">
         <div className="hero-bg">
+          <div 
+            className="hero-bg-blur" 
+            style={{ backgroundImage: `url('${heroContent.bg_image_url || "/images/hero-premium.jpg"}')` }}
+          />
           <img
             src={heroContent.bg_image_url || "/images/hero-premium.jpg"}
             alt="Royani Wedding Background"
             fetchPriority="high"
             loading="eager"
+            className="hero-bg-img"
           />
         </div>
         <div className="hero-overlay" />
