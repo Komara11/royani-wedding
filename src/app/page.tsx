@@ -484,7 +484,7 @@ export default function Home() {
     description: "Mewujudkan hari spesial Anda menjadi sempurna, berkesan, dan elegan lewat layanan profesional kami.",
     cta_text: "Konsultasi Gratis",
     scroll_text: "Scroll untuk melihat galeri",
-    bg_image_url: "/images/hero-bg.jpg",
+    bg_image_url: "/images/hero-premium.jpg",
     parallax_image_url: "/images/bg-divider.jpg",
     parallax_quote: "Cinta tidak hanya tentang saling memandang, melainkan bersama-sama melihat ke satu arah yang sama dengan komitmen dan ketulusan abadi."
   });
@@ -951,7 +951,7 @@ export default function Home() {
       <section className="hero" id="home">
         <div className="hero-bg">
           <img
-            src={heroContent.bg_image_url || "/images/bg-hero.jpg"}
+            src={heroContent.bg_image_url || "/images/hero-premium.jpg"}
             alt="Royani Wedding Background"
             fetchPriority="high"
             loading="eager"
