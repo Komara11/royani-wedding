@@ -1426,7 +1426,7 @@ export default function Home() {
                   onChange={(e) => setBookingAddress(e.target.value)}
                   style={{ resize: "none" }}
                 />
-                <label htmlFor="modal-address" className="form-label-premium">Alamat Lengkap Biodata Pengantin</label>
+                <label htmlFor="modal-address" className="form-label-premium">Alamat Lengkap Anda</label>
               </div>
               <div className="form-group-premium">
                 <textarea
