@@ -549,7 +549,12 @@ export default function Home() {
         if (!portSnap.empty) {
           const items = portSnap.docs
             .filter(d => d.data().is_active !== false)
-            .map((d, idx) => ({ ...d.data(), id: idx, src: d.data().image_url, gridClass: d.data().grid_class || "col-6" } as typeof fallbackPortfolioItems[0]));
+            .map((d, idx) => ({ 
+              ...d.data(), 
+              id: idx, 
+              src: d.data().image_url || fallbackPortfolioItems[idx % fallbackPortfolioItems.length].src, 
+              gridClass: d.data().grid_class || "col-6" 
+            } as typeof fallbackPortfolioItems[0]));
           if (items.length > 0) setPortfolioItems(items);
         }
 
@@ -593,8 +598,23 @@ export default function Home() {
           getDoc(doc(db, "site_content", "portfolio_categories"))
         ]);
 
-        if (heroSnap.exists()) setHeroContent(heroSnap.data() as typeof heroContent);
-        if (aboutSnap.exists()) setAboutContent(aboutSnap.data() as typeof aboutContent);
+        if (heroSnap.exists()) {
+          const data = heroSnap.data();
+          setHeroContent(prev => ({ 
+            ...prev, 
+            ...data,
+            bg_image_url: data.bg_image_url || prev.bg_image_url,
+            parallax_image_url: data.parallax_image_url || prev.parallax_image_url
+          }) as typeof heroContent);
+        }
+        if (aboutSnap.exists()) {
+          const data = aboutSnap.data();
+          setAboutContent(prev => ({
+            ...prev,
+            ...data,
+            image_url: data.image_url || prev.image_url
+          }) as typeof aboutContent);
+        }
         if (contactSnap.exists()) setContactContent(contactSnap.data() as typeof contactContent);
         if (socialSnap.exists()) setSocialMedia(socialSnap.data() as typeof socialMedia);
         if (footerSnap.exists()) setFooterContent(footerSnap.data() as typeof footerContent);
