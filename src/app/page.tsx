@@ -975,6 +975,7 @@ export default function Home() {
             alt="Royani Wedding Background"
             fetchPriority="high"
             loading="eager"
+            onError={(e) => { e.currentTarget.src = "/images/bg-hero.jpg"; }}
           />
         </div>
         <div className="hero-overlay" />
@@ -1026,7 +1027,11 @@ export default function Home() {
             ref={(el) => { if (el) revealRefs.current[0] = el; }}
           >
             <div className="about-frame">
-              <img src={aboutContent.image_url} alt="Royani Wedding Setup" />
+              <img 
+                src={aboutContent.image_url} 
+                alt="Royani Wedding Setup" 
+                onError={(e) => { e.currentTarget.src = "/images/about.jpg"; }} 
+              />
             </div>
             {/* Elegant overlapping quote card */}
             <div className="about-floating-quote">
@@ -1122,7 +1127,11 @@ export default function Home() {
               style={{ transitionDelay: `${idx * 0.1}s` }}
               onClick={() => openLightbox(item.id)}
             >
-              <img src={item.src} alt={item.title} />
+              <img 
+                src={item.src} 
+                alt={item.title} 
+                onError={(e) => { e.currentTarget.src = fallbackPortfolioItems[idx % fallbackPortfolioItems.length].src; }} 
+              />
               <div className="portfolio-overlay">
                 <span className="portfolio-overlay-tag">{item.category}</span>
                 <h4>{item.title}</h4>
