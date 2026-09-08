@@ -1,0 +1,764 @@
+{
+  "site_content": {
+    "hero": {
+      "title_first": "Royani",
+      "parallax_image_url": "https://firebasestorage.googleapis.com/v0/b/royani-weding.firebasestorage.app/o/content%2F1781609302605_WhatsAppImage20260612at9.56.44PM3.jpeg?alt=media&token=48b6a872-0487-498c-86e1-4864b1d1b1da",
+      "subtitle": "Wedding Organizer",
+      "title_second": "Wedding",
+      "description": "Mewujudkan hari spesial Anda menjadi sempurna, berkesan, dan elegan lewat layanan profesional kami.",
+      "scroll_text": "Gulir ke bawah",
+      "bg_image_url": "",
+      "cta_text": "Daftar Harga"
+    },
+    "about": {
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/royani-weding.firebasestorage.app/o/content%2F1781608504075_WhatsAppImage20260612at9.54.32PM2.jpeg?alt=media&token=b5c48bfb-fff6-4c8d-a573-06e0626b1098",
+      "quote": "Hari terindah adalah ketika janji suci terucap dan disaksikan oleh semesta dengan keanggunan abadi.",
+      "metrics": [
+        {
+          "label": "Acara Sukses",
+          "value": "500+"
+        },
+        {
+          "value": "10+",
+          "label": "Tahun Kerja"
+        },
+        {
+          "label": "Kepuasan Klien",
+          "value": "99%"
+        }
+      ],
+      "paragraph_2": "Dari konsep tata rias anggun, dekorasi megah, hingga pengaturan alur acara di lapangan, kami memberikan sentuhan elegan dan perhatian penuh di setiap detiknya.",
+      "title_first": "Menciptakan Momen",
+      "paragraph_1": "Royani Wedding adalah mitra wedding organizer profesional di Majalengka yang berdedikasi tinggi untuk mewujudkan konsep pernikahan impian Anda. Kami memadukan nilai artistik dan detail organisasi terbaik demi kenyamanan seluruh rangkaian acara Anda.",
+      "title_highlight": "Abadi",
+      "tag": "Tentang Kami"
+    },
+    "contact": {
+      "address": "Desa Kedungsari, Kec. Ligung, Kab. Majalengka",
+      "description": "Kami percaya setiap detail menceritakan kisah cinta unik Anda. Ceritakan konsep pernikahan impian Anda, dan mari kita wujudkan hari bahagia Anda menjadi kenyataan yang anggun dan tak terlupakan.",
+      "title_highlight": "Pernikahan Anda",
+      "maps_url": "https://www.google.com/maps/place/Royani+wedding+gallery/@-6.631259,108.3431362,17z/data=!4m6!3m5!1s0x2e6edd131e725ead:0x46b77e412f815e01!8m2!3d-6.6312202!4d108.3431383!16s%2Fg%2F11h9fjcljr?hl=id&entry=ttu&g_ep=EgoyMDI2MDYwOS4wIKXMDSoASAFQAw%3D%3D",
+      "tag": "Hubungi Kami",
+      "form_title": "Kirim Pesan",
+      "title_first": "Mulai Konsultasi",
+      "form_description": "Rencanakan konsep pernikahan impian Anda bersama konsultan wedding planner kami.",
+      "maps_embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.123456789!2d108.3431362!3d-6.631259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6edd131e725ead%3A0x46b77e412f815e01!2sRoyani%20wedding%20gallery!5e0!3m2!1sid!2sid!4v1234567890",
+      "form_tag": "Rencana Hari Bahagia",
+      "whatsapp_number": "6287847222209"
+    },
+    "portfolio_categories": {
+      "list": [
+        "Adat",
+        "Resepsi",
+        "Outdoor",
+        "Kimono",
+        "Dekorasi",
+        "bride & bridesmaid"
+      ]
+    }
+  },
+  "pricing_packages": [
+    {
+      "id": "12ylpSxr1qCA27BuJINv",
+      "featured": false,
+      "sort_order": 0,
+      "name": "Minimalis",
+      "price": "Rp 6.000.000",
+      "sections": [
+        {
+          "features": [
+            "Dekorasi Indoor"
+          ],
+          "title": "Dekorasi",
+          "is_bonus": false
+        },
+        {
+          "features": [
+            "1x sepasang busana akad",
+            "1x gaun resepsi",
+            "1x jas resepsi",
+            "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+            "1 set melati fresh",
+            "1x makeup pengantin + touch up"
+          ],
+          "is_bonus": false,
+          "title": "Make-up & Busana"
+        },
+        {
+          "is_bonus": false,
+          "features": [
+            "Cetak 1 album magnetik 70 lembar + file"
+          ],
+          "title": "Dokumentasi"
+        },
+        {
+          "is_bonus": true,
+          "title": "Include",
+          "features": [
+            "Softlens pengantin",
+            "Henna + nail art pengantin",
+            "Makeup ibu hajat"
+          ]
+        },
+        {
+          "is_bonus": false,
+          "title": "Note :",
+          "features": [
+            "Biaya transport menyesuaikan dengan jarak "
+          ]
+        }
+      ],
+      "type": "lengkap",
+      "is_active": true
+    },
+    {
+      "id": "3a6ZY13Kmb8podx6vrNq",
+      "is_active": true,
+      "featured": false,
+      "type": "akad",
+      "sort_order": 1,
+      "price": "Rp 1.700.000",
+      "name": "Paket 2",
+      "sections": [
+        {
+          "is_bonus": false,
+          "title": "Make-up & Busana",
+          "features": [
+            "Makeup Pengantin",
+            "Busana Akad + Acc",
+            "Jas Pengantin Pria",
+            "Sepatu Pria & Wanita",
+            "Melati Fresh"
+          ]
+        },
+        {
+          "features": [
+            "Softlens Pengantin",
+            "Henna + Nail Art Pengantin"
+          ],
+          "title": "Free",
+          "is_bonus": true
+        },
+        {
+          "features": [
+            "Biaya transport menyesuaikan dengan jarak "
+          ],
+          "is_bonus": false,
+          "title": "Note :"
+        }
+      ]
+    },
+    {
+      "id": "AyQMUpSoJlmfIvjn3eMN",
+      "price": "Rp 35.500.000",
+      "sections": [
+        {
+          "features": [
+            "Pelaminan 8 meter",
+            "Rangkaian bunga imitasi premium",
+            "Lorong masuk",
+            "Foto booth",
+            "2 kotak uang",
+            "2 meja penerima tamu",
+            "1 gapura pintu masuk",
+            "9 lokal tenda (model menyesuaikan tema)",
+            "100 pcs kursi tamu + 100 pcs sarung kursi",
+            "1 set alat-alat prasmanan (roll toup) berikut 100 piring rotan & 100 sendok",
+            "2 malam lampu penerang + jenset",
+            "Set meja akad",
+            "2 kipas blower",
+            "Karpet merah 30 meter",
+            "2 meja VIP"
+          ],
+          "is_bonus": false,
+          "title": "Dekorasi"
+        },
+        {
+          "features": [
+            "1x sepasang busana akad",
+            "2x gaun resepsi",
+            "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+            "1 set melati fresh",
+            "1x makeup pengantin + touch up",
+            "1x makeup dan busana ibu hajat + besan",
+            "Beskap bapa hajat & besan",
+            "6 makeup dan busana pagar ayu",
+            "2 pagar bagus"
+          ],
+          "is_bonus": false,
+          "title": "Make-up & Busana"
+        },
+        {
+          "is_bonus": false,
+          "title": "Dokumentasi",
+          "features": [
+            "Cetak 1 album magazine + file editing (1 flashdisk)",
+            "Cetak 1 album magnetik",
+            "Video sinematik",
+            "Video liputan",
+            "Video on flashdisk"
+          ]
+        },
+        {
+          "is_bonus": true,
+          "features": [
+            "1 MC Akad",
+            "4 Crew WO",
+            "Softlens pengantin",
+            "Henna + nail art pengantin",
+            "Makeup dewasa 2",
+            "Makeup anak 2",
+            "Pelepasan balon",
+            "Tim wcc"
+          ],
+          "title": "Include "
+        },
+        {
+          "title": "Note :",
+          "is_bonus": false,
+          "features": [
+            "Biaya transport menyesuaikan dengan jarak "
+          ]
+        }
+      ],
+      "name": "Platinum",
+      "is_active": true,
+      "sort_order": 6,
+      "type": "lengkap",
+      "featured": false
+    },
+    {
+      "id": "BtHLwFPv4YUDpiOh1LUi",
+      "sections": [
+        {
+          "is_bonus": false,
+          "features": [
+            "Pelaminan 6 meter",
+            "Kursi 5",
+            "Rangkaian bunga imitasi premium mix fresh flowers",
+            "2 kotak uang",
+            "1 meja penerima tamu",
+            "Gapura pintu masuk lorong",
+            "7 lokasi tenda (model menyesuaikan tema)",
+            "100 pcs kursi tamu + 100 pcs sarung kursi",
+            "1 set alat-alat prasmanan (roll toup) berikut 100 piring rotan & sendok",
+            "2 malam lampu penerang + jenset",
+            "Set meja akad",
+            "2 kipas blower"
+          ],
+          "title": "Dekorasi"
+        },
+        {
+          "is_bonus": false,
+          "title": "Make-up & Busana",
+          "features": [
+            "1x sepasang busana akad",
+            "2x gaun resepsi",
+            "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+            "1 set melati fresh",
+            "1x makeup pengantin + touch up",
+            "1x makeup dan busana ibu hajat + besan ",
+            "Beskap bapa hajat + besan",
+            "4 makeup dan busana pagar ayu",
+            "2 pagar bagus"
+          ]
+        },
+        {
+          "title": "Dokumentasi",
+          "is_bonus": false,
+          "features": [
+            "1 album wedding magnetik",
+            "Cetak 100 foto + file"
+          ]
+        },
+        {
+          "is_bonus": true,
+          "title": "Include",
+          "features": [
+            "Softlens pengantin ",
+            "Henna + nail art pengantin",
+            "Makeup dewasa 2",
+            "Makeup anak 2",
+            "Tim wcc",
+            "1 MC akad"
+          ]
+        },
+        {
+          "title": "Note :",
+          "features": [
+            "Biaya transport menyesuaikan dengan jarak"
+          ],
+          "is_bonus": false
+        }
+      ],
+      "type": "lengkap",
+      "price": "Rp. 20.500.000",
+      "is_active": true,
+      "featured": false,
+      "sort_order": 5,
+      "name": "Ivory"
+    },
+    {
+      "id": "HjI46pcH6c36wBuGQTej",
+      "name": "Silver",
+      "is_active": true,
+      "featured": false,
+      "type": "lengkap",
+      "price": "Rp 17.500.000",
+      "sort_order": 4,
+      "sections": [
+        {
+          "is_bonus": false,
+          "features": [
+            "Pelaminan 6 meter",
+            "kursi 5",
+            "Rangkaian bunga imitasi premium",
+            "2 kotak uang",
+            "1 meja penerima tamu",
+            "Gapura pintu masuk lorong",
+            "7 lokal tenda (model menyesuaikan tema)",
+            "100 pcs kursi tamu + 100 pcs sarung kursi",
+            "1 set alat-alat prasmanan (roll toup) berikut 100 piring rotan & 100 sendok",
+            "2 malam lampu penerang + jenset",
+            "Set meja akad",
+            "1 kipas blower"
+          ],
+          "title": "Dekorasi"
+        },
+        {
+          "features": [
+            "1x sepasang busana akad",
+            "2x gaun resepsi",
+            "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+            "1 set melati fresh",
+            "1x makeup pengantin + touch up",
+            "1x makeup dan busana ibu hajat + besan",
+            "Beskap bapa hajat & besan",
+            "4 makeup dan busana pagar ayu"
+          ],
+          "title": "Make-up & Busana",
+          "is_bonus": false
+        },
+        {
+          "is_bonus": false,
+          "title": "Dokumentasi",
+          "features": [
+            "1 album wedding magnetik",
+            "Cetak 100 foto + file"
+          ]
+        },
+        {
+          "features": [
+            "Softlens pengantin",
+            "Henna + nail art pengantin",
+            "Makeup dewasa 2",
+            "Makeup anak 2",
+            "Tim wcc"
+          ],
+          "is_bonus": true,
+          "title": "Include"
+        },
+        {
+          "is_bonus": false,
+          "features": [
+            "Biaya transport menyesuaikan dengan jarak "
+          ],
+          "title": "Note :"
+        }
+      ]
+    },
+    {
+      "id": "ISqgCncZj0tL40go6mEl",
+      "is_active": true,
+      "sections": [
+        {
+          "features": [
+            "Pelaminan 6 meter",
+            "kursi 5",
+            "Rangkaian bunga imitasi premium",
+            "2 kotak uang ukuran standar",
+            "1 meja penerima tamu",
+            "Gapura pintu masuk",
+            "2 set tenda",
+            "100 pcs kursi tamu + 100 pcs sarung kursi",
+            "1 set alat-alat prasmanan berikut 100 piring rotan & 100 sendok",
+            "2 malam lampu penerang + jenset",
+            "Set meja akad",
+            "1 kipas blower"
+          ],
+          "is_bonus": false,
+          "title": "Dekorasi"
+        },
+        {
+          "features": [
+            "1x sepasang busana akad",
+            "2x gaun resepsi",
+            "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+            "1 set melati fresh",
+            "1x makeup pengantin + touch up",
+            "1x makeup dan busana ibu hajat + besan",
+            "Beskap bapa hajat & besan",
+            "4 makeup dan busana pagar ayu"
+          ],
+          "title": "Make-up & Busana",
+          "is_bonus": false
+        },
+        {
+          "title": "Dokumentasi",
+          "is_bonus": false,
+          "features": [
+            "1 album wedding magnetik",
+            "Cetak foto 100 lembar + file foto"
+          ]
+        },
+        {
+          "features": [
+            "Softlens pengantin",
+            "Henna + nail art khusus pengantin",
+            "Makeup anak 2",
+            "Tim wcc"
+          ],
+          "title": "Include",
+          "is_bonus": true
+        },
+        {
+          "features": [
+            "Biaya transport menyesuaikan dengan jarak "
+          ],
+          "is_bonus": false,
+          "title": "Note :"
+        }
+      ],
+      "name": "Standar 2",
+      "price": "Rp 15.500.000",
+      "featured": false,
+      "type": "lengkap",
+      "sort_order": 3
+    },
+    {
+      "id": "Quy0ykKhdWid9WVMBXr7",
+      "featured": true,
+      "name": "Gold",
+      "price": "Rp 25.500.000",
+      "sections": [
+        {
+          "features": [
+            "Pelaminan 6 meter x video trone",
+            "Rangkaian bunga imitasi premium mix fresh  flowers",
+            "Lorong masuk",
+            "Foto booth",
+            "2 kotak uang",
+            "1 meja penerima tamu",
+            "Gapura pintu masuk ",
+            "8 lokal tenda (model menyesuaikan tema)",
+            "100 pcs kursi tamu + 100 pcs sarung kursi",
+            "1 set alat-alat prasmanan (roll toup) berikut 100 piring rotan & 100 sendok",
+            "2 malam lampu penerang + jenset",
+            "Set meja akad",
+            "2 kipas blower",
+            "Karpet jalan "
+          ],
+          "title": "Dekorasi",
+          "is_bonus": false
+        },
+        {
+          "features": [
+            "1x sepasang busana akad",
+            "2x gaun resepsi",
+            "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+            "1 set melati fresh",
+            "1x makeup pengantin + touch up",
+            "1x makeup dan busana ibu hajat + besan",
+            "Beskap bapa hajat & besan",
+            "4 makeup dan busana pagar ayu",
+            "2 pagar bagus"
+          ],
+          "title": "Make-up & Busana",
+          "is_bonus": false
+        },
+        {
+          "features": [
+            "1 album wedding magnetik",
+            "1 album magazine",
+            "Cetak 100 foto + file"
+          ],
+          "title": "Dokumentasi",
+          "is_bonus": false
+        },
+        {
+          "features": [
+            "1 MC Akad",
+            "Softlens pengantin",
+            "Henna + nail art pengantin",
+            "Makeup dewasa 2",
+            "Pelepasan balon",
+            "Tim wcc"
+          ],
+          "is_bonus": true,
+          "title": "Include "
+        },
+        {
+          "features": [
+            "Biaya transport menyesuaikan dengan jarak "
+          ],
+          "is_bonus": false,
+          "title": "Note :"
+        }
+      ],
+      "sort_order": 5,
+      "is_active": true,
+      "type": "lengkap"
+    },
+    {
+      "id": "fiT6R6jJu2C7Bd5XPCFA",
+      "price": "Rp 45.500.000",
+      "sort_order": 7,
+      "featured": false,
+      "name": "Exclusive",
+      "type": "lengkap",
+      "sections": [
+        {
+          "is_bonus": false,
+          "features": [
+            "Pelaminan 10 meter",
+            "Rangkaian bunga imitasi premium",
+            "Lorong masuk",
+            "Foto booth",
+            "2 kotak uang",
+            "2 meja penerima tamu",
+            "1 gapura pintu masuk",
+            "10 lokal tenda (model menyesuaikan tema)",
+            "100 pcs kursi tamu + 100 pcs sarung kursi",
+            "1 set alat-alat prasmanan (roll toup) berikut 150 piring rotan & 150 sendok",
+            "2 malam lampu penerang + jenset",
+            "1 Set meja akad Exclusive",
+            "3 kipas blower",
+            "Karpet jalan 40 meter",
+            "2 meja VIP",
+            "2 meja hidangan tambahan"
+          ],
+          "title": "Dekorasi"
+        },
+        {
+          "is_bonus": false,
+          "title": "Make-up & Busana",
+          "features": [
+            "1x sepasang busana akad",
+            "2x gaun resepsi",
+            "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+            "1 set melati fresh",
+            "1x makeup pengantin + touch up",
+            "1x makeup dan busana ibu hajat + besan",
+            "Beskap bapa hajat & besan",
+            "6 makeup dan busana pagar ayu",
+            "4 makeup keluarga",
+            "2 pagar bagus"
+          ]
+        },
+        {
+          "is_bonus": false,
+          "title": "Dokumentasi",
+          "features": [
+            "Cetak 1 album magazine + file editing (1 flashdisk)",
+            "Cetak 1 album magnetik",
+            "Video sinematik",
+            "Video liputan",
+            "Video on flashdisk"
+          ]
+        },
+        {
+          "is_bonus": true,
+          "title": "Include ",
+          "features": [
+            "1 MC Akad",
+            "4 Crew WO",
+            "Pemandu siraman",
+            "Softlens pengantin",
+            "Henna + nail art pengantin",
+            "Makeup dewasa 2",
+            "Makeup anak 2",
+            "Pelepasan balon",
+            "Tim wcc"
+          ]
+        },
+        {
+          "is_bonus": false,
+          "title": "Note :",
+          "features": [
+            "Biaya transport menyesuaikan dengan jarak "
+          ]
+        }
+      ],
+      "is_active": true
+    },
+    {
+      "id": "q7DPtYtlRrOZOWgXDsZb",
+      "price": "Rp 2.500.000",
+      "sections": [
+        {
+          "title": "Make-up & Busana",
+          "is_bonus": false,
+          "features": [
+            "Makeup Pengantin",
+            "Busana Akad + Acc",
+            "Jas Pengantin Pria",
+            "Sepatu Pria & Wanita",
+            "Melati Fresh"
+          ]
+        },
+        {
+          "is_bonus": false,
+          "features": [
+            "1 Album Magnetik 50 Lembar + File Foto"
+          ],
+          "title": "Dokumentasi"
+        },
+        {
+          "features": [
+            "Softlens Pengantin",
+            "Henna + Nail Art Pengantin"
+          ],
+          "title": "free",
+          "is_bonus": true
+        },
+        {
+          "is_bonus": false,
+          "title": "Note :",
+          "features": [
+            "Biaya transport menyesuaikan dengan jarak "
+          ]
+        }
+      ],
+      "name": "Paket 1",
+      "is_active": true,
+      "sort_order": 0,
+      "type": "akad",
+      "featured": false
+    },
+    {
+      "id": "rACUoKoUsf33ItOqwj4B",
+      "sort_order": 2,
+      "featured": false,
+      "price": "Rp 13.500.000",
+      "type": "lengkap",
+      "sections": [
+        {
+          "features": [
+            "Pelaminan 6 meter",
+            "kursi 5",
+            "2 kotak uang ukuran standar",
+            "1 meja penerima tamu",
+            "Gapura pintu masuk",
+            "2 set tenda",
+            "100 pcs kursi tamu",
+            "1 set alat-alat prasmanan berikut 100 piring rotan & 100 sendok"
+          ],
+          "is_bonus": false,
+          "title": "Dekorasi"
+        },
+        {
+          "is_bonus": false,
+          "title": "Make-up & Busana",
+          "features": [
+            "1x sepasang busana akad",
+            "2x gaun resepsi",
+            "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+            "1 set melati fresh",
+            "1x makeup pengantin + touch up",
+            "1x makeup dan busana ibu hajat + besan",
+            "Beskap bapa hajat & besan",
+            "4 makeup dan busana pagar ayu"
+          ]
+        },
+        {
+          "features": [
+            "1 album wedding magnetik",
+            "Cetak foto 70 lembar + file foto"
+          ],
+          "is_bonus": false,
+          "title": "Dokumentasi"
+        },
+        {
+          "features": [
+            "Softlens pengantin",
+            "Henna + nail art khusus pengantin",
+            "Makeup anak 2"
+          ],
+          "title": "Include",
+          "is_bonus": true
+        },
+        {
+          "title": "Note :",
+          "is_bonus": false,
+          "features": [
+            "Biaya transport menyesuaikan dengan jarak "
+          ]
+        }
+      ],
+      "is_active": true,
+      "name": "Standar 1"
+    },
+    {
+      "id": "rv4A5UK48v73GgUiTPAs",
+      "name": "Ekonomis",
+      "featured": false,
+      "type": "lengkap",
+      "sort_order": 1,
+      "price": "Rp 9.500.000",
+      "is_active": true,
+      "sections": [
+        {
+          "features": [
+            "Pelaminan 4–5 meter",
+            "kursi 3",
+            "2 kotak uang standar",
+            "1 meja penerima tamu",
+            "4 lokal tenda (model menyesuaikan tema)",
+            "100 pcs kursi tamu",
+            "1 set alat-alat prasmanan berikut 100 piring rotan & 100 sendok"
+          ],
+          "title": "Dekorasi",
+          "is_bonus": false
+        },
+        {
+          "is_bonus": false,
+          "features": [
+            "1x sepasang busana akad",
+            "1x gaun resepsi",
+            "1x jas resepsi",
+            "Sepasang sepatu (akad dan resepsi) pengantin pria & wanita",
+            "1 set melati fresh",
+            "1x makeup pengantin + touch up",
+            "1x makeup dan busana ibu hajat",
+            "Beskap bapa hajat",
+            "4 makeup dan busana pagar ayu"
+          ],
+          "title": "Make-up & Busana"
+        },
+        {
+          "features": [
+            "Cetak 1 album magnetik 70 lembar + file"
+          ],
+          "title": "Dokumentasi",
+          "is_bonus": false
+        },
+        {
+          "is_bonus": true,
+          "features": [
+            "Softlens pengantin",
+            "Henna + nail art pengantin"
+          ],
+          "title": "Include"
+        },
+        {
+          "is_bonus": false,
+          "features": [
+            "Biaya transport menyesuaikan dengan jarak "
+          ],
+          "title": "Note :"
+        }
+      ]
+    }
+  ],
+  "faq_items": []
+}
