@@ -24,45 +24,30 @@ export default function PortfolioPage() {
   const [visibleCount, setVisibleCount] = useState(12);
   const [portfolioCategories, setPortfolioCategories] = useState<string[]>(["Semua", "Adat", "Resepsi", "Outdoor", "Kimono", "Dekorasi"]);
 
-  // Fetch from Firebase
+  // Fetch from database
   useEffect(() => {
     async function fetchPortfolio() {
       try {
         const items = await getPortfolios();
         const catData = await getPortfolioCategories();
         
-        if (items.length > 0) setPortfolioItems(items as any);
+        if (items && (items as any).length > 0) {
+          setPortfolioItems((items as any).map((d: any) => ({
+            id: d.id,
+            src: d.imageUrl || d.image_url || "",
+            category: d.category || "Resepsi",
+            title: d.title || "",
+            location: d.location || "",
+            gridClass: d.gridClass || d.grid_class || "col-6",
+          })));
+        }
 
         if (catData) {
           const c = (catData as any).list || [];
-          setCategories(["All", ...c]);
+          setPortfolioCategories(["Semua", ...c]);
         }
       } catch (err) {
-        console.error("Error fetching portfolio:", err);
-      } finally {
-        setLoading(false);
-      }
-    }));
-        if (items.length > 0) setPortfolioItems(items);
-
-        if (catSnap?.data) {
-          const c = catSnap.data.list || [];
-          setCategories(["All", ...c]);
-        }
-      } catch (err) {
-        console.error("Error fetching portfolio:", err);
-      } finally {
-        setLoading(false);
-      }
-    } as PortfolioItemType));
-          if (items.length > 0) setPortfolioItems(items);
-        }
-
-        if (catSnap.exists() && catSnap.data().list) {
-          setPortfolioCategories(["Semua", ...catSnap.data().list]);
-        }
-      } catch (err) {
-        console.warn("Firestore fetch failed, using fallback data:", err);
+        console.warn("Fetch failed, using fallback data:", err);
       }
     }
     fetchPortfolio();

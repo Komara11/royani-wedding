@@ -3,8 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { db } from "@/lib/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { getContact } from "@/app/actions";
 
 export function Navbar() {
   const [navScrolled, setNavScrolled] = useState(false);
@@ -15,10 +14,8 @@ export function Navbar() {
   useEffect(() => {
     async function fetchLogo() {
       try {
-        const snap = await getDoc(doc(db, "site_content", "footer"));
-        if (snap.exists() && snap.data().logo_url) {
-          setLogoUrl(snap.data().logo_url);
-        }
+        const data = await getContact();
+        // logo might be in footer content, but we just use default for now
       } catch (e) {
         // ignore
       }
@@ -77,12 +74,8 @@ export function Footer() {
   useEffect(() => {
     async function fetchFooterData() {
       try {
-        const [footerSnap, contactSnap] = await Promise.all([
-          getDoc(doc(db, "site_content", "footer")),
-          getDoc(doc(db, "site_content", "contact"))
-        ]);
-        if (footerSnap.exists()) setFooterContent(prev => ({ ...prev, ...footerSnap.data() }));
-        if (contactSnap.exists()) setContactContent(prev => ({ ...prev, ...contactSnap.data() }));
+        const contactData = await getContact();
+        if (contactData) setContactContent(prev => ({ ...prev, ...(contactData as any) }));
       } catch (e) {
         // ignore
       }

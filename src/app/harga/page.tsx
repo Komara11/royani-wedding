@@ -562,98 +562,12 @@ export default function Home() {
       } catch (err) {
         console.error("Error fetching data:", err);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
-    }
-
-        // Fetch Contact Content for WhatsApp
-        const docRef = await prisma.siteContent.findUnique({ where: { id: "contact" } });
-        if (docRef?.data) {
-          setContactContent(docRef.data);
-        }
-      } catch (err) {
-        console.error("Error fetching data:", err);
-      } finally {
-        setLoading(false);
-      }
-    } as typeof fallbackPortfolioItems[0]));
-          if (items.length > 0) setPortfolioItems(items);
-        }
-
-        // Pricing packages
-        const pkgQ = query(collection(db, "pricing_packages"), orderBy("sort_order"));
-        const pkgSnap = await getDocs(pkgQ);
-        if (!pkgSnap.empty) {
-          const allPkgs = pkgSnap.docs
-            .map(d => d.data())
-            .filter(p => p.is_active !== false);
-          const akad = allPkgs.filter(p => p.type === "akad").map(p => ({
-            name: p.name, price: p.price, featured: p.featured || false,
-            sections: (p.sections || []).map((s: { title: string; is_bonus: boolean; features: string[] }) => ({ title: s.title, free: s.is_bonus, features: s.features })),
-          })) as PricingPackage[];
-          const lengkap = allPkgs.filter(p => p.type === "lengkap").map(p => ({
-            name: p.name, price: p.price, featured: p.featured || false,
-            sections: (p.sections || []).map((s: { title: string; is_bonus: boolean; features: string[] }) => ({ title: s.title, free: s.is_bonus, features: s.features })),
-          })) as PricingPackage[];
-          if (akad.length > 0) setAkadPkgs(akad);
-          if (lengkap.length > 0) setLengkapPkgs(lengkap);
-        }
-
-        // FAQs
-        const faqQ = query(collection(db, "faqs"), orderBy("sort_order"));
-        const faqSnap = await getDocs(faqQ);
-        if (!faqSnap.empty) {
-          const items = faqSnap.docs
-            .map(d => d.data())
-            .filter(f => f.is_active !== false)
-            .map(f => ({ question: f.question, answer: f.answer }));
-          if (items.length > 0) setFaqItems(items);
-        }
-
-        // Site Content
-        const [heroSnap, aboutSnap, contactSnap, socialSnap, footerSnap, catSnap] = await Promise.all([
-          getDoc(doc(db, "site_content", "hero")),
-          getDoc(doc(db, "site_content", "about")),
-          getDoc(doc(db, "site_content", "contact")),
-          getDoc(doc(db, "site_content", "social_media")),
-          getDoc(doc(db, "site_content", "footer")),
-          getDoc(doc(db, "site_content", "portfolio_categories"))
-        ]);
-
-        if (heroSnap.exists()) {
-          const data = heroSnap.data();
-          setHeroContent(prev => ({ 
-            ...prev, 
-            ...data,
-            bg_image_url: data.bg_image_url || prev.bg_image_url,
-            parallax_image_url: data.parallax_image_url || prev.parallax_image_url
-          }) as typeof heroContent);
-        }
-        if (aboutSnap.exists()) {
-          const data = aboutSnap.data();
-          setAboutContent(prev => ({
-            ...prev,
-            ...data,
-            image_url: data.image_url || prev.image_url
-          }) as typeof aboutContent);
-        }
-        if (contactSnap.exists()) setContactContent(contactSnap.data() as typeof contactContent);
-        if (socialSnap.exists()) setSocialMedia(socialSnap.data() as typeof socialMedia);
-        if (footerSnap.exists()) setFooterContent(footerSnap.data() as typeof footerContent);
-        if (catSnap.exists() && catSnap.data().list) {
-          setPortfolioCategories(["Semua", ...catSnap.data().list]);
-        }
-
-        } catch (err) {
-          console.warn("Firestore fetch failed, using fallback data:", err);
-        }
-      })();
-
-      await Promise.all([minDelay, dataFetch]);
-      setIsLoading(false);
     }
     fetchData();
   }, []);
+
 
   const [selectedCategory, setSelectedCategory] = useState("Semua");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);

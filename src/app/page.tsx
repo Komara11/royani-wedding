@@ -536,98 +536,25 @@ export default function Home() {
     logo_url: ""
   });
 
-  // Fetch data from Firestore
+  // Fetch data from database
   useEffect(() => {
     async function fetchData() {
-      const minDelay = new Promise(resolve => setTimeout(resolve, 1000));
-      const dataFetch = (async () => {
-        try {
-          // Portfolio
-        const portQ = query(collection(db, "portfolio_items"), orderBy("sort_order"));
-        const portSnap = await getDocs(portQ);
-        if (!portSnap.empty) {
-          const items = portSnap.docs
-            .filter(d => d.data().is_active !== false)
-            .map((d, idx) => ({ 
-              ...d.data(), 
-              id: idx, 
-              src: d.data().image_url || fallbackPortfolioItems[idx % fallbackPortfolioItems.length].src, 
-              gridClass: d.data().grid_class || "col-6" 
-            } as typeof fallbackPortfolioItems[0]));
-          if (items.length > 0) setPortfolioItems(items);
-        }
-
-        // Pricing packages
-        const pkgQ = query(collection(db, "pricing_packages"), orderBy("sort_order"));
-        const pkgSnap = await getDocs(pkgQ);
-        if (!pkgSnap.empty) {
-          const allPkgs = pkgSnap.docs
-            .map(d => d.data())
-            .filter(p => p.is_active !== false);
-          const akad = allPkgs.filter(p => p.type === "akad").map(p => ({
-            name: p.name, price: p.price, featured: p.featured || false,
-            sections: (p.sections || []).map((s: { title: string; is_bonus: boolean; features: string[] }) => ({ title: s.title, free: s.is_bonus, features: s.features })),
-          })) as PricingPackage[];
-          const lengkap = allPkgs.filter(p => p.type === "lengkap").map(p => ({
-            name: p.name, price: p.price, featured: p.featured || false,
-            sections: (p.sections || []).map((s: { title: string; is_bonus: boolean; features: string[] }) => ({ title: s.title, free: s.is_bonus, features: s.features })),
-          })) as PricingPackage[];
-          if (akad.length > 0) setAkadPkgs(akad);
-          if (lengkap.length > 0) setLengkapPkgs(lengkap);
-        }
-
-        // FAQs
-        const faqQ = query(collection(db, "faqs"), orderBy("sort_order"));
-        const faqSnap = await getDocs(faqQ);
-        if (!faqSnap.empty) {
-          const items = faqSnap.docs
-            .map(d => d.data())
-            .filter(f => f.is_active !== false)
-            .map(f => ({ question: f.question, answer: f.answer }));
-          if (items.length > 0) setFaqItems(items);
-        }
-
-        // Site Content
-        const [heroSnap, aboutSnap, contactSnap, socialSnap, footerSnap, catSnap] = await Promise.all([
-          getDoc(doc(db, "site_content", "hero")),
-          getDoc(doc(db, "site_content", "about")),
-          getDoc(doc(db, "site_content", "contact")),
-          getDoc(doc(db, "site_content", "social_media")),
-          getDoc(doc(db, "site_content", "footer")),
-          getDoc(doc(db, "site_content", "portfolio_categories"))
+      try {
+        const [heroData, aboutData, contactData, socialData] = await Promise.all([
+          getHero(),
+          getAbout(),
+          getContact(),
+          getSocialLinks()
         ]);
-
-        if (heroSnap.exists()) {
-          const data = heroSnap.data();
-          setHeroContent(prev => ({ 
-            ...prev, 
-            ...data,
-            bg_image_url: data.bg_image_url || prev.bg_image_url,
-            parallax_image_url: data.parallax_image_url || prev.parallax_image_url
-          }) as typeof heroContent);
-        }
-        if (aboutSnap.exists()) {
-          const data = aboutSnap.data();
-          setAboutContent(prev => ({
-            ...prev,
-            ...data,
-            image_url: data.image_url || prev.image_url
-          }) as typeof aboutContent);
-        }
-        if (contactSnap.exists()) setContactContent(contactSnap.data() as typeof contactContent);
-        if (socialSnap.exists()) setSocialMedia(socialSnap.data() as typeof socialMedia);
-        if (footerSnap.exists()) setFooterContent(footerSnap.data() as typeof footerContent);
-        if (catSnap.exists() && catSnap.data().list) {
-          setPortfolioCategories(["Semua", ...catSnap.data().list]);
-        }
-
-        } catch (err) {
-          console.warn("Firestore fetch failed, using fallback data:", err);
-        }
-      })();
-
-      await Promise.all([minDelay, dataFetch]);
-      setIsLoading(false);
+        if (heroData) setHeroContent(prev => ({ ...prev, ...(heroData as any) }));
+        if (aboutData) setAboutContent(prev => ({ ...prev, ...(aboutData as any) }));
+        if (contactData) setContactContent(contactData as any);
+        if (socialData) setSocialMedia(socialData as any);
+      } catch (err) {
+        console.warn("Fetch failed, using fallback data:", err);
+      } finally {
+        setIsLoading(false);
+      }
     }
     fetchData();
   }, []);
