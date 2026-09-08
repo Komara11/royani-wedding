@@ -29,7 +29,7 @@ export default function PortfolioPage() {
   useEffect(() => {
     async function fetchPortfolio() {
       try {
-        const portQ = query(collection(db, "portfolio_items"), orderBy("sort_order"));
+        const portQ = query(collection(db, "galeri_portfolio"), orderBy("sort_order"));
         const [portSnap, catSnap] = await Promise.all([
           getDocs(portQ),
           getDoc(doc(db, "site_content", "portfolio_categories"))
@@ -193,10 +193,10 @@ export default function PortfolioPage() {
             </div>
             
             <button className="lightbox-nav prev" onClick={prevImage}>
-              <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
             <button className="lightbox-nav next" onClick={nextImage}>
-              <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
             </button>
           </div>
         </div>

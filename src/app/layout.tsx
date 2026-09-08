@@ -37,6 +37,21 @@ export const metadata: Metadata = {
     "royani wedding",
   ],
   authors: [{ name: "Royani Wedding" }],
+  openGraph: {
+    title: "Royani Wedding - Wedding Organizer & Planner Profesional",
+    description: "Jasa Wedding Organizer, Rias Busana, Dekorasi, & Dokumentasi Terbaik di Cirebon & Sekitarnya.",
+    url: "https://royaniwedding.com",
+    siteName: "Royani Wedding",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 800,
+        height: 600,
+      },
+    ],
+    locale: "id_ID",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
