@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { db } from "@/lib/firebase";
-import { collection, getDocs, query, orderBy, doc, getDoc } from "firebase/firestore";
+import { getPortfolios, getPortfolioCategories } from "@/app/actions";
 
 // Shared Types
 type PortfolioItemType = {
@@ -29,21 +28,33 @@ export default function PortfolioPage() {
   useEffect(() => {
     async function fetchPortfolio() {
       try {
-        const portQ = query(collection(db, "galeri_portfolio"), orderBy("sort_order"));
-        const [portSnap, catSnap] = await Promise.all([
-          getDocs(portQ),
-          getDoc(doc(db, "site_content", "portfolio_categories"))
-        ]);
+        const items = await getPortfolios();
+        const catData = await getPortfolioCategories();
         
-        if (!portSnap.empty) {
-          const items = portSnap.docs
-            .filter(d => d.data().is_active !== false)
-            .map((d, idx) => ({ 
-              ...d.data(), 
-              id: idx, 
-              src: d.data().image_url, 
-              gridClass: d.data().grid_class || "col-6" 
-            } as PortfolioItemType));
+        if (items.length > 0) setPortfolioItems(items as any);
+
+        if (catData) {
+          const c = (catData as any).list || [];
+          setCategories(["All", ...c]);
+        }
+      } catch (err) {
+        console.error("Error fetching portfolio:", err);
+      } finally {
+        setLoading(false);
+      }
+    }));
+        if (items.length > 0) setPortfolioItems(items);
+
+        if (catSnap?.data) {
+          const c = catSnap.data.list || [];
+          setCategories(["All", ...c]);
+        }
+      } catch (err) {
+        console.error("Error fetching portfolio:", err);
+      } finally {
+        setLoading(false);
+      }
+    } as PortfolioItemType));
           if (items.length > 0) setPortfolioItems(items);
         }
 

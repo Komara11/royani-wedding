@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { db } from "@/lib/firebase";
-import { collection, getDocs, doc, getDoc, query, orderBy } from "firebase/firestore";
+import { getPackages, getFaqs, getContact } from "@/app/actions";
 
 // Portfolio definition (fallback data)
 const fallbackPortfolioItems = [
@@ -540,21 +539,44 @@ export default function Home() {
   // Fetch data from Firestore
   useEffect(() => {
     async function fetchData() {
-      const minDelay = new Promise(resolve => setTimeout(resolve, 1000));
-      const dataFetch = (async () => {
-        try {
-          // Portfolio
-        const portQ = query(collection(db, "portfolio_items"), orderBy("sort_order"));
-        const portSnap = await getDocs(portQ);
-        if (!portSnap.empty) {
-          const items = portSnap.docs
-            .filter(d => d.data().is_active !== false)
-            .map((d, idx) => ({ 
-              ...d.data(), 
-              id: idx, 
-              src: d.data().image_url || fallbackPortfolioItems[idx % fallbackPortfolioItems.length].src, 
-              gridClass: d.data().grid_class || "col-6" 
-            } as typeof fallbackPortfolioItems[0]));
+      try {
+        // Fetch Packages
+        const packages = await getPackages();
+        const akad = packages.filter(p => p.type === "akad");
+        const lengkap = packages.filter(p => p.type === "lengkap");
+
+        if (akad.length > 0) setAkadPkgs(akad as any);
+        if (lengkap.length > 0) setLengkapPkgs(lengkap as any);
+
+        // Fetch FAQ
+        const faqs = await getFaqs();
+        if (faqs.length > 0) {
+          setFaqItems(faqs);
+        }
+
+        // Fetch Contact Content for WhatsApp
+        const contactData = await getContact();
+        if (contactData) {
+          setContactContent(contactData as any);
+        }
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+        // Fetch Contact Content for WhatsApp
+        const docRef = await prisma.siteContent.findUnique({ where: { id: "contact" } });
+        if (docRef?.data) {
+          setContactContent(docRef.data);
+        }
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      } finally {
+        setLoading(false);
+      }
+    } as typeof fallbackPortfolioItems[0]));
           if (items.length > 0) setPortfolioItems(items);
         }
 
