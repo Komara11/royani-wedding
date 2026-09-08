@@ -4,19 +4,16 @@ const conn = new Client();
 
 const script = `
 cd /var/www/royani-wedding
-npm install prisma @prisma/client
-npx prisma db push
-
-cd /var/www/royani-admin
-npm install prisma @prisma/client
-npx prisma db push
+npm install @prisma/client
+npx prisma generate
+node import_pg.js
 `;
 
 conn.on('ready', () => {
   conn.exec(script, (err, stream) => {
     if (err) throw err;
     stream.on('close', () => {
-      console.log('Database pushed successfully.');
+      console.log('Done.');
       conn.end();
     });
     stream.on('data', (d) => process.stdout.write(d));
