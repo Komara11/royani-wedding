@@ -16,13 +16,7 @@ type PortfolioItemType = {
 };
 
 // Fallback data
-const fallbackPortfolioItems: PortfolioItemType[] = [
-  { id: 1, src: "/portfolio/1.jpg", category: "Adat", title: "Intimate Adat", location: "Bandung", gridClass: "col-4" },
-  { id: 2, src: "/portfolio/2.jpg", category: "Resepsi", title: "Grand Reception", location: "Jakarta", gridClass: "col-8" },
-  { id: 3, src: "/portfolio/3.jpg", category: "Pre-Wedding", title: "Nature Pre-Wedding", location: "Bali", gridClass: "col-6" },
-  { id: 4, src: "/portfolio/4.jpg", category: "Adat", title: "Traditional Adat", location: "Yogyakarta", gridClass: "col-6" },
-  { id: 5, src: "/portfolio/5.jpg", category: "Resepsi", title: "Garden Party", location: "Bogor", gridClass: "col-12" },
-];
+const fallbackPortfolioItems: PortfolioItemType[] = [];
 
 export default function PortfolioPage() {
   const [portfolioItems, setPortfolioItems] = useState<PortfolioItemType[]>(fallbackPortfolioItems);
