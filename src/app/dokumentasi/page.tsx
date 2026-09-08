@@ -115,23 +115,17 @@ export default function PortfolioPage() {
 
   return (
     <>
-      <nav style={{ background: "var(--nav-bg)", borderBottom: "1px solid var(--border-color)", padding: "16px 40px", position: "sticky", top: 0, zIndex: 100, backdropFilter: "blur(10px)" }}>
-        <div style={{ maxWidth: 1280, width: "100%", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
-          <Link href="/" style={{ color: "var(--gold)", textDecoration: "none", fontSize: "0.95rem", display: "flex", alignItems: "center", gap: "8px", fontWeight: 500 }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 18, height: 18 }}>
-              <line x1="19" y1="12" x2="5" y2="12" />
-              <polyline points="12 19 5 12 12 5" />
-            </svg>
-            Kembali ke Beranda
-          </Link>
-          <div style={{ fontFamily: "var(--ff-playfair)", fontSize: "1.3rem", color: "var(--text-primary)" }}>
-            Semua Dokumentasi
-          </div>
-        </div>
-      </nav>
 
-      <main style={{ padding: "60px 40px", maxWidth: 1280, margin: "0 auto", minHeight: "80vh" }}>
+      <section id="dokumentasi" className="page-top-padding">
         
+        <div style={{ textAlign: "center", marginBottom: "50px" }}>
+          <span className="section-tag reveal">Dokumentasi</span>
+          <h1 className="section-title reveal">Karya & <span>Inspirasi</span></h1>
+          <p className="section-desc reveal" style={{ margin: "0 auto" }}>
+            Jelajahi seluruh koleksi momen berharga yang telah kami abadikan.
+          </p>
+        </div>
+
         {/* Filter */}
         <div className="portfolio-filters" style={{ marginBottom: "40px" }}>
           {categories.map((cat) => (
@@ -182,7 +176,7 @@ export default function PortfolioPage() {
             Belum ada dokumentasi untuk kategori ini.
           </div>
         )}
-      </main>
+      </section>
 
       {/* PORTFOLIO LIGHTBOX MODAL */}
       {lightboxIndex !== null && (

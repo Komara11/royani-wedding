@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display, Cormorant_Garamond } from "next/font/google";
+import { Navbar, Footer, Preloader } from "@/components/SharedUI";
 import "./globals.css";
 
 const inter = Inter({
@@ -48,7 +49,12 @@ export default function RootLayout({
       lang="id"
       className={`${inter.variable} ${playfair.variable} ${cormorant.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <Preloader />
+        <Navbar />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

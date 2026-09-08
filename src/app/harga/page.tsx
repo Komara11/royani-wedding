@@ -857,384 +857,303 @@ export default function Home() {
 
   return (
     <>
-      {/* HERO SECTION (PRESERVED) */}
-      <section className="hero" id="home">
-        <div className="hero-bg">
-          <img
-            src={heroContent.bg_image_url || "/images/bg-hero.jpg"}
-            alt="Royani Wedding Background"
-            fetchPriority="high"
-            loading="eager"
-            onError={(e) => { e.currentTarget.src = "/images/bg-hero.jpg"; }}
-          />
-        </div>
-        <div className="hero-overlay" />
-        <div className="hero-content">
-          <p className="hero-subtitle">{heroContent.subtitle}</p>
-          <h1 className="hero-title">
-            {heroContent.title_first} <span>{heroContent.title_second}</span>
-          </h1>
-          <p className="hero-desc">
-            {heroContent.description}
-          </p>
-          <div className="hero-cta">
-            <Link
-              href="/harga"
-              className="btn btn-primary"
-            >
-              {heroContent.cta_text}
-            </Link>
-          </div>
-        </div>
-        {/* Scroll Down Indicator */}
-        <a
-          href="#tentang"
-          onClick={(e) => scrollTo(e, "tentang")}
-          className="hero-scroll-indicator"
-        >
-          <span className="scroll-text">{heroContent.scroll_text}</span>
-          <div className="scroll-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="7 13 12 18 17 13" />
-              <polyline points="7 6 12 11 17 6" />
-            </svg>
-          </div>
-        </a>
-      </section>
+      
 
       
 
-      {/* ABOUT SECTION (EDITORIAL OVERHAUL) */}
-      <section id="tentang">
-        <div className="glow-spot" style={{ top: "10%", left: "5%" }} />
-        <div className="about-grid">
+      
+
+      {/* PRICING SECTION (BROCHURE OVERHAUL) */}
+      <section className="pricing page-top-padding" id="harga" style={{ maxWidth: "100%" }}>
+        <div className="glow-spot" style={{ top: "20%", left: "20%" }} />
+        <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0" }}>
           <div
-            className="about-image-wrapper reveal"
-            ref={(el) => { if (el) revealRefs.current[0] = el; }}
+            className="pricing-header reveal"
+            ref={(el) => { if (el) revealRefs.current[7] = el; }}
           >
-            <div className="about-frame">
-              <img 
-                src={aboutContent.image_url} 
-                alt="Royani Wedding Setup" 
-                onError={(e) => { e.currentTarget.src = "/images/about.jpg"; }} 
-              />
-            </div>
-            {/* Elegant overlapping quote card */}
-            <div className="about-floating-quote">
-              <p>&ldquo;{aboutContent.quote}&rdquo;</p>
-            </div>
-          </div>
-          <div
-            className="about-text reveal"
-            ref={(el) => { if (el) revealRefs.current[1] = el; }}
-          >
-            <span className="section-tag">{aboutContent.tag}</span>
+            <span className="section-tag">Daftar Paket</span>
             <h2 className="section-title">
-              {aboutContent.title_first} <span>{aboutContent.title_highlight}</span>
+              Investasi Hari <span>Bahagia</span>
             </h2>
-            <p style={{ textAlign: "justify" }}>
-              {aboutContent.paragraph_1}
+            <p className="section-desc">
+              Pilih paket penawaran terbaik kami yang sesuai dengan visi acara Anda. Tiap paket fleksibel dan dapat di-custom.
             </p>
-            <p style={{ textAlign: "justify" }}>
-              {aboutContent.paragraph_2}
-            </p>
-            <div className="about-metrics">
-              {aboutContent.metrics.map((metric, idx) => (
-                <div key={idx} className="metric-item reveal" style={{ transitionDelay: `${0.1 * (idx + 1)}s` }}>
-                  <div className="metric-num">{metric.value}</div>
-                  <div className="metric-label">{metric.label}</div>
-                </div>
-              ))}
-            </div>
           </div>
-        </div>
-      </section>
 
-      {/* PARALLAX QUOTE DIVIDER */}
-      <div className="parallax-divider">
-        <div
-          className="parallax-bg"
-          style={{ backgroundImage: `url('${heroContent.parallax_image_url || "/images/bg-divider.jpg"}')` }}
-        />
-        <p>
-          &ldquo;{heroContent.parallax_quote || "Cinta tidak hanya tentang saling memandang, melainkan bersama-sama melihat ke satu arah yang sama dengan komitmen dan ketulusan abadi."}&rdquo;
-        </p>
-      </div>
-
-      
-
-      
-
-      
-
-      {/* FAQ SECTION (LEFT ACCENT ACCORDION) */}
-      <section id="faq">
-        <div className="glow-spot" style={{ bottom: "10%", right: "10%" }} />
-        <div style={{ textAlign: "center" }}>
-          <span
-            className="section-tag reveal"
-            ref={(el) => { if (el) revealRefs.current[20] = el; }}
+          {/* Pricing Tabs */}
+          <div
+            className="pricing-tabs reveal"
+            ref={(el) => { if (el) revealRefs.current[8] = el; }}
           >
-            Tanya Jawab
-          </span>
-          <h2
-            className="section-title reveal"
-            ref={(el) => { if (el) revealRefs.current[21] = el; }}
-          >
-            Pertanyaan <span>Populer</span>
-          </h2>
-          <p
-            className="section-desc reveal"
-            style={{ margin: "0 auto 80px" }}
-            ref={(el) => { if (el) revealRefs.current[22] = el; }}
-          >
-            Berikut adalah tanggapan atas beberapa pertanyaan yang paling sering diajukan calon pengantin kami.
-          </p>
-        </div>
-
-        <div className="faq-grid">
-          {faqItems.map((faq, idx) => (
-            <div
-              key={idx}
-              className="reveal"
-              style={{ transitionDelay: `${idx * 0.08}s`, width: "100%" }}
+            <button
+              className={`pricing-tab ${activePriceTab === "akad" ? "active" : ""}`}
+              onClick={() => setActivePriceTab("akad")}
             >
-              <div className={`faq-item ${activeFaqIndex === idx ? "active" : ""}`}>
-                <button
-                  className="faq-question"
-                  onClick={() => setActiveFaqIndex(activeFaqIndex === idx ? null : idx)}
+              Paket Akad
+            </button>
+            <button
+              className={`pricing-tab ${activePriceTab === "lengkap" ? "active" : ""}`}
+              onClick={() => setActivePriceTab("lengkap")}
+            >
+              Paket Lengkap
+            </button>
+          </div>
+
+          {/* Akad Grid */}
+          <div className={`pricing-grid pricing-grid-akad ${activePriceTab === "akad" ? "active" : ""}`}>
+            {akadPkgs.map((pkg, idx) => {
+              const isExpanded = !!expandedCards[pkg.name];
+              const totalFeaturesCount = pkg.sections.flatMap((s) => s.features).length;
+              return (
+                <div
+                  key={idx}
+                  className="price-card reveal"
+                  ref={(el) => { if (el) revealRefs.current[9 + idx] = el; }}
                 >
-                  <span>{faq.question}</span>
-                  <div className="faq-icon-wrapper">
-                    <svg width="12" height="12" viewBox="0 0 12 12">
-                      <path d="M11 5H7V1c0-.55-.45-1-1-1s-1 .45-1 1v4H1c-.55 0-1 .45-1 1s.45 1 1 1h4v4c0 .55.45 1 1 1s1-.45 1-1V7h4c.55 0 1-.45 1-1s-.45-1-1-1z" />
-                    </svg>
+                  <div className="price-cat">Paket Akad</div>
+                  <h3 className="price-name">{pkg.name}</h3>
+                  <div className="price-amount">{pkg.price}</div>
+
+                  {/* Highlights (visible when collapsed) */}
+                  <div className={`price-highlights ${isExpanded ? "hidden" : ""}`}>
+                    <ul className="price-features highlight-list">
+                      {pkg.sections
+                        .flatMap((s) => s.features)
+                        .slice(0, 3)
+                        .map((feat, fIdx) => (
+                          <li key={fIdx}>
+                            {feat}
+                          </li>
+                        ))}
+                      {totalFeaturesCount > 3 && (
+                        <li className="more-features-text">
+                          + {totalFeaturesCount - 3} fasilitas lainnya
+                        </li>
+                      )}
+                    </ul>
                   </div>
-                </button>
-                <div className="faq-answer">
-                  <p>{faq.answer}</p>
+
+                  {/* Full Details (visible when expanded) */}
+                  <div className={`price-details ${isExpanded ? "expanded" : ""}`}>
+                    {pkg.sections.map((sec, sIdx) => (
+                      <div key={sIdx} className="price-section">
+                        <h4 className="price-section-title">{sec.title}</h4>
+                        <ul className="price-features">
+                          {sec.features.map((feat, fIdx) => (
+                            <li key={fIdx} className={sec.free ? "free" : ""}>
+                              {feat}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Toggle Button */}
+                  <button
+                    className="btn-toggle-details"
+                    onClick={() => toggleCard(pkg.name)}
+                  >
+                    {isExpanded ? (
+                      <>
+                        Sembunyikan Detail
+                        <svg className="chevron-icon up" viewBox="0 0 24 24">
+                          <path d="M7 14l5-5 5 5H7z" />
+                        </svg>
+                      </>
+                    ) : (
+                      <>
+                        Lihat Detail Paket
+                        <svg className="chevron-icon" viewBox="0 0 24 24">
+                          <path d="M7 10l5 5 5-5H7z" />
+                        </svg>
+                      </>
+                    )}
+                  </button>
+
+                  <button
+                    className="btn-price"
+                    onClick={() => setSelectedBookingPackage(pkg)}
+                  >
+                    Pilih Paket
+                  </button>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      
-
-      {/* SOSIAL MEDIA */}
-      <section className="sosial-section" id="sosial">
-        <span
-          className="section-tag reveal"
-          ref={(el) => { if (el) revealRefs.current[24] = el; }}
-        >
-          Sosial Media
-        </span>
-        <h2
-          className="section-title reveal"
-          ref={(el) => { if (el) revealRefs.current[25] = el; }}
-        >
-          {socialMedia.title_first} <span>{socialMedia.title_highlight}</span>
-        </h2>
-        <p
-          className="section-desc reveal"
-          style={{ margin: "0 auto 80px" }}
-          ref={(el) => { if (el) revealRefs.current[26] = el; }}
-        >
-          {socialMedia.description}
-        </p>
-
-        <div className="sosial-grid">
-          {socialMedia.items.map((item, idx) => (
-            <a
-              key={idx}
-              href={item.url}
-              className="sosial-card reveal"
-              style={{ transitionDelay: `${0.1 * (idx + 1)}s` }}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div className="sosial-card-icon-wrapper">
-                {item.platform.toLowerCase() === "instagram" && (
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather-icon">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                  </svg>
-                )}
-                {item.platform.toLowerCase() === "tiktok" && (
-                  <svg viewBox="0 0 24 24" fill="currentColor" className="feather-icon">
-                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
-                  </svg>
-                )}
-                {item.platform.toLowerCase() === "facebook" && (
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather-icon">
-                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                  </svg>
-                )}
-                {item.platform.toLowerCase() === "whatsapp" && (
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather-icon">
-                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-                  </svg>
-                )}
-              </div>
-              <span>{item.platform}</span>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      
-
-      {/* CONTACT & DETAILED QUERY FORM (INLINE PREMIUM OVERHAUL) */}
-      <section id="kontak">
-        <div className="glow-spot" style={{ top: "30%", left: "5%" }} />
-        <div className="contact-section-grid">
-          <div
-            className="contact-info-wrapper reveal"
-            ref={(el) => { if (el) revealRefs.current[28] = el; }}
-          >
-            <span className="section-tag">{contactContent.tag}</span>
-            <h2 className="section-title">
-              {contactContent.title_first} <span>{contactContent.title_highlight}</span>
-            </h2>
-            <p className="contact-intro-text">
-              {contactContent.description}
-            </p>
-
-            <div className="contact-minimal-list">
-              <a
-                href={contactContent.whatsapp_number.replace(/[^0-9]/g, "").replace(/^0/, "62").startsWith("62") ? `https://wa.me/${contactContent.whatsapp_number.replace(/[^0-9]/g, "").replace(/^0/, "62")}` : `https://wa.me/${contactContent.whatsapp_number}`}
-                className="contact-minimal-item reveal"
-                style={{ transitionDelay: "0.1s" }}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="contact-minimal-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-                  </svg>
-                </div>
-                <div className="contact-minimal-text">
-                  <span className="contact-item-label">WhatsApp Chat</span>
-                  <span className="contact-item-value">{contactContent.whatsapp_number}</span>
-                </div>
-              </a>
-              <a
-                href={contactContent.maps_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact-minimal-item reveal"
-                style={{ transitionDelay: "0.2s" }}
-              >
-                <div className="contact-minimal-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                    <circle cx="12" cy="10" r="3" />
-                  </svg>
-                </div>
-                <div className="contact-minimal-text">
-                  <span className="contact-item-label">Lokasi Galeri</span>
-                  <span className="contact-item-value">{contactContent.address}</span>
-                </div>
-              </a>
-            </div>
-
-            {/* Location Map Premium Wrapper */}
-            <div className="contact-map-card reveal" style={{ transitionDelay: "0.3s" }}>
-              <div className="map-frame">
-                <iframe
-                  title="Royani Wedding Gallery Majalengka Map"
-                  className="map-premium-iframe"
-                  src={contactContent.maps_embed_url}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-              <div className="map-caption">
-                <span className="map-caption-icon">✦</span>
-                <span className="map-caption-text">Galeri Utama & Workshop Royani Wedding</span>
-              </div>
-            </div>
+              );
+            })}
           </div>
 
-          {/* Contact Form Container (INLINE UNDERLINES) */}
-          <div
-            className="contact-form-premium reveal"
-            ref={(el) => { if (el) revealRefs.current[29] = el; }}
-          >
-            <div className="form-premium-header">
-              <span className="form-premium-subtitle">{contactContent.form_tag}</span>
-              <h3>{contactContent.form_title}</h3>
-              <p>{contactContent.form_description}</p>
-            </div>
-            <form onSubmit={handleContactSubmit}>
+          {/* Lengkap Grid */}
+          <div className={`pricing-grid pricing-grid-lengkap ${activePriceTab === "lengkap" ? "active" : ""}`}>
+            {lengkapPkgs.map((pkg, idx) => {
+              const isExpanded = !!expandedCards[pkg.name];
+              const totalFeaturesCount = pkg.sections.flatMap((s) => s.features).length;
+              return (
+                <div
+                  key={idx}
+                  className={`price-card ${pkg.featured ? "featured" : ""} reveal`}
+                  ref={(el) => { if (el) revealRefs.current[11 + idx] = el; }}
+                >
+                  <div className="price-cat">Paket Lengkap</div>
+                  <h3 className="price-name">{pkg.name}</h3>
+                  <div className="price-amount">{pkg.price}</div>
+
+                  {/* Highlights (visible when collapsed) */}
+                  <div className={`price-highlights ${isExpanded ? "hidden" : ""}`}>
+                    <ul className="price-features highlight-list">
+                      {pkg.sections
+                        .flatMap((s) => s.features)
+                        .slice(0, 3)
+                        .map((feat, fIdx) => (
+                          <li key={fIdx}>
+                            {feat}
+                          </li>
+                        ))}
+                      {totalFeaturesCount > 3 && (
+                        <li className="more-features-text">
+                          + {totalFeaturesCount - 3} fasilitas lainnya
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+
+                  {/* Full Details (visible when expanded) */}
+                  <div className={`price-details ${isExpanded ? "expanded" : ""}`}>
+                    {pkg.sections.map((sec, sIdx) => (
+                      <div key={sIdx} className="price-section">
+                        <h4 className="price-section-title">{sec.title}</h4>
+                        <ul className="price-features">
+                          {sec.features.map((feat, fIdx) => (
+                            <li key={fIdx} className={sec.free ? "free" : ""}>
+                              {feat}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Toggle Button */}
+                  <button
+                    className="btn-toggle-details"
+                    onClick={() => toggleCard(pkg.name)}
+                  >
+                    {isExpanded ? (
+                      <>
+                        Sembunyikan Detail
+                        <svg className="chevron-icon up" viewBox="0 0 24 24">
+                          <path d="M7 14l5-5 5 5H7z" />
+                        </svg>
+                      </>
+                    ) : (
+                      <>
+                        Lihat Detail Paket
+                        <svg className="chevron-icon" viewBox="0 0 24 24">
+                          <path d="M7 10l5 5 5-5H7z" />
+                        </svg>
+                      </>
+                    )}
+                  </button>
+
+                  <button
+                    className="btn-price"
+                    onClick={() => setSelectedBookingPackage(pkg)}
+                  >
+                    Pilih Paket
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* BOOKING MODAL */}
+      {selectedBookingPackage && (
+        <div className="booking-modal-backdrop" onClick={closeBookingModal}>
+          <div className="booking-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="booking-modal-close" onClick={closeBookingModal}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+            <h3>Booking {selectedBookingPackage.name}</h3>
+            <p>Konfirmasi pilihan Anda ({selectedBookingPackage.price}) dengan mengisi form detail acara berikut.</p>
+            <form onSubmit={handleBookingSubmit}>
               <div className="form-group-premium">
                 <input
-                  id="contact-name"
+                  id="modal-name"
                   type="text"
                   className="form-input-premium"
                   required
                   placeholder=" "
-                  value={contactName}
-                  onChange={(e) => setContactName(e.target.value)}
+                  value={bookingName}
+                  onChange={(e) => setBookingName(e.target.value)}
                 />
-                <label htmlFor="contact-name" className="form-label-premium">Nama Lengkap Anda</label>
+                <label htmlFor="modal-name" className="form-label-premium">Nama Lengkap Anda</label>
               </div>
               <div className="form-group-premium">
                 <input
-                  id="contact-date"
+                  id="modal-date"
                   type="date"
                   className="form-input-premium"
+                  required
                   placeholder=" "
-                  value={contactDate}
-                  onChange={(e) => setContactDate(e.target.value)}
+                  value={bookingDate}
+                  onChange={(e) => setBookingDate(e.target.value)}
                 />
-                <label htmlFor="contact-date" className="form-label-premium">Rencana Tanggal Acara</label>
+                <label htmlFor="modal-date" className="form-label-premium">Rencana Tanggal Acara</label>
               </div>
               <div className="form-group-premium">
-                <select
-                  id="contact-select-package"
+                <input
+                  id="modal-location"
+                  type="text"
                   className="form-input-premium"
-                  value={contactPackage}
-                  onChange={(e) => setContactPackage(e.target.value)}
-                  style={{ background: "var(--background)", color: "var(--text-primary)" }}
-                >
-                  <option value="" disabled hidden></option>
-                  <option value="Paket Akad 1 (Rp 2.500.000)">Paket Akad 1 (Rp 2.500.000)</option>
-                  <option value="Paket Akad 2 (Rp 1.700.000)">Paket Akad 2 (Rp 1.700.000)</option>
-                  <option value="Paket Lengkap Minimalis (Rp 6.000.000)">Paket Lengkap Minimalis (Rp 6.000.000)</option>
-                  <option value="Paket Lengkap Ekonomis (Rp 9.500.000)">Paket Lengkap Ekonomis (Rp 9.500.000)</option>
-                  <option value="Paket Lengkap Standar 1 (Rp 13.500.000)">Paket Lengkap Standar 1 (Rp 13.500.000)</option>
-                  <option value="Paket Lengkap Standar 2 (Rp 15.500.000)">Paket Lengkap Standar 2 (Rp 15.500.000)</option>
-                  <option value="Paket Lengkap Silver (Rp 17.500.000)">Paket Lengkap Silver (Rp 17.500.000)</option>
-                  <option value="Paket Lengkap Gold (Rp 20.000.000)">Paket Lengkap Gold (Rp 20.000.000)</option>
-                  <option value="Paket Lengkap Platinum (Rp 35.000.000)">Paket Lengkap Platinum (Rp 35.000.000)</option>
-                  <option value="Paket Lengkap Exclusive (Rp 45.000.000)">Paket Lengkap Exclusive (Rp 45.000.000)</option>
-                </select>
-                <label htmlFor="contact-select-package" className="form-label-premium">Paket Pernikahan yang Diminati</label>
+                  required
+                  placeholder=" "
+                  value={bookingLocation}
+                  onChange={(e) => setBookingLocation(e.target.value)}
+                />
+                <label htmlFor="modal-location" className="form-label-premium">Lokasi Rencana Acara</label>
               </div>
               <div className="form-group-premium">
                 <textarea
-                  id="contact-msg"
+                  id="modal-address"
                   className="form-input-premium"
-                  rows={3}
                   required
+                  rows={2}
                   placeholder=" "
-                  value={contactNotes}
-                  onChange={(e) => setContactNotes(e.target.value)}
+                  value={bookingAddress}
+                  onChange={(e) => setBookingAddress(e.target.value)}
                   style={{ resize: "none" }}
                 />
-                <label htmlFor="contact-msg" className="form-label-premium">Detail Impian & Rencana Acara Anda</label>
+                <label htmlFor="modal-address" className="form-label-premium">Alamat Lengkap Anda</label>
               </div>
-              <button type="submit" className="btn btn-primary" style={{ width: "100%", marginTop: "12px" }}>
-                Kirim via WhatsApp
+              <div className="form-group-premium">
+                <textarea
+                  id="modal-notes"
+                  className="form-input-premium"
+                  rows={2}
+                  placeholder=" "
+                  value={bookingNotes}
+                  onChange={(e) => setBookingNotes(e.target.value)}
+                  style={{ resize: "none" }}
+                />
+                <label htmlFor="modal-notes" className="form-label-premium">Catatan Kustomisasi (Opsional)</label>
+              </div>
+              <button type="submit" className="btn btn-primary" style={{ width: "100%", marginTop: "10px" }}>
+                Kirim Booking ke WhatsApp
               </button>
             </form>
           </div>
         </div>
-      </section>
+      )}
+
+      
+
+      
+
+      
 
       </>
   );

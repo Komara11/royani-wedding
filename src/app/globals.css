@@ -2259,3 +2259,33 @@ select.form-input-premium option {
     grid-column: span 12 !important;
   }
 }
+
+.page-top-padding {
+  padding-top: 160px !important;
+  min-height: 80vh;
+}
+@media (max-width: 768px) {
+  .page-top-padding {
+    padding-top: 120px !important;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .page-top-padding .pricing-grid.active {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    scroll-snap-type: none !important;
+  }
+  .page-top-padding .pricing-grid.active .price-card {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 20px !important;
+  }
+}
+
