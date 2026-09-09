@@ -1,0 +1,7 @@
+--- src/app/harga/page.tsx
++++ src/app/harga/page.tsx
+@@ -29,3 +29,3 @@
+ 
+-  const filtered = packages.filter((p) => p.type === tab);
++  const filtered = packages.filter((p) => p.type?.toLowerCase().includes(tab));
+ 

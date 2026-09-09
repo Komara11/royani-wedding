@@ -265,7 +265,7 @@ nav.scrolled {
    ========================================================================== */
 .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px; }
 .service-card { background: var(--background); padding: 40px 32px; border: 1px solid var(--border-light); text-align: center; transition: var(--transition-smooth); border-radius: 4px; }
-.service-icon { font-size: 2.5rem; margin-bottom: 24px; font-family: var(--font-playfair); color: var(--gold-light); display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border: 1px solid var(--gold); border-radius: 50%; background: var(--bg-secondary); }
+.service-icon { font-size: 3rem; margin-bottom: 24px; }
 .service-title { font-size: 1.25rem; margin-bottom: 16px; color: var(--gold); font-family: var(--font-playfair); }
 .service-desc { font-size: 0.95rem; color: var(--text-secondary); }
 .service-card:hover { border-color: var(--border); background: var(--bg-card); }

@@ -32,7 +32,7 @@ export default function HargaPage() {
     fetchData();
   }, []);
 
-  const filtered = packages.filter((p) => p.type?.toLowerCase().includes(tab));
+  const filtered = packages.filter((p) => p.type === tab);
 
   return (
     <main>

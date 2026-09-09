@@ -107,7 +107,7 @@ export default function HomePage() {
 
   // Pick 3 featured packages for preview
   const previewPkgs = packages.length > 0
-    ? (packages.filter((p) => p.type?.toLowerCase().includes("lengkap")).length > 0 ? packages.filter((p) => p.type?.toLowerCase().includes("lengkap")).slice(0, 3) : packages.slice(0, 3))
+    ? packages.filter((p) => p.type?.toLowerCase() === "lengkap" || p.type?.toLowerCase() === "paket lengkap").slice(0, 3)
     : [];
 
   // Services data
@@ -141,7 +141,7 @@ export default function HomePage() {
     <main>
       {/* ═══════ HERO ═══════ */}
       <section className="hero" id="home">
-        <div className="hero-bg" style={{ backgroundImage: `url(${heroContent.bg_image_url || (heroContent as any).image_url || "/images/bg-hero.jpg"})` }} />
+        <div className="hero-bg" style={{ backgroundImage: `url(${heroContent.bg_image_url})` }} />
         <div className="hero-overlay" />
         <div className="hero-content">
           <motion.div
@@ -259,7 +259,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══════ PARALLAX QUOTE ═══════ */}
-      <section className="parallax-section" style={{ backgroundImage: `url(${heroContent.parallax_image_url || "/images/bg-divider.jpg"})` }}>
+      <section className="parallax-section" style={{ backgroundImage: `url(${heroContent.parallax_image_url})` }}>
         <div className="parallax-overlay" />
         <AnimatedSection className="parallax-content">
           <p className="parallax-quote">&ldquo;{heroContent.parallax_quote}&rdquo;</p>
@@ -321,7 +321,11 @@ export default function HomePage() {
           </AnimatedSection>
 
           <div className="pricing-preview-grid">
-            {previewPkgs.map((pkg: any, i: number) => (
+            {(previewPkgs.length > 0 ? previewPkgs : [
+              { id: "1", name: "Silver", price: "Rp 15.000.000", featured: false, sections: [{ features: ["Pelaminan 6 Meter", "Rias Pengantin Lengkap", "MC & Sound System", "Dokumentasi Foto"] }] },
+              { id: "2", name: "Gold", price: "Rp 25.000.000", featured: true, sections: [{ features: ["Pelaminan 8 Meter", "Rias Pengantin Premium", "MC & Sound System", "Foto & Video", "Photobooth Corner"] }] },
+              { id: "3", name: "Platinum", price: "Rp 35.000.000", featured: false, sections: [{ features: ["Pelaminan 10 Meter Megah", "Rias Pengantin Exclusive", "MC & Full Entertainment", "Foto & Video Cinematic", "Full Dekorasi"] }] },
+            ] as any[]).map((pkg: any, i: number) => (
               <AnimatedSection key={pkg.id} className={`pricing-card ${pkg.featured ? "featured" : ""}`} delay={i * 0.15}>
                 {pkg.featured && <div className="pricing-badge">Terpopuler</div>}
                 <h3 className="pricing-name">{pkg.name}</h3>
