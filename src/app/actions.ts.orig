@@ -44,75 +44,43 @@ const fallbackHero = {
 };
 
 export async function getHero() {
-  try {
-    const doc = await prisma.siteContent.findUnique({ where: { id: "hero" } });
-    if (!doc?.data) return fallbackHero;
-    return { ...fallbackHero, ...Object.fromEntries(Object.entries(doc.data as any).filter(([_, v]) => v !== "" && v !== null)) };
-  } catch (e) {
-    return fallbackHero;
-  }
+  const doc = await prisma.siteContent.findUnique({ where: { id: "hero" } });
+  if (!doc?.data) return fallbackHero;
+  return { ...fallbackHero, ...Object.fromEntries(Object.entries(doc.data as any).filter(([_, v]) => v !== "" && v !== null)) };
 }
 
 export async function getAbout() {
-  try {
-    const doc = await prisma.siteContent.findUnique({ where: { id: "about" } });
-    return doc?.data || null;
-  } catch (e) {
-    return null;
-  }
+  const doc = await prisma.siteContent.findUnique({ where: { id: "about" } });
+  return doc?.data || null;
 }
 
 export async function getContact() {
-  try {
-    const doc = await prisma.siteContent.findUnique({ where: { id: "contact" } });
-    return doc?.data || null;
-  } catch (e) {
-    return null;
-  }
+  const doc = await prisma.siteContent.findUnique({ where: { id: "contact" } });
+  return doc?.data || null;
 }
 
 export async function getSocialLinks() {
-  try {
-    const doc = await prisma.siteContent.findUnique({ where: { id: "social_links" } });
-    return doc?.data || null;
-  } catch (e) {
-    return null;
-  }
+  const doc = await prisma.siteContent.findUnique({ where: { id: "social_links" } });
+  return doc?.data || null;
 }
 
 export async function getPortfolioCategories() {
-  try {
-    const doc = await prisma.siteContent.findUnique({ where: { id: "portfolio_categories" } });
-    return doc?.data || null;
-  } catch (e) {
-    return null;
-  }
+  const doc = await prisma.siteContent.findUnique({ where: { id: "portfolio_categories" } });
+  return doc?.data || null;
 }
 
 export async function getPortfolios() {
-  try {
-    const data = await prisma.portfolio.findMany({ orderBy: { sortOrder: 'asc' } });
-    if (!data || data.length === 0) return fallbackPortfolios;
-    return data;
-  } catch (e) {
-    return fallbackPortfolios;
-  }
+  const data = await prisma.portfolio.findMany({ orderBy: { sortOrder: 'asc' } });
+  if (!data || data.length === 0) return fallbackPortfolios;
+  return data;
 }
 
 export async function getPackages() {
-  try {
-    const data = await prisma.package.findMany({ orderBy: { sortOrder: 'asc' } });
-    if (!data || data.length === 0) return fallbackPackages;
-    return data;
-  } catch (e) {
-    return fallbackPackages;
-  }
+  const data = await prisma.package.findMany({ orderBy: { sortOrder: 'asc' } });
+  if (!data || data.length === 0) return fallbackPackages;
+  return data;
 }
 
 export async function getFaqs() {
-  try {
-    return await prisma.faqItem.findMany({ orderBy: { sortOrder: 'asc' } });
-  } catch (e) {
-    return [];
-  }
+  return await prisma.faqItem.findMany({ orderBy: { sortOrder: 'asc' } });
 }
