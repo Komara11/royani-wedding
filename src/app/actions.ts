@@ -36,12 +36,61 @@ const fallbackHero = {
   bg_image_url: "/images/bg-hero.jpg",
   parallax_image_url: "/images/bg-divider.jpg",
   subtitle: "WEDDING ORGANIZER",
-  title_first: "Royani",
-  title_second: "Wedding",
+  title_first: "Mewujudkan Hari",
+  title_second: "Sempurna Anda",
   description: "Mewujudkan hari spesial Anda menjadi sempurna, berkesan, dan elegan lewat layanan profesional kami.",
   cta_text: "Konsultasi Gratis",
   parallax_quote: "Cinta tidak hanya tentang saling memandang, melainkan bersama-sama melihat ke satu arah yang sama dengan komitmen dan ketulusan abadi."
 };
+
+const fallbackAbout = {
+  tag: "TENTANG KAMI",
+  title_first: "Mewujudkan Momen",
+  title_highlight: "Paling Berharga",
+  paragraph_1: "Royani Wedding adalah mitra wedding organizer profesional di Majalengka yang berdedikasi tinggi untuk mewujudkan konsep pernikahan impian Anda. Kami memadukan nilai artistik dan detail organisasi terbaik demi kenyamanan seluruh rangkaian acara Anda.",
+  paragraph_2: "Dari konsep tata rias anggun, dekorasi megah, hingga pengaturan alur acara di lapangan, kami memberikan sentuhan elegan dan perhatian penuh di setiap detiknya.",
+  quote: "\"Pernikahan adalah simfoni cinta yang diabadikan dalam janji suci. Kami hadir untuk memastikan simfoni tersebut mengalun sempurna.\"",
+  image_url: "/images/about.jpg",
+  metrics: [
+    { value: "500+", label: "Acara Sukses" },
+    { value: "50+", label: "Mitra Vendor" },
+    { value: "8+", label: "Tahun Pengalaman" }
+  ]
+};
+
+const fallbackContact = {
+  tag: "KONSULTASI GRATIS",
+  title_first: "Mari Rencanakan",
+  title_highlight: "Hari Spesial Anda",
+  description: "Konsultasikan konsep pernikahan impian Anda bersama tim kami. Kami siap memberikan solusi terbaik sesuai dengan anggaran dan kebutuhan Anda.",
+  whatsapp_number: "+62 878 4722 2209",
+  address: "Blok Rabu RT.03/RW.02 No.81, Beusi, Ligung, Majalengka",
+  maps_url: "https://maps.app.goo.gl/kioYwz4396tGzD8b9",
+  maps_embed_url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1154.5123991206124!2d108.2721081!3d-6.6669931!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6ede115166299b%3A0xe54c86e245a4ecb4!2sRoyani%20Wedding!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid",
+  form_tag: "HUBUNGI KAMI",
+  form_title: "Tinggalkan Pesan",
+  form_description: "Isi form di bawah ini dan tim kami akan segera menghubungi Anda melalui WhatsApp."
+};
+
+const fallbackSocialLinks = {
+  tag: "SOSIAL MEDIA",
+  title_first: "Ikuti",
+  title_highlight: "Perjalanan Kami",
+  description: "Lihat lebih banyak karya dan momen indah pernikahan klien kami di berbagai platform sosial media.",
+  items: [
+    { platform: "Instagram", url: "https://instagram.com/royaniwedding", icon: "instagram" },
+    { platform: "TikTok", url: "https://tiktok.com/@royaniwedding", icon: "tiktok" },
+    { platform: "Facebook", url: "https://facebook.com/royaniwedding", icon: "facebook" },
+    { platform: "WhatsApp", url: "https://wa.me/6287847222209", icon: "whatsapp" }
+  ]
+};
+
+const fallbackFaqs = [
+  { id: "1", sortOrder: 1, question: "Apakah paket pernikahan bisa disesuaikan kembali?", answer: "Ya, tentu saja. Semua paket yang kami tawarkan fleksibel dan dapat disesuaikan kembali dengan konsep impian, kuantitas tamu, maupun anggaran pernikahan Anda." },
+  { id: "2", sortOrder: 2, question: "Bagaimana mekanisme pembayaran dan DP di Royani Wedding?", answer: "Mekanisme pembayaran sangat mudah dan bertahap. Untuk mengamankan tanggal pernikahan (booking date), Anda cukup membayar Down Payment (DP) awal yang disepakati. Sisa pembayaran dapat dicicil." },
+  { id: "3", sortOrder: 3, question: "Apakah melayani jasa pernikahan di luar wilayah Majalengka?", answer: "Ya, kami melayani wilayah Majalengka serta wilayah sekitar seperti Cirebon, Kuningan, Indramayu, dan daerah sekitarnya. Tergantung lokasi, mungkin terdapat sedikit penyesuaian biaya transportasi." },
+  { id: "4", sortOrder: 4, question: "Berapa lama persiapan minimal sebelum memesan (booking)?", answer: "Waktu ideal adalah 3 hingga 6 bulan sebelum acara pernikahan. Hal ini sangat penting terutama di bulan-bulan padat (wedding season) agar tim kami dapat mempersiapkan segala detailnya dengan matang." }
+];
 
 export async function getHero() {
   try {
@@ -56,27 +105,30 @@ export async function getHero() {
 export async function getAbout() {
   try {
     const doc = await prisma.siteContent.findUnique({ where: { id: "about" } });
-    return doc?.data || null;
+    if (!doc?.data) return fallbackAbout;
+    return { ...fallbackAbout, ...Object.fromEntries(Object.entries(doc.data as any).filter(([_, v]) => v !== "" && v !== null)) };
   } catch (e) {
-    return null;
+    return fallbackAbout;
   }
 }
 
 export async function getContact() {
   try {
     const doc = await prisma.siteContent.findUnique({ where: { id: "contact" } });
-    return doc?.data || null;
+    if (!doc?.data) return fallbackContact;
+    return { ...fallbackContact, ...Object.fromEntries(Object.entries(doc.data as any).filter(([_, v]) => v !== "" && v !== null)) };
   } catch (e) {
-    return null;
+    return fallbackContact;
   }
 }
 
 export async function getSocialLinks() {
   try {
     const doc = await prisma.siteContent.findUnique({ where: { id: "social_links" } });
-    return doc?.data || null;
+    if (!doc?.data) return fallbackSocialLinks;
+    return { ...fallbackSocialLinks, ...Object.fromEntries(Object.entries(doc.data as any).filter(([_, v]) => v !== "" && v !== null)) };
   } catch (e) {
-    return null;
+    return fallbackSocialLinks;
   }
 }
 
@@ -111,8 +163,10 @@ export async function getPackages() {
 
 export async function getFaqs() {
   try {
-    return await prisma.faqItem.findMany({ orderBy: { sortOrder: 'asc' } });
+    const data = await prisma.faqItem.findMany({ orderBy: { sortOrder: 'asc' } });
+    if (!data || data.length === 0) return fallbackFaqs;
+    return data;
   } catch (e) {
-    return [];
+    return fallbackFaqs;
   }
 }

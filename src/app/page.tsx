@@ -144,23 +144,14 @@ export default function HomePage() {
         <div className="hero-bg"><img src={heroContent.bg_image_url || (heroContent as any).image_url || "/images/bg-hero.jpg"} alt="Royani Wedding" onError={(e) => { e.currentTarget.src = "/images/bg-hero.jpg"; }} /></div>
         <div className="hero-overlay" />
         <div className="hero-content">
-          <motion.div
-            className="hero-badge"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.4 }}
-          >
-            WEDDING ORGANIZER • MAJALENGKA • EST. 2016
-          </motion.div>
-
           <motion.h1
             className="hero-title"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.6 }}
           >
-            Mewujudkan Hari<br />
-            <span>Sempurna Anda</span>
+            {heroContent.title_first} <br />
+            <span>{heroContent.title_second}</span>
           </motion.h1>
 
           <motion.p
