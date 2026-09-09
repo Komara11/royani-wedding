@@ -115,7 +115,7 @@ export default function HomePage() {
   const selectedPkgs = [akadPkg, lengkapPkg].filter(Boolean);
   if (selectedPkgs.length === 0) selectedPkgs.push(...activePkgs.slice(0, 2));
 
-  const categoryCards = selectedPkgs.map((p) => ({
+  const categoryCards = selectedPkgs.map((p: any) => ({
       id: p.id,
       name: p.name || "",
       price: p.price || "",
