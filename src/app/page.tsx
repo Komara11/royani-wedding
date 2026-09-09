@@ -105,6 +105,31 @@ export default function HomePage() {
 
   const waLink = `https://wa.me/${parseWa(contactContent.whatsapp_number)}?text=Halo%20Royani%20Wedding%2C%20saya%20ingin%20berkonsultasi%20mengenai%20rencana%20pernikahan%20saya.`;
 
+  const akadPkgs = packages.filter((p) => p.type?.toLowerCase() === "akad");
+  const lengkapPkgs = packages.filter((p) => p.type?.toLowerCase() === "lengkap");
+  const formatRp = (num: number) => new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(num).replace("Rp", "Rp ");
+  const getMinPrice = (pkgs: any[]) => {
+    if (pkgs.length === 0) return "Konsultasikan";
+    const prices = pkgs.map(p => parseInt(p.price.replace(/[^\d]/g, ""), 10) || 999999999);
+    return formatRp(Math.min(...prices));
+  };
+
+  const categoryCards = [
+    {
+      id: "cat-akad",
+      name: "Paket Akad",
+      price: getMinPrice(akadPkgs),
+      featured: false,
+      features: ["Makeup & Busana Pengantin", "Melati Fresh & Aksesoris", "Jas Pengantin Pria", "Dokumentasi Foto & Cetak Album", "Bisa disesuaikan dengan kebutuhan"]
+    },
+    {
+      id: "cat-lengkap",
+      name: "Paket Lengkap",
+      price: getMinPrice(lengkapPkgs),
+      featured: true,
+      features: ["Dekorasi Pelaminan & Tenda", "Alat Prasmanan & Meja Kursi", "Makeup, Busana Pengantin & Keluarga", "Dokumentasi Lengkap (Album & Video)", "Tim WO & Acara Terkoordinasi"]
+    }
+  ];
   // Pick 3 featured packages for preview
   const previewPkgs = packages.length > 0
     ? (packages.filter((p) => p.type?.toLowerCase().includes("lengkap")).length > 0 ? packages.filter((p) => p.type?.toLowerCase().includes("lengkap")).slice(0, 3) : packages.slice(0, 3))
@@ -177,15 +202,21 @@ export default function HomePage() {
             </Link>
           </motion.div>
 
-          <motion.div
+          <motion.a
+            href="#paket"
             className="hero-scroll"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 2.5 }}
           >
             <span>Scroll</span>
-            <div className="scroll-line" />
-          </motion.div>
+            <div className="scroll-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="7 13 12 18 17 13" />
+                <polyline points="7 6 12 11 17 6" />
+              </svg>
+            </div>
+          </motion.a>
         </div>
       </section>
 
@@ -312,7 +343,7 @@ export default function HomePage() {
           </AnimatedSection>
 
           <div className="pricing-preview-grid">
-            {previewPkgs.map((pkg: any, i: number) => (
+            {categoryCards.map((pkg: any, i: number) => (
               <AnimatedSection key={pkg.id} className={`pricing-card ${pkg.featured ? "featured" : ""}`} delay={i * 0.15}>
                 {pkg.featured && <div className="pricing-badge">Terpopuler</div>}
                 <h3 className="pricing-name">{pkg.name}</h3>
@@ -321,12 +352,9 @@ export default function HomePage() {
                   <span className="pricing-amount">{pkg.price}</span>
                 </div>
                 <ul className="pricing-features">
-                  {(pkg.sections?.[0]?.features || []).slice(0, 5).map((f: string, fi: number) => (
+                  {pkg.features.map((f: string, fi: number) => (
                     <li key={fi}>✓ {f}</li>
                   ))}
-                  {(pkg.sections?.[0]?.features?.length || 0) > 5 && (
-                    <li className="pricing-more">+{(pkg.sections?.[0]?.features?.length || 0) - 5} fasilitas lainnya</li>
-                  )}
                 </ul>
                 <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-primary pricing-cta">
                   Konsultasi Paket
@@ -335,11 +363,6 @@ export default function HomePage() {
             ))}
           </div>
 
-          <AnimatedSection className="section-cta">
-            <Link href="/harga" className="btn-outline">
-              Lihat Semua Paket →
-            </Link>
-          </AnimatedSection>
         </div>
       </section>
 

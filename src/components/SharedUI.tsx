@@ -35,7 +35,7 @@ export function Navbar() {
   const navLinks = [
     { href: "/", label: "Beranda" },
     { href: "/dokumentasi", label: "Dokumentasi" },
-    { href: "/harga", label: "Paket" },
+    { href: "/#paket", label: "Paket" },
   ];
 
   return (
@@ -203,7 +203,7 @@ export function Footer() {
               <ul>
                 <li><Link href="/">Beranda</Link></li>
                 <li><Link href="/dokumentasi">Dokumentasi</Link></li>
-                <li><Link href="/harga">Paket Harga</Link></li>
+                <li><Link href="/#paket">Paket Harga</Link></li>
               </ul>
             </div>
 

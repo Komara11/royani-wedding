@@ -1,0 +1,13 @@
+--- src/app/page.tsx
++++ src/app/page.tsx
+@@ -345,9 +345,7 @@
+                 <ul className="pricing-features">
+-                  {(pkg.sections?.[0]?.features || []).slice(0, 5).map((f: string, fi: number) => (
++                  {pkg.features.map((f: string, fi: number) => (
+                     <li key={fi}>✓ {f}</li>
+                   ))}
+-                  {(pkg.sections?.[0]?.features?.length || 0) > 5 && (
+-                    <li className="pricing-more">+{(pkg.sections?.[0]?.features?.length || 0) - 5} fasilitas lainnya</li>
+-                  )}
+                 </ul>
+                 <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-primary pricing-cta">
