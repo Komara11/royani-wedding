@@ -1,0 +1,136 @@
+--- src/app/page.tsx
++++ src/app/page.tsx
+@@ -20,3 +20,131 @@
+ 
++const fallbackPortfolioItems = [
++  { id: 0, imageUrl: "/images/porto-1.jpg", title: "Pernikahan Andi & Sari", category: "Resepsi", location: "Grand Ballroom" },
++  { id: 1, imageUrl: "/images/porto-2.jpg", title: "Pernikahan Rian & Dewi", category: "Outdoor", location: "Outdoor Garden" },
++  { id: 2, imageUrl: "/images/porto-3.jpg", title: "Pernikahan Yoga & Putri", category: "Adat", location: "Gedung Serbaguna" },
++  { id: 3, imageUrl: "/images/porto-4.jpg", title: "Pernikahan Dimas & Rina", category: "Resepsi", location: "Hotel Bintang 5" },
++];
++
++const lengkapPackages = [
++  {
++    id: "l1",
++    name: "Minimalis",
++    price: "Rp 6.000.000",
++    featured: false,
++    sections: [
++      {
++        title: "Make-up & Busana",
++        features: [
++          "1x sepasang busana akad",
++          "1x gaun resepsi",
++          "1x jas resepsi",
++          "Sepasang sepatu",
++          "1 set melati fresh",
++          "1x makeup pengantin + touch up"
++        ]
++      }
++    ]
++  },
++  {
++    id: "l2",
++    name: "Ekonomis",
++    price: "Rp 9.500.000",
++    featured: true,
++    sections: [
++      {
++        title: "Dekorasi & Make-up",
++        features: [
++          "Pelaminan 4–5 meter",
++          "4 lokal tenda (menyesuaikan)",
++          "1x sepasang busana akad & resepsi",
++          "1x makeup pengantin + touch up",
++          "1x makeup ibu hajat",
++          "4 makeup pagar ayu"
++        ]
++      }
++    ]
++  },
++  {
++    id: "l3",
++    name: "Standar 1",
++    price: "Rp 13.500.000",
++    featured: false,
++    sections: [
++      {
++        title: "Paket Lengkap",
++        features: [
++          "Pelaminan 6 meter",
++          "1 gapura pintu masuk",
++          "2 set tenda",
++          "1x sepasang busana akad & resepsi",
++          "1x makeup pengantin + touch up",
++          "1 set alat prasmanan"
++        ]
++      }
++    ]
++  }
++];
++
++const akadPackages = [
++  {
++    id: "a1",
++    name: "Paket 1",
++    price: "Rp 2.500.000",
++    featured: true,
++    sections: [{ title: "Make-up & Busana", features: ["Makeup Pengantin", "Busana Akad + Acc", "Jas Pengantin Pria", "Melati Fresh", "1 Album Magnetik"] }]
++  },
++  {
++    id: "a2",
++    name: "Paket 2",
++    price: "Rp 1.700.000",
++    featured: false,
++    sections: [{ title: "Make-up", features: ["Makeup Pengantin", "Busana Akad + Acc", "Jas Pengantin Pria", "Melati Fresh"] }]
++  }
++];
++
+ /* ══════════════════════════════════════
+@@ -107,3 +235,3 @@
+   const previewPkgs = packages.length > 0
+-    ? (packages.filter((p) => p.type?.toLowerCase().includes("lengkap")).length > 0 ? packages.filter((p) => p.type?.toLowerCase().includes("lengkap")).slice(0, 3) : packages.slice(0, 3))
+-    : [];
++    ? (packages.filter((p) => p.type?.toLowerCase().includes("lengkap")).length > 0 ? packages.filter((p) => p.type?.toLowerCase().includes("lengkap")).slice(0, 3) : packages.slice(0, 3))
++    : lengkapPackages;
+@@ -124,3 +252,5 @@
+     if (heroData) setHeroContent((p) => ({ ...p, ...Object.fromEntries(Object.entries(heroData as any).filter(([_, v]) => v !== "" && v !== null)) }));
+     if (aboutData) setAboutContent((p) => ({ ...p, ...Object.fromEntries(Object.entries(aboutData as any).filter(([_, v]) => v !== "" && v !== null)) }));
++    if (portData && (portData as any).length > 0) setPortfolioItems((portData as any).slice(0, 6));
++    else setPortfolioItems(fallbackPortfolioItems);
+@@ -154,3 +284,9 @@
+       <section className="hero" id="home">
+-        <div className="hero-bg" style={{ backgroundImage: `url(${heroContent.bg_image_url || (heroContent as any).image_url || "/images/bg-hero.jpg"})` }} />
++        <div className="hero-bg">
++          <img 
++            src={heroContent.bg_image_url || (heroContent as any).image_url || "/images/bg-hero.jpg"} 
++            alt="Royani Wedding" 
++            onError={(e) => { e.currentTarget.src = "/images/bg-hero.jpg"; }} 
++          />
++        </div>
+         <div className="hero-overlay" />
+@@ -216,3 +352,3 @@
+           <div className="portfolio-preview-grid">
+-            {(portfolioItems.length > 0 ? portfolioItems : [
+-              { id: 1, title: "Andi & Sari", category: "Resepsi", imageUrl: "/images/porto-1.jpg", location: "Majalengka" },
+-              { id: 2, title: "Rian & Dewi", category: "Outdoor", imageUrl: "/images/porto-2.jpg", location: "Cirebon" },
+-              { id: 3, title: "Yoga & Putri", category: "Adat", imageUrl: "/images/porto-3.jpg", location: "Indramayu" },
+-              { id: 4, title: "Dimas & Rina", category: "Resepsi", imageUrl: "/images/porto-4.jpg", location: "Majalengka" },
+-            ]).slice(0, 4).map((item: any, i: number) => (
++            {portfolioItems.slice(0, 4).map((item: any, i: number) => (
+               <AnimatedSection key={item.id} className="portfolio-card" delay={i * 0.1}>
+@@ -310,6 +446,6 @@
+               <div className="contact-card">
+-                <h3>📍 Lokasi Kami</h3>
++                <h3>LOKASI KAMI</h3>
+                 <p>{contactContent.address}</p>
+               </div>
+               <div className="contact-card">
+-                <h3>📱 WhatsApp</h3>
++                <h3>WHATSAPP</h3>
+                 <a href={waLink} target="_blank" rel="noopener noreferrer">{contactContent.whatsapp_number}</a>
+@@ -317,3 +453,3 @@
+               <div className="contact-map">
+-                <iframe src={contactContent.maps_embed_url} width="100%" height="250" style={{ border: 0, borderRadius: 12 }} allowFullScreen loading="lazy" />
++                <iframe src={contactContent.maps_embed_url} width="100%" height="400" style={{ border: 0, borderRadius: 4 }} allowFullScreen loading="lazy" />
+               </div>

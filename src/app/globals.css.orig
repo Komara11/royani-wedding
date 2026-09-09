@@ -217,8 +217,7 @@ nav.scrolled {
 .hero, .page-hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
 .page-hero { min-height: 60vh; padding-top: 80px; }
 
-.hero-bg, .page-hero-bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
-.hero-bg img, .page-hero-bg img { width: 100%; height: 100%; object-fit: cover; animation: zoomIn 20s infinite alternate linear; }
+.hero-bg, .page-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: -1; animation: zoomIn 20s infinite alternate linear; }
 .hero-overlay, .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.6), var(--background)); z-index: 0; }
 
 .hero-content, .page-hero-content { position: relative; z-index: 1; padding: 0 24px; width: 100%; max-width: 900px; }

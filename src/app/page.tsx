@@ -141,7 +141,7 @@ export default function HomePage() {
     <main>
       {/* ═══════ HERO ═══════ */}
       <section className="hero" id="home">
-        <div className="hero-bg" style={{ backgroundImage: `url(${heroContent.bg_image_url || (heroContent as any).image_url || "/images/bg-hero.jpg"})` }} />
+        <div className="hero-bg"><img src={heroContent.bg_image_url || (heroContent as any).image_url || "/images/bg-hero.jpg"} alt="Royani Wedding" onError={(e) => { e.currentTarget.src = "/images/bg-hero.jpg"; }} /></div>
         <div className="hero-overlay" />
         <div className="hero-content">
           <motion.div
@@ -411,15 +411,15 @@ export default function HomePage() {
           <div className="contact-grid">
             <AnimatedSection className="contact-info" direction="left">
               <div className="contact-card">
-                <h3>📍 Lokasi Kami</h3>
+                <h3 style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", textTransform: "uppercase", color: "var(--gold)", letterSpacing: "2px", marginBottom: "12px" }}>Lokasi Kami</h3>
                 <p>{contactContent.address}</p>
               </div>
               <div className="contact-card">
-                <h3>📱 WhatsApp</h3>
+                <h3 style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", textTransform: "uppercase", color: "var(--gold)", letterSpacing: "2px", marginBottom: "12px" }}>WhatsApp</h3>
                 <a href={waLink} target="_blank" rel="noopener noreferrer">{contactContent.whatsapp_number}</a>
               </div>
               <div className="contact-map">
-                <iframe src={contactContent.maps_embed_url} width="100%" height="250" style={{ border: 0, borderRadius: 12 }} allowFullScreen loading="lazy" />
+                <iframe src={contactContent.maps_embed_url} width="100%" height="400" style={{ border: 0, borderRadius: 12 }} allowFullScreen loading="lazy" />
               </div>
             </AnimatedSection>
 

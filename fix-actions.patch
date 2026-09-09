@@ -1,0 +1,68 @@
+--- src/app/actions.ts
++++ src/app/actions.ts
+@@ -2,2 +2,46 @@
+ 
+ import prisma from "@/lib/prisma";
++
++const fallbackPackages = [
++  {
++    id: "l1", name: "Minimalis", price: "Rp 6.000.000", type: "lengkap", featured: false, sortOrder: 1,
++    sections: [{ title: "Make-up & Busana", features: ["1x sepasang busana akad", "1x gaun resepsi", "1x jas resepsi", "Sepasang sepatu", "1 set melati fresh", "1x makeup pengantin + touch up"] }]
++  },
++  {
++    id: "l2", name: "Ekonomis", price: "Rp 9.500.000", type: "lengkap", featured: true, sortOrder: 2,
++    sections: [{ title: "Dekorasi & Make-up", features: ["Pelaminan 4–5 meter", "4 lokal tenda (menyesuaikan)", "1x sepasang busana akad & resepsi", "1x makeup pengantin + touch up", "1x makeup ibu hajat", "4 makeup pagar ayu"] }]
++  },
++  {
++    id: "l3", name: "Standar 1", price: "Rp 13.500.000", type: "lengkap", featured: false, sortOrder: 3,
++    sections: [{ title: "Paket Lengkap", features: ["Pelaminan 6 meter", "1 gapura pintu masuk", "2 set tenda", "1x sepasang busana akad & resepsi", "1x makeup pengantin + touch up", "1 set alat prasmanan"] }]
++  },
++  {
++    id: "a1", name: "Paket 1", price: "Rp 2.500.000", type: "akad", featured: true, sortOrder: 4,
++    sections: [{ title: "Make-up & Busana", features: ["Makeup Pengantin", "Busana Akad + Acc", "Jas Pengantin Pria", "Melati Fresh", "1 Album Magnetik"] }]
++  },
++  {
++    id: "a2", name: "Paket 2", price: "Rp 1.700.000", type: "akad", featured: false, sortOrder: 5,
++    sections: [{ title: "Make-up", features: ["Makeup Pengantin", "Busana Akad + Acc", "Jas Pengantin Pria", "Melati Fresh"] }]
++  }
++];
++
++const fallbackPortfolios = [
++  { id: "p1", imageUrl: "/images/porto-1.jpg", title: "Pernikahan Andi & Sari", category: "Resepsi", location: "Majalengka", sortOrder: 1 },
++  { id: "p2", imageUrl: "/images/porto-2.jpg", title: "Pernikahan Rian & Dewi", category: "Outdoor", location: "Cirebon", sortOrder: 2 },
++  { id: "p3", imageUrl: "/images/porto-3.jpg", title: "Pernikahan Yoga & Putri", category: "Adat", location: "Indramayu", sortOrder: 3 },
++  { id: "p4", imageUrl: "/images/porto-4.jpg", title: "Pernikahan Dimas & Rina", category: "Resepsi", location: "Majalengka", sortOrder: 4 },
++];
++
++const fallbackHero = {
++  bg_image_url: "/images/bg-hero.jpg",
++  parallax_image_url: "/images/bg-divider.jpg",
++  subtitle: "WEDDING ORGANIZER",
++  title_first: "Royani",
++  title_second: "Wedding",
++  description: "Mewujudkan hari spesial Anda menjadi sempurna, berkesan, dan elegan lewat layanan profesional kami.",
++  cta_text: "Konsultasi Gratis",
++  parallax_quote: "Cinta tidak hanya tentang saling memandang, melainkan bersama-sama melihat ke satu arah yang sama dengan komitmen dan ketulusan abadi."
++};
+ 
+ export async function getHero() {
+@@ -5,3 +49,4 @@
+   const doc = await prisma.siteContent.findUnique({ where: { id: "hero" } });
+-  return doc?.data || null;
++  if (!doc?.data) return fallbackHero;
++  return { ...fallbackHero, ...Object.fromEntries(Object.entries(doc.data as any).filter(([_, v]) => v !== "" && v !== null)) };
+ }
+@@ -28,3 +73,5 @@
+ export async function getPortfolios() {
+-  return await prisma.portfolio.findMany({ orderBy: { sortOrder: 'asc' } });
++  const data = await prisma.portfolio.findMany({ orderBy: { sortOrder: 'asc' } });
++  if (!data || data.length === 0) return fallbackPortfolios;
++  return data;
+ }
+@@ -32,3 +79,5 @@
+ export async function getPackages() {
+-  return await prisma.package.findMany({ orderBy: { sortOrder: 'asc' } });
++  const data = await prisma.package.findMany({ orderBy: { sortOrder: 'asc' } });
++  if (!data || data.length === 0) return fallbackPackages;
++  return data;
+ }
