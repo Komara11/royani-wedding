@@ -1,5 +1,6 @@
 "use server";
 
+import { unstable_noStore as noStore } from "next/cache";
 import prisma from "@/lib/prisma";
 
 const fallbackPackages = [
@@ -93,6 +94,7 @@ const fallbackFaqs = [
 ];
 
 export async function getHero() {
+  noStore();
   try {
     const doc = await prisma.siteContent.findUnique({ where: { id: "hero" } });
     if (!doc?.data) return fallbackHero;
@@ -103,6 +105,7 @@ export async function getHero() {
 }
 
 export async function getAbout() {
+  noStore();
   try {
     const doc = await prisma.siteContent.findUnique({ where: { id: "about" } });
     if (!doc?.data) return fallbackAbout;
@@ -113,6 +116,7 @@ export async function getAbout() {
 }
 
 export async function getContact() {
+  noStore();
   try {
     const doc = await prisma.siteContent.findUnique({ where: { id: "contact" } });
     if (!doc?.data) return fallbackContact;
@@ -123,6 +127,7 @@ export async function getContact() {
 }
 
 export async function getSocialLinks() {
+  noStore();
   try {
     const doc = await prisma.siteContent.findUnique({ where: { id: "social_links" } });
     if (!doc?.data) return fallbackSocialLinks;
@@ -133,6 +138,7 @@ export async function getSocialLinks() {
 }
 
 export async function getPortfolioCategories() {
+  noStore();
   try {
     const doc = await prisma.siteContent.findUnique({ where: { id: "portfolio_categories" } });
     return doc?.data || null;
@@ -142,6 +148,7 @@ export async function getPortfolioCategories() {
 }
 
 export async function getPortfolios() {
+  noStore();
   try {
     const data = await prisma.portfolio.findMany({ orderBy: { sortOrder: 'asc' } });
     if (!data || data.length === 0) return fallbackPortfolios;
@@ -152,6 +159,7 @@ export async function getPortfolios() {
 }
 
 export async function getPackages() {
+  noStore();
   try {
     const data = await prisma.package.findMany({ orderBy: { sortOrder: 'asc' } });
     if (!data || data.length === 0) return fallbackPackages;
@@ -162,6 +170,7 @@ export async function getPackages() {
 }
 
 export async function getFaqs() {
+  noStore();
   try {
     const data = await prisma.faqItem.findMany({ orderBy: { sortOrder: 'asc' } });
     if (!data || data.length === 0) return fallbackFaqs;
