@@ -5,24 +5,12 @@ import prisma from "@/lib/prisma";
 
 const fallbackPackages = [
   {
-    id: "l1", name: "Minimalis", price: "Rp 6.000.000", type: "lengkap", featured: false, sortOrder: 1,
-    sections: [{ title: "Make-up & Busana", features: ["1x sepasang busana akad", "1x gaun resepsi", "1x jas resepsi", "Sepasang sepatu", "1 set melati fresh", "1x makeup pengantin + touch up"] }]
+    id: "cat-akad", name: "Paket Akad", price: "Mulai dari Rp 4.000.000", type: "akad", featured: false, sortOrder: 1,
+    sections: [{ title: "", is_bonus: false, features: ["Makeup & Busana Pengantin", "Melati Fresh & Aksesoris", "Jas Pengantin Pria", "Dokumentasi Foto & Cetak Album", "Bisa disesuaikan dengan kebutuhan"] }]
   },
   {
-    id: "l2", name: "Ekonomis", price: "Rp 9.500.000", type: "lengkap", featured: true, sortOrder: 2,
-    sections: [{ title: "Dekorasi & Make-up", features: ["Pelaminan 4–5 meter", "4 lokal tenda (menyesuaikan)", "1x sepasang busana akad & resepsi", "1x makeup pengantin + touch up", "1x makeup ibu hajat", "4 makeup pagar ayu"] }]
-  },
-  {
-    id: "l3", name: "Standar 1", price: "Rp 13.500.000", type: "lengkap", featured: false, sortOrder: 3,
-    sections: [{ title: "Paket Lengkap", features: ["Pelaminan 6 meter", "1 gapura pintu masuk", "2 set tenda", "1x sepasang busana akad & resepsi", "1x makeup pengantin + touch up", "1 set alat prasmanan"] }]
-  },
-  {
-    id: "a1", name: "Paket 1", price: "Rp 2.500.000", type: "akad", featured: true, sortOrder: 4,
-    sections: [{ title: "Make-up & Busana", features: ["Makeup Pengantin", "Busana Akad + Acc", "Jas Pengantin Pria", "Melati Fresh", "1 Album Magnetik"] }]
-  },
-  {
-    id: "a2", name: "Paket 2", price: "Rp 1.700.000", type: "akad", featured: false, sortOrder: 5,
-    sections: [{ title: "Make-up", features: ["Makeup Pengantin", "Busana Akad + Acc", "Jas Pengantin Pria", "Melati Fresh"] }]
+    id: "cat-lengkap", name: "Paket Lengkap", price: "Mulai dari Rp 15.000.000", type: "lengkap", featured: true, sortOrder: 2,
+    sections: [{ title: "", is_bonus: false, features: ["Dekorasi Pelaminan & Tenda", "Alat Prasmanan & Meja Kursi", "Makeup, Busana Pengantin & Keluarga", "Dokumentasi Lengkap (Album & Video)", "Tim WO & Acara Terkoordinasi"] }]
   }
 ];
 
