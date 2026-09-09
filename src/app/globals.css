@@ -451,4 +451,7 @@ nav.scrolled {
   .service-card, .pricing-card { width: 85vw; max-width: 300px; scroll-snap-align: center; flex-shrink: 0; }
   .swipe-indicator { display: block; text-align: center; font-size: 0.8rem; color: var(--gold); margin-bottom: 16px; opacity: 0.8; font-style: italic; }
 }
-\n.swipe-indicator { display: none; }
+
+@media (min-width: 769px) {
+  .swipe-indicator { display: none !important; }
+}
