@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display, Cormorant_Garamond } from "next/font/google";
 import { Navbar, Footer, Preloader } from "@/components/SharedUI";
-import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -105,6 +104,12 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${playfair.variable} ${cormorant.variable}`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body suppressHydrationWarning>
         <Preloader />
         <Navbar />

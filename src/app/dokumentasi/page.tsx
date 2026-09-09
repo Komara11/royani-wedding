@@ -62,24 +62,9 @@ export default function DokumentasiPage() {
   return (
     <main>
       {/* Hero Banner */}
-      <section className="page-hero">
-        <div className="page-hero-bg" style={{ backgroundImage: "url(/images/bg-hero.jpg)" }} />
-        <div className="page-hero-overlay" />
-        <div className="page-hero-content">
-          <AnimatedSection>
-            <span className="section-tag">PORTFOLIO</span>
-            <h1 className="page-hero-title">
-              Momen yang <span>Terabadikan</span>
-            </h1>
-            <p className="page-hero-desc">
-              Setiap pernikahan adalah cerita unik. Berikut momen-momen indah yang telah kami abadikan bersama klien kami.
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
 
       {/* Category Filter */}
-      <section className="section">
+      <section className="section" style={{ paddingTop: 150 }}>
         <div className="container">
           <div className="filter-pills">
             {categories.map((cat) => (

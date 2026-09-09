@@ -105,19 +105,35 @@ export default function HomePage() {
 
   const waLink = `https://wa.me/${parseWa(contactContent.whatsapp_number)}?text=Halo%20Royani%20Wedding%2C%20saya%20ingin%20berkonsultasi%20mengenai%20rencana%20pernikahan%20saya.`;
 
-  // Simplified Packages
-  const categoryCards = packages
-    .filter((p: any) => p.is_active !== false && p.isActive !== false) // Fallback to true
-    .sort((a: any, b: any) => (a.sort_order || a.sortOrder || 0) - (b.sort_order || b.sortOrder || 0))
-    .map((p) => ({
-      id: p.id,
-      name: p.name,
-      price: p.price,
-      featured: p.featured,
-      features: Array.isArray(p.sections) 
-        ? (typeof p.sections[0] === 'string' ? p.sections : (p.sections[0]?.features || [])) 
-        : []
-    }));
+  const akadPkgs = packages.filter((p) => p.type?.toLowerCase() === "akad");
+  const lengkapPkgs = packages.filter((p) => p.type?.toLowerCase() === "lengkap");
+  const formatRp = (num: number) => new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(num).replace("Rp", "Rp ");
+  const getMinPrice = (pkgs: any[]) => {
+    if (pkgs.length === 0) return "Konsultasikan";
+    const prices = pkgs.map(p => parseInt(p.price.replace(/[^\d]/g, ""), 10) || 999999999);
+    return formatRp(Math.min(...prices));
+  };
+
+  const categoryCards = [
+    {
+      id: "cat-akad",
+      name: "Paket Akad",
+      price: getMinPrice(akadPkgs),
+      featured: false,
+      features: ["Makeup & Busana Pengantin", "Melati Fresh & Aksesoris", "Jas Pengantin Pria", "Dokumentasi Foto & Cetak Album", "Bisa disesuaikan dengan kebutuhan"]
+    },
+    {
+      id: "cat-lengkap",
+      name: "Paket Lengkap",
+      price: getMinPrice(lengkapPkgs),
+      featured: true,
+      features: ["Dekorasi Pelaminan & Tenda", "Alat Prasmanan & Meja Kursi", "Makeup, Busana Pengantin & Keluarga", "Dokumentasi Lengkap (Album & Video)", "Tim WO & Acara Terkoordinasi"]
+    }
+  ];
+  // Pick 3 featured packages for preview
+  const previewPkgs = packages.length > 0
+    ? (packages.filter((p) => p.type?.toLowerCase().includes("lengkap")).length > 0 ? packages.filter((p) => p.type?.toLowerCase().includes("lengkap")).slice(0, 3) : packages.slice(0, 3))
+    : [];
 
   // Services data
   const services = [

@@ -34,11 +34,8 @@ export function Navbar() {
 
   const navLinks = [
     { href: "/", label: "Beranda" },
-    { href: "/#tentang", label: "Tentang" },
-    { href: "/#layanan", label: "Layanan" },
     { href: "/dokumentasi", label: "Dokumentasi" },
-    { href: "/#testimoni", label: "Testimoni" },
-    { href: "/#kontak", label: "Kontak" },
+    { href: "/#paket", label: "Paket" },
   ];
 
   return (
@@ -205,10 +202,8 @@ export function Footer() {
               <h4>Navigasi</h4>
               <ul>
                 <li><Link href="/">Beranda</Link></li>
-                <li><Link href="/#tentang">Tentang</Link></li>
-                <li><Link href="/#layanan">Layanan</Link></li>
                 <li><Link href="/dokumentasi">Dokumentasi</Link></li>
-                <li><Link href="/#kontak">Kontak</Link></li>
+                <li><Link href="/#paket">Paket Harga</Link></li>
               </ul>
             </div>
 

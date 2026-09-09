@@ -36,8 +36,8 @@ const fallbackHero = {
   bg_image_url: "/images/bg-hero.jpg",
   parallax_image_url: "/images/bg-divider.jpg",
   subtitle: "WEDDING ORGANIZER",
-  title_first: "Mewujudkan Hari",
-  title_second: "Sempurna Anda",
+  title_first: "Royani",
+  title_second: "Wedding",
   description: "Mewujudkan hari spesial Anda menjadi sempurna, berkesan, dan elegan lewat layanan profesional kami.",
   cta_text: "Konsultasi Gratis",
   parallax_quote: "Cinta tidak hanya tentang saling memandang, melainkan bersama-sama melihat ke satu arah yang sama dengan komitmen dan ketulusan abadi."
