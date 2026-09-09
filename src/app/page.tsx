@@ -105,23 +105,53 @@ export default function HomePage() {
 
   const waLink = `https://wa.me/${parseWa(contactContent.whatsapp_number)}?text=Halo%20Royani%20Wedding%2C%20saya%20ingin%20berkonsultasi%20mengenai%20rencana%20pernikahan%20saya.`;
 
-  // Force exactly 2 packages (Akad and Lengkap)
-  const activePkgs = packages
-    .filter((p: any) => p.is_active !== false && p.isActive !== false)
-    .sort((a: any, b: any) => (a.sort_order || a.sortOrder || 0) - (b.sort_order || b.sortOrder || 0));
+  // Create 2 aggregated category cards based on the lowest price in each category
+  const activePkgs = packages.filter((p: any) => p.is_active !== false && p.isActive !== false);
   
-  const akadPkg = activePkgs.find((p: any) => p.type?.toLowerCase() === "akad");
-  const lengkapPkg = activePkgs.find((p: any) => p.type?.toLowerCase() === "lengkap");
-  const selectedPkgs = [akadPkg, lengkapPkg].filter(Boolean);
-  if (selectedPkgs.length === 0) selectedPkgs.push(...activePkgs.slice(0, 2));
+  // Find cheapest Akad
+  const akadPkgs = activePkgs.filter((p: any) => p.type?.toLowerCase() === 'akad');
+  const cheapestAkad = akadPkgs.length > 0 ? akadPkgs.sort((a, b) => {
+    const pA = parseInt((a.price || "").replace(/[^0-9]/g, '')) || 0;
+    const pB = parseInt((b.price || "").replace(/[^0-9]/g, '')) || 0;
+    return pA - pB;
+  })[0].price : "Rp 2.500.000";
 
-  const categoryCards = selectedPkgs.map((p: any) => ({
-      id: p.id,
-      name: p.name || "",
-      price: p.price || "",
-      featured: p.featured || false,
-      features: Array.isArray(p.sections) ? (typeof p.sections[0] === 'string' ? p.sections : (p.sections[0]?.features || [])) : []
-  }));
+  // Find cheapest Lengkap
+  const lengkapPkgs = activePkgs.filter((p: any) => p.type?.toLowerCase() === 'lengkap');
+  const cheapestLengkap = lengkapPkgs.length > 0 ? lengkapPkgs.sort((a, b) => {
+    const pA = parseInt((a.price || "").replace(/[^0-9]/g, '')) || 0;
+    const pB = parseInt((b.price || "").replace(/[^0-9]/g, '')) || 0;
+    return pA - pB;
+  })[0].price : "Rp 6.000.000";
+
+  const categoryCards = [
+    {
+      id: "cat-akad",
+      name: "Paket Akad",
+      price: `Mulai dari ${cheapestAkad}`,
+      featured: false,
+      features: [
+        "Makeup & Busana Pengantin",
+        "Melati Fresh & Aksesoris",
+        "Jas Pengantin Pria",
+        "Dokumentasi Foto & Cetak Album",
+        "Bisa disesuaikan dengan kebutuhan"
+      ]
+    },
+    {
+      id: "cat-lengkap",
+      name: "Paket Lengkap",
+      price: `Mulai dari ${cheapestLengkap}`,
+      featured: true,
+      features: [
+        "Dekorasi Pelaminan & Tenda",
+        "Alat Prasmanan & Meja Kursi",
+        "Makeup, Busana Pengantin & Keluarga",
+        "Dokumentasi Lengkap (Album & Video)",
+        "Tim WO & Acara Terkoordinasi"
+      ]
+    }
+  ];
 
   // Services data
   const services = [
