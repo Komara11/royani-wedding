@@ -177,21 +177,15 @@ export default function HomePage() {
             </Link>
           </motion.div>
 
-          <motion.a
-            href="#paket"
+          <motion.div
             className="hero-scroll"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 2.5 }}
           >
             <span>Scroll</span>
-            <div className="scroll-arrow">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="7 13 12 18 17 13" />
-                <polyline points="7 6 12 11 17 6" />
-              </svg>
-            </div>
-          </motion.a>
+            <div className="scroll-line" />
+          </motion.div>
         </div>
       </section>
 
