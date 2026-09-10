@@ -1,0 +1,19 @@
+--- src/app/actions.ts
++++ src/app/actions.ts
+@@ -62,18 +62,6 @@
+     sections: [{ title: "Paket Lengkap", features: ["Dekorasi Pelaminan & Tenda", "Alat Prasmanan & Meja Kursi", "Makeup, Busana Pengantin & Keluarga", "Dokumentasi Lengkap (Album & Video)", "Tim WO & Acara Terkoordinasi"] }]
+   },
+-  {
+-    id: "l3", name: "Standar 1", price: "Rp 13.500.000", type: "lengkap", featured: false, sortOrder: 3,
+-    sections: [{ title: "Paket Lengkap", features: ["Pelaminan 6 meter", "1 gapura pintu masuk", "2 set tenda", "1x sepasang busana akad & resepsi", "1x makeup pengantin + touch up", "1 set alat prasmanan"] }]
+-  },
+   {
+-    id: "a1", name: "Paket 1", price: "Rp 2.500.000", type: "akad", featured: true, sortOrder: 4,
++    id: "a1", name: "Paket Akad", price: "Rp 4.000.000", type: "akad", featured: true, sortOrder: 2,
+     sections: [{ title: "Make-up & Busana", features: ["Makeup Pengantin", "Busana Akad + Acc", "Jas Pengantin Pria", "Melati Fresh", "1 Album Magnetik"] }]
+-  },
+-  {
+-    id: "a2", name: "Paket 2", price: "Rp 1.700.000", type: "akad", featured: false, sortOrder: 5,
+-    sections: [{ title: "Make-up", features: ["Makeup Pengantin", "Busana Akad + Acc", "Jas Pengantin Pria", "Melati Fresh"] }]
+   }
+ ];

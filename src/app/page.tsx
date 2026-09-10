@@ -105,53 +105,17 @@ export default function HomePage() {
 
   const waLink = `https://wa.me/${parseWa(contactContent.whatsapp_number)}?text=Halo%20Royani%20Wedding%2C%20saya%20ingin%20berkonsultasi%20mengenai%20rencana%20pernikahan%20saya.`;
 
-  // Create 2 aggregated category cards based on the lowest price in each category
-  const activePkgs = packages.filter((p: any) => p.is_active !== false && p.isActive !== false);
-  
-  // Find cheapest Akad
-  const akadPkgs = activePkgs.filter((p: any) => p.type?.toLowerCase() === 'akad');
-  const cheapestAkad = akadPkgs.length > 0 ? akadPkgs.sort((a, b) => {
-    const pA = parseInt((a.price || "").replace(/[^0-9]/g, '')) || 0;
-    const pB = parseInt((b.price || "").replace(/[^0-9]/g, '')) || 0;
-    return pA - pB;
-  })[0].price : "Rp 2.500.000";
+  // Map all packages directly from the database
+  const activePkgs = packages.filter((p: any) => p.is_active !== false && p.isActive !== false)
+                             .sort((a: any, b: any) => (a.sort_order || a.sortOrder || 0) - (b.sort_order || b.sortOrder || 0));
 
-  // Find cheapest Lengkap
-  const lengkapPkgs = activePkgs.filter((p: any) => p.type?.toLowerCase() === 'lengkap');
-  const cheapestLengkap = lengkapPkgs.length > 0 ? lengkapPkgs.sort((a, b) => {
-    const pA = parseInt((a.price || "").replace(/[^0-9]/g, '')) || 0;
-    const pB = parseInt((b.price || "").replace(/[^0-9]/g, '')) || 0;
-    return pA - pB;
-  })[0].price : "Rp 6.000.000";
-
-  const categoryCards = [
-    {
-      id: "cat-akad",
-      name: "Paket Akad",
-      price: `Mulai dari ${cheapestAkad}`,
-      featured: false,
-      features: [
-        "Makeup & Busana Pengantin",
-        "Melati Fresh & Aksesoris",
-        "Jas Pengantin Pria",
-        "Dokumentasi Foto & Cetak Album",
-        "Bisa disesuaikan dengan kebutuhan"
-      ]
-    },
-    {
-      id: "cat-lengkap",
-      name: "Paket Lengkap",
-      price: `Mulai dari ${cheapestLengkap}`,
-      featured: true,
-      features: [
-        "Dekorasi Pelaminan & Tenda",
-        "Alat Prasmanan & Meja Kursi",
-        "Makeup, Busana Pengantin & Keluarga",
-        "Dokumentasi Lengkap (Album & Video)",
-        "Tim WO & Acara Terkoordinasi"
-      ]
-    }
-  ];
+  const categoryCards = activePkgs.map((p: any) => ({
+      id: p.id,
+      name: p.name || "",
+      price: p.price || "",
+      featured: p.featured || false,
+      features: Array.isArray(p.sections) ? (typeof p.sections[0] === 'string' ? p.sections : (p.sections[0]?.features || [])) : []
+  }));
 
   // Services data
   const services = [
@@ -184,7 +148,7 @@ export default function HomePage() {
     <main>
       {/* ═══════ HERO ═══════ */}
       <section className="hero" id="home">
-        <div className="hero-bg"><img src={heroContent.bg_image_url || (heroContent as any).image_url || "/images/bg-hero.jpg"} alt="Royani Wedding" onError={(e) => { e.currentTarget.src = "/images/bg-hero.jpg"; }} /></div>
+        <div className="hero-bg"><img src={heroContent.bg_image_url || (heroContent as any).image_url || "/images/bg-hero.jpg"} alt="Royani Wedding" loading="eager" fetchpriority="high" decoding="async" onError={(e) => { e.currentTarget.src = "/images/bg-hero.jpg"; }} /></div>
         <div className="hero-overlay" />
         <div className="hero-content">
           <motion.h1
@@ -248,7 +212,7 @@ export default function HomePage() {
           <div className="about-grid">
             <AnimatedSection className="about-image-wrapper" direction="left">
               <div className="about-image">
-                <img src={aboutContent.image_url || "/images/about.jpg"} alt="Royani Wedding" onError={(e) => { e.currentTarget.src = "/images/about.jpg"; }} />
+                <img src={aboutContent.image_url || "/images/about.jpg"} alt="Royani Wedding" loading="lazy" decoding="async" onError={(e) => { e.currentTarget.src = "/images/about.jpg"; }} />
               </div>
               <div className="about-quote-card">
                 <p>&ldquo;{aboutContent.quote}&rdquo;</p>
@@ -328,7 +292,7 @@ export default function HomePage() {
             ]).slice(0, 4).map((item: any, i: number) => (
               <AnimatedSection key={item.id} className="portfolio-card" delay={i * 0.1}>
                 <div className="portfolio-card-img">
-                  <img src={item.imageUrl || item.image_url || "/images/porto-1.jpg"} alt={item.title} />
+                  <img src={item.imageUrl || item.image_url || "/images/porto-1.jpg"} alt={item.title} loading="lazy" decoding="async" />
                   <div className="portfolio-card-overlay">
                     <span className="portfolio-card-category">{item.category}</span>
                     <h3>{item.title}</h3>

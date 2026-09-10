@@ -1,0 +1,22 @@
+--- src/app/globals.css
++++ src/app/globals.css
+@@ -35,6 +35,8 @@
+ html {
+   scroll-behavior: smooth;
+   font-size: 16px;
+   background-color: var(--background);
++  overflow-x: hidden;
++  width: 100%;
+ }
+ 
+@@ -46,4 +48,5 @@
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   overflow-x: hidden;
++  width: 100%;
+ }
+@@ -198,3 +201,3 @@
+ /* Navbar Mobile */
+-.hamburger { display: none; flex-direction: column; gap: 6px; z-index: 2000; position: relative; }
++.hamburger { display: none; flex-direction: column; gap: 6px; z-index: 2000; position: relative; background: transparent; border: none; cursor: pointer; padding: 4px; outline: none; }
+ .hamburger span { width: 30px; height: 2px; background: var(--text-primary); transition: 0.3s; }

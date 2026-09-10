@@ -45,7 +45,7 @@ export function Navbar() {
     <nav className={navScrolled ? "scrolled" : ""}>
       <div className="nav-container">
         <Link href="/" className="nav-logo" onClick={() => setHamburgerActive(false)}>
-          <img src="/logo.png" alt="Royani Wedding" />
+          <img src="/logo.png" alt="Royani Wedding" loading="eager" decoding="async" />
         </Link>
 
         {/* Desktop Links */}
@@ -185,7 +185,7 @@ export function Footer() {
           {/* Top: Brand + Tagline */}
           <div className="footer-top">
             <Link href="/" className="footer-logo-link">
-              <img src="/logo.png" alt="Royani Wedding" className="footer-logo-img" />
+              <img src="/logo.png" alt="Royani Wedding" className="footer-logo-img" loading="lazy" decoding="async" />
             </Link>
             <p className="footer-motto">Mewujudkan Hari Sempurna Anda</p>
           </div>
@@ -267,7 +267,7 @@ export function Preloader() {
     <div className={`preloader ${!isLoading ? "fade-out" : ""}`}>
       <div className="preloader-content">
         <div className="preloader-logo">
-          <img src="/logo.png" alt="Royani Wedding" />
+          <img src="/logo.png" alt="Royani Wedding" loading="eager" decoding="async" />
         </div>
         <div className="preloader-title">Royani Wedding</div>
         <div className="preloader-subtitle">Wedding Organizer</div>
