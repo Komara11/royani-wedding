@@ -148,7 +148,7 @@ export default function HomePage() {
     <main>
       {/* ═══════ HERO ═══════ */}
       <section className="hero" id="home">
-        <div className="hero-bg"><img src={heroContent.bg_image_url || (heroContent as any).image_url || "/images/bg-hero.jpg"} alt="Royani Wedding" loading="eager" fetchpriority="high" decoding="async" onError={(e) => { e.currentTarget.src = "/images/bg-hero.jpg"; }} /></div>
+        <div className="hero-bg"><img src={heroContent.bg_image_url || (heroContent as any).image_url || "/images/bg-hero.jpg"} alt="Royani Wedding" loading="eager" fetchPriority="high" decoding="async" onError={(e) => { e.currentTarget.src = "/images/bg-hero.jpg"; }} /></div>
         <div className="hero-overlay" />
         <div className="hero-content">
           <motion.h1

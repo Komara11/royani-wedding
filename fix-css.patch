@@ -1,8 +1,0 @@
---- src/app/globals.css
-+++ src/app/globals.css
-@@ -452,3 +452,4 @@
-   .swipe-indicator { display: block; text-align: center; font-size: 0.8rem; color: var(--gold); margin-bottom: 16px; opacity: 0.8; font-style: italic; }
- }
--\n.swipe-indicator { display: none; }
-+
-+.swipe-indicator { display: none; }
