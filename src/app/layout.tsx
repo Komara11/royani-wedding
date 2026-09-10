@@ -106,10 +106,12 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable} ${cormorant.variable}`}
     >
       <body suppressHydrationWarning>
-        <Preloader />
-        <Navbar />
-        {children}
-        <Footer />
+        <div style={{ overflowX: "hidden", position: "relative", width: "100%", display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+          <Preloader />
+          <Navbar />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );
