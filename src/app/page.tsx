@@ -175,9 +175,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 2.1 }}
           >
-            <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-primary">
-              {heroContent.cta_text}
-            </a>
+            
             <Link href="/dokumentasi" className="btn-outline">
               Lihat Dokumentasi
             </Link>
@@ -311,43 +309,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══════ PRICING PREVIEW ═══════ */}
-      <section className="section section-alt" id="paket">
-        <div className="container">
-          <AnimatedSection className="section-header">
-            <span className="section-tag">PAKET KAMI</span>
-            <h2 className="section-title">
-              Pilih Paket <span>Terbaik</span>
-            </h2>
-            <p className="section-desc center">
-              Setiap paket dapat disesuaikan dengan kebutuhan dan anggaran Anda. Hubungi kami untuk penawaran terbaik.
-            </p>
-          </AnimatedSection>
-
-          <p className="swipe-indicator">← Geser ke samping →</p>
-          <div className="pricing-preview-grid">
-            {categoryCards.map((pkg: any, i: number) => (
-              <AnimatedSection key={pkg.id} className={`pricing-card ${pkg.featured ? "featured" : ""}`} delay={i * 0.15}>
-                {pkg.featured && <div className="pricing-badge">Terpopuler</div>}
-                <h3 className="pricing-name">{pkg.name}</h3>
-                <div className="pricing-price">
-                  <span className="pricing-from">Mulai dari</span>
-                  <span className="pricing-amount">{pkg.price}</span>
-                </div>
-                <ul className="pricing-features">
-                  {pkg.features.map((f: string, fi: number) => (
-                    <li key={fi}>✓ {f}</li>
-                  ))}
-                </ul>
-                <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-primary pricing-cta">
-                  Konsultasi Paket
-                </a>
-              </AnimatedSection>
-            ))}
-          </div>
-
-        </div>
-      </section>
+      
 
       {/* ═══════ TESTIMONIALS ═══════ */}
       <section className="section" id="testimoni">

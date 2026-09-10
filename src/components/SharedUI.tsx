@@ -36,6 +36,7 @@ export function Navbar() {
     { href: "/", label: "Beranda" },
     { href: "/#tentang", label: "Tentang" },
     { href: "/#layanan", label: "Layanan" },
+    { href: "/harga", label: "Paket Harga" },
     { href: "/dokumentasi", label: "Dokumentasi" },
     { href: "/#testimoni", label: "Testimoni" },
     { href: "/#kontak", label: "Kontak" },
