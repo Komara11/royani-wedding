@@ -200,7 +200,7 @@ nav.scrolled {
 .nav-cta::after { display: none; }
 .nav-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
 
-.hamburger { display: none; flex-direction: column; gap: 6px; z-index: 2000; position: relative; background: transparent; border: none; cursor: pointer; padding: 4px; outline: none; }
+.hamburger { display: none; flex-direction: column; gap: 6px; z-index: 2000; position: relative; background: transparent !important; border: none !important; cursor: pointer; padding: 4px; outline: none; -webkit-appearance: none; appearance: none; -webkit-tap-highlight-color: transparent; }
 .hamburger span { width: 30px; height: 2px; background: var(--text-primary); transition: 0.3s; }
 .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); background: var(--gold); }
 .hamburger.active span:nth-child(2) { opacity: 0; }

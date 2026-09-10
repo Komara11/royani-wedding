@@ -58,16 +58,7 @@ export function Navbar() {
               </Link>
             </li>
           ))}
-          <li>
-            <a
-              href="https://wa.me/6287847222209?text=Halo%20Royani%20Wedding%2C%20saya%20ingin%20berkonsultasi%20mengenai%20rencana%20pernikahan%20saya."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="nav-cta"
-            >
-              Konsultasi
-            </a>
-          </li>
+          
         </ul>
 
         {/* Hamburger */}
@@ -115,21 +106,7 @@ export function Navbar() {
                   </Link>
                 </motion.li>
               ))}
-              <motion.li
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.4 }}
-              >
-                <a
-                  href="https://wa.me/6287847222209?text=Halo%20Royani%20Wedding%2C%20saya%20ingin%20berkonsultasi."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="nav-cta"
-                  onClick={() => setHamburgerActive(false)}
-                >
-                  Konsultasi Gratis
-                </a>
-              </motion.li>
+              
             </motion.ul>
 
             <div className="mobile-nav-footer">
@@ -240,10 +217,7 @@ export function Footer() {
           <div className="footer-bottom">
             <p>© {new Date().getFullYear()} Royani Wedding. Seluruh hak cipta dilindungi.</p>
             <p className="footer-attribution">
-              Designed by{" "}
-              <a href="https://www.clovercode.shop" target="_blank" rel="noopener noreferrer">
-                CloverCode
-              </a>
+              Designed by <a href="https://rahesa-komara-r7o2.vercel.app/" target="_blank" rel="noopener noreferrer" style={{color: "var(--gold)"}}>komara</a> from <a href="https://www.clovercode.shop" target="_blank" rel="noopener noreferrer">CloverCode</a>
             </p>
           </div>
         </div>
