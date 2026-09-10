@@ -282,26 +282,65 @@ export default function HomePage() {
             </p>
           </AnimatedSection>
 
-          <div className="pricing-grid">
-            {categoryCards.slice(0, 3).map((pkg: any, i: number) => (
-              <AnimatedSection key={pkg.id} className={`pricing-card ${pkg.featured ? "featured" : ""}`} delay={i * 0.15}>
-                {pkg.featured && <div className="pricing-badge">Terpopuler</div>}
-                <h3 className="pricing-name">{pkg.name}</h3>
-                <div className="pricing-price">
-                  <span className="pricing-amount">{pkg.price}</span>
-                </div>
-                <ul className="pricing-features">
-                  {pkg.features.slice(0, 6).map((f: string, fi: number) => (
-                    <li key={fi}>✓ {f}</li>
-                  ))}
-                  {pkg.features.length > 6 && <li className="pricing-more">+ {pkg.features.length - 6} fitur lainnya</li>}
-                </ul>
-                <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-primary pricing-cta">
-                  Konsultasi Paket
-                </a>
-              </AnimatedSection>
-            ))}
-          </div>
+          {/* Preview Kategori Akad */}
+          {activePkgs.filter((p: any) => p.type?.toLowerCase() === "akad").slice(0, 2).length > 0 && (
+            <div style={{ marginBottom: "64px" }}>
+              <h3 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "1.75rem", marginBottom: "32px", textAlign: "center" }}>Paket Akad</h3>
+              <div className="pricing-grid">
+                {activePkgs.filter((p: any) => p.type?.toLowerCase() === "akad").slice(0, 2).map((pkg: any, i: number) => {
+                  const features = Array.isArray(pkg.sections) ? (typeof pkg.sections[0] === 'string' ? pkg.sections : (pkg.sections[0]?.features || [])) : [];
+                  return (
+                    <AnimatedSection key={pkg.id} className={`pricing-card ${pkg.featured ? "featured" : ""}`} delay={i * 0.15}>
+                      {pkg.featured && <div className="pricing-badge">Terpopuler</div>}
+                      <h3 className="pricing-name">{pkg.name}</h3>
+                      <div className="pricing-price">
+                        <span className="pricing-amount">{pkg.price}</span>
+                      </div>
+                      <ul className="pricing-features">
+                        {features.slice(0, 5).map((f: string, fi: number) => (
+                          <li key={fi}>✓ {f}</li>
+                        ))}
+                        {features.length > 5 && <li className="pricing-more">+ {features.length - 5} fitur lainnya</li>}
+                      </ul>
+                      <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-primary pricing-cta">
+                        Konsultasi Paket
+                      </a>
+                    </AnimatedSection>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Preview Kategori Lengkap */}
+          {activePkgs.filter((p: any) => p.type?.toLowerCase() === "lengkap").slice(0, 2).length > 0 && (
+            <div style={{ marginBottom: "40px" }}>
+              <h3 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "1.75rem", marginBottom: "32px", textAlign: "center" }}>Paket Lengkap</h3>
+              <div className="pricing-grid">
+                {activePkgs.filter((p: any) => p.type?.toLowerCase() === "lengkap").slice(0, 2).map((pkg: any, i: number) => {
+                  const features = Array.isArray(pkg.sections) ? (typeof pkg.sections[0] === 'string' ? pkg.sections : (pkg.sections[0]?.features || [])) : [];
+                  return (
+                    <AnimatedSection key={pkg.id} className={`pricing-card ${pkg.featured ? "featured" : ""}`} delay={i * 0.15}>
+                      {pkg.featured && <div className="pricing-badge">Terpopuler</div>}
+                      <h3 className="pricing-name">{pkg.name}</h3>
+                      <div className="pricing-price">
+                        <span className="pricing-amount">{pkg.price}</span>
+                      </div>
+                      <ul className="pricing-features">
+                        {features.slice(0, 5).map((f: string, fi: number) => (
+                          <li key={fi}>✓ {f}</li>
+                        ))}
+                        {features.length > 5 && <li className="pricing-more">+ {features.length - 5} fitur lainnya</li>}
+                      </ul>
+                      <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-primary pricing-cta">
+                        Konsultasi Paket
+                      </a>
+                    </AnimatedSection>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           <div style={{ textAlign: "center", marginTop: "40px" }}>
             <Link href="/harga" className="btn-outline">
