@@ -269,15 +269,55 @@ export default function HomePage() {
       </section>
 
 
+      {/* ═══════ PORTFOLIO PREVIEW ═══════ */}
+      <section className="section" id="portfolio">
+        <div className="container">
+          <AnimatedSection className="section-header">
+            <span className="section-tag">DOKUMENTASI</span>
+            <h2 className="section-title">
+              Momen yang <span>Terabadikan</span>
+            </h2>
+            <p className="section-desc center">
+              Setiap pernikahan adalah cerita unik. Berikut beberapa momen indah yang telah kami abadikan.
+            </p>
+          </AnimatedSection>
+
+          <div className="portfolio-preview-grid">
+            {(portfolioItems.length > 0 ? portfolioItems : [
+              { id: 1, title: "Andi & Sari", category: "Resepsi", imageUrl: "/images/porto-1.jpg", location: "Majalengka" },
+              { id: 2, title: "Rian & Dewi", category: "Outdoor", imageUrl: "/images/porto-2.jpg", location: "Cirebon" },
+              { id: 3, title: "Yoga & Putri", category: "Adat", imageUrl: "/images/porto-3.jpg", location: "Indramayu" },
+              { id: 4, title: "Dimas & Rina", category: "Resepsi", imageUrl: "/images/porto-4.jpg", location: "Majalengka" },
+            ]).slice(0, 4).map((item: any, i: number) => (
+              <AnimatedSection key={item.id} className="portfolio-card" delay={i * 0.1}>
+                <div className="portfolio-card-img">
+                  <img src={item.imageUrl || item.image_url || "/images/porto-1.jpg"} alt={item.title} loading="lazy" decoding="async" />
+                  <div className="portfolio-card-overlay">
+                    <span className="portfolio-card-category">{item.category}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.location}</p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <AnimatedSection className="section-cta">
+            <Link href="/dokumentasi" className="btn-outline">
+              Lihat Semua Dokumentasi →
+            </Link>
+          </AnimatedSection>
+        </div>
+      </section>
       {/* ═══════ CATEGORY PREVIEW ═══════ */}
-      <section className="section" id="paket" style={{ backgroundColor: "var(--background)" }}>
+      <section className="section section-alt" id="paket">
         <div className="container">
           <AnimatedSection className="section-header" direction="up">
             <span className="section-tag">PAKET PERNIKAHAN</span>
             <h2 className="section-title">
               Pilihan <span className="gold-text">Kategori</span>
             </h2>
-            <p className="section-desc">
+            <p className="section-desc" style={{ margin: "0 auto", textAlign: "center" }}>
               Kami membagi layanan kami ke dalam dua kategori utama untuk mempermudah Anda menyesuaikan dengan skala acara.
             </p>
           </AnimatedSection>
@@ -327,46 +367,6 @@ export default function HomePage() {
               </AnimatedSection>
             )}
           </div>
-        </div>
-      </section>
-      {/* ═══════ PORTFOLIO PREVIEW ═══════ */}
-      <section className="section" id="portfolio">
-        <div className="container">
-          <AnimatedSection className="section-header">
-            <span className="section-tag">DOKUMENTASI</span>
-            <h2 className="section-title">
-              Momen yang <span>Terabadikan</span>
-            </h2>
-            <p className="section-desc center">
-              Setiap pernikahan adalah cerita unik. Berikut beberapa momen indah yang telah kami abadikan.
-            </p>
-          </AnimatedSection>
-
-          <div className="portfolio-preview-grid">
-            {(portfolioItems.length > 0 ? portfolioItems : [
-              { id: 1, title: "Andi & Sari", category: "Resepsi", imageUrl: "/images/porto-1.jpg", location: "Majalengka" },
-              { id: 2, title: "Rian & Dewi", category: "Outdoor", imageUrl: "/images/porto-2.jpg", location: "Cirebon" },
-              { id: 3, title: "Yoga & Putri", category: "Adat", imageUrl: "/images/porto-3.jpg", location: "Indramayu" },
-              { id: 4, title: "Dimas & Rina", category: "Resepsi", imageUrl: "/images/porto-4.jpg", location: "Majalengka" },
-            ]).slice(0, 4).map((item: any, i: number) => (
-              <AnimatedSection key={item.id} className="portfolio-card" delay={i * 0.1}>
-                <div className="portfolio-card-img">
-                  <img src={item.imageUrl || item.image_url || "/images/porto-1.jpg"} alt={item.title} loading="lazy" decoding="async" />
-                  <div className="portfolio-card-overlay">
-                    <span className="portfolio-card-category">{item.category}</span>
-                    <h3>{item.title}</h3>
-                    <p>{item.location}</p>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-
-          <AnimatedSection className="section-cta">
-            <Link href="/dokumentasi" className="btn-outline">
-              Lihat Semua Dokumentasi →
-            </Link>
-          </AnimatedSection>
         </div>
       </section>
 
