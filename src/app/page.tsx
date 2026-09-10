@@ -268,6 +268,48 @@ export default function HomePage() {
         </AnimatedSection>
       </section>
 
+
+      {/* ═══════ PRICING PREVIEW ═══════ */}
+      <section className="section" id="paket" style={{ backgroundColor: "var(--background)" }}>
+        <div className="container">
+          <AnimatedSection className="section-header" direction="up">
+            <span className="section-tag">PAKET HARGA</span>
+            <h2 className="section-title">
+              Pilihan <span className="gold-text">Terbaik</span>
+            </h2>
+            <p className="section-desc">
+              Sesuaikan paket pernikahan dengan kebutuhan dan anggaran Anda.
+            </p>
+          </AnimatedSection>
+
+          <div className="pricing-grid">
+            {categoryCards.slice(0, 3).map((pkg: any, i: number) => (
+              <AnimatedSection key={pkg.id} className={`pricing-card ${pkg.featured ? "featured" : ""}`} delay={i * 0.15}>
+                {pkg.featured && <div className="pricing-badge">Terpopuler</div>}
+                <h3 className="pricing-name">{pkg.name}</h3>
+                <div className="pricing-price">
+                  <span className="pricing-amount">{pkg.price}</span>
+                </div>
+                <ul className="pricing-features">
+                  {pkg.features.slice(0, 6).map((f: string, fi: number) => (
+                    <li key={fi}>✓ {f}</li>
+                  ))}
+                  {pkg.features.length > 6 && <li className="pricing-more">+ {pkg.features.length - 6} fitur lainnya</li>}
+                </ul>
+                <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-primary pricing-cta">
+                  Konsultasi Paket
+                </a>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <div style={{ textAlign: "center", marginTop: "40px" }}>
+            <Link href="/harga" className="btn-outline">
+              Lihat Semua Paket Harga
+            </Link>
+          </div>
+        </div>
+      </section>
       {/* ═══════ PORTFOLIO PREVIEW ═══════ */}
       <section className="section" id="portfolio">
         <div className="container">
