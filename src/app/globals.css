@@ -206,7 +206,7 @@ nav.scrolled {
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background: var(--gold); }
 
-.mobile-overlay {
+.mobile-overlay { touch-action: none;
   position: fixed; inset: 0; background: var(--background); z-index: 1500;
   display: flex; flex-direction: column; justify-content: center; align-items: center;
 }

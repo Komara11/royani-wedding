@@ -22,8 +22,17 @@ export function Navbar() {
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = hamburgerActive ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (hamburgerActive) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+    return () => { 
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
   }, [hamburgerActive]);
 
   const getActiveClass = (path: string) => {
