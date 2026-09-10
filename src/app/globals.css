@@ -319,6 +319,23 @@ nav.scrolled {
 .lightbox-info h3 { font-family: var(--font-playfair); font-size: 1.5rem; color: var(--gold); }
 .lightbox-info p { color: var(--text-secondary); }
 
+
+/* ==========================================================================
+   11. CATEGORY PREVIEW (HOME)
+   ========================================================================== */
+.category-preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 48px; }
+.category-preview-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 4px; padding: 56px 40px; text-align: center; transition: var(--transition-smooth); position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
+.category-preview-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--gold); transform: scaleX(0); transition: var(--transition-smooth); transform-origin: left; }
+.category-preview-card:hover::before { transform: scaleX(1); }
+.category-preview-card:hover { transform: translateY(-5px); box-shadow: 0 10px 40px rgba(0,0,0,0.3); border-color: var(--border); }
+.category-preview-card.featured { border-color: var(--gold); background: linear-gradient(to bottom, var(--bg-elevated), var(--background)); box-shadow: 0 0 40px rgba(201, 169, 110, 0.05); }
+.category-preview-card.featured::before { transform: scaleX(1); background: var(--gold-light); }
+.cp-icon { font-size: 3rem; color: var(--gold); font-family: var(--font-playfair); margin-bottom: 24px; font-style: italic; }
+.cp-title { font-family: var(--font-playfair); font-size: 2.25rem; color: var(--text-primary); margin-bottom: 16px; }
+.cp-desc { font-size: 1rem; color: var(--text-secondary); margin-bottom: 40px; line-height: 1.8; max-width: 400px; }
+.cp-price { margin-bottom: 40px; font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 2px; }
+.cp-price span { display: block; font-family: var(--font-playfair); font-size: 2.5rem; color: var(--gold); margin-top: 12px; font-weight: 600; text-transform: none; letter-spacing: 0; }
+
 /* ==========================================================================
    10. PRICING
    ========================================================================== */
@@ -443,7 +460,7 @@ nav.scrolled {
   .nav-links-desktop, .hero-actions .btn-outline { display: none; }
   .hamburger { display: flex; }
   .hero-title, .page-hero-title { font-size: clamp(2.5rem, 8vw, 3.5rem); }
-  .about-grid, .contact-grid, .portfolio-preview-grid { grid-template-columns: 1fr; }
+  .about-grid, .contact-grid, .portfolio-preview-grid, .category-preview-grid { grid-template-columns: 1fr; }
   .about-image-wrapper { max-width: 500px; margin: 0 auto; }
   .about-quote-card { right: 0; bottom: -20px; width: 80%; padding: 20px; font-size: 1rem; }
   .contact-form { padding: 32px 24px; }

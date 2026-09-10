@@ -269,83 +269,63 @@ export default function HomePage() {
       </section>
 
 
-      {/* ═══════ PRICING PREVIEW ═══════ */}
+      {/* ═══════ CATEGORY PREVIEW ═══════ */}
       <section className="section" id="paket" style={{ backgroundColor: "var(--background)" }}>
         <div className="container">
           <AnimatedSection className="section-header" direction="up">
-            <span className="section-tag">PAKET HARGA</span>
+            <span className="section-tag">PAKET PERNIKAHAN</span>
             <h2 className="section-title">
-              Pilihan <span className="gold-text">Terbaik</span>
+              Pilihan <span className="gold-text">Kategori</span>
             </h2>
             <p className="section-desc">
-              Sesuaikan paket pernikahan dengan kebutuhan dan anggaran Anda.
+              Kami membagi layanan kami ke dalam dua kategori utama untuk mempermudah Anda menyesuaikan dengan skala acara.
             </p>
           </AnimatedSection>
 
-          {/* Preview Kategori Akad */}
-          {activePkgs.filter((p: any) => p.type?.toLowerCase() === "akad").slice(0, 2).length > 0 && (
-            <div style={{ marginBottom: "64px" }}>
-              <h3 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "1.75rem", marginBottom: "32px", textAlign: "center" }}>Paket Akad</h3>
-              <div className="pricing-grid">
-                {activePkgs.filter((p: any) => p.type?.toLowerCase() === "akad").slice(0, 2).map((pkg: any, i: number) => {
-                  const features = Array.isArray(pkg.sections) ? (typeof pkg.sections[0] === 'string' ? pkg.sections : (pkg.sections[0]?.features || [])) : [];
-                  return (
-                    <AnimatedSection key={pkg.id} className={`pricing-card ${pkg.featured ? "featured" : ""}`} delay={i * 0.15}>
-                      {pkg.featured && <div className="pricing-badge">Terpopuler</div>}
-                      <h3 className="pricing-name">{pkg.name}</h3>
-                      <div className="pricing-price">
-                        <span className="pricing-amount">{pkg.price}</span>
-                      </div>
-                      <ul className="pricing-features">
-                        {features.slice(0, 5).map((f: string, fi: number) => (
-                          <li key={fi}>✓ {f}</li>
-                        ))}
-                        {features.length > 5 && <li className="pricing-more">+ {features.length - 5} fitur lainnya</li>}
-                      </ul>
-                      <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-primary pricing-cta">
-                        Konsultasi Paket
-                      </a>
-                    </AnimatedSection>
-                  );
-                })}
-              </div>
-            </div>
-          )}
+          <div className="category-preview-grid">
+            {/* Kartu Akad */}
+            {activePkgs.some((p: any) => p.type?.toLowerCase() === "akad") && (
+              <AnimatedSection className="category-preview-card" delay={0.1}>
+                <div className="cp-icon">I</div>
+                <h3 className="cp-title">Paket Akad</h3>
+                <p className="cp-desc">
+                  Solusi praktis dan elegan untuk momen suci pengesahan cinta Anda. Berfokus pada tata rias anggun, busana pengantin, dan dokumentasi esensial untuk acara yang khidmat.
+                </p>
+                <div className="cp-price">
+                  Mulai dari
+                  <span>
+                    {activePkgs.filter((p: any) => p.type?.toLowerCase() === "akad").sort((a: any, b: any) => {
+                      const pA = parseInt((a.price || "").replace(/[^0-9]/g, '')) || 0;
+                      const pB = parseInt((b.price || "").replace(/[^0-9]/g, '')) || 0;
+                      return pA - pB;
+                    })[0]?.price || "Hubungi Kami"}
+                  </span>
+                </div>
+                <Link href="/harga" className="btn-outline">Lihat Detail Akad</Link>
+              </AnimatedSection>
+            )}
 
-          {/* Preview Kategori Lengkap */}
-          {activePkgs.filter((p: any) => p.type?.toLowerCase() === "lengkap").slice(0, 2).length > 0 && (
-            <div style={{ marginBottom: "40px" }}>
-              <h3 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "1.75rem", marginBottom: "32px", textAlign: "center" }}>Paket Lengkap</h3>
-              <div className="pricing-grid">
-                {activePkgs.filter((p: any) => p.type?.toLowerCase() === "lengkap").slice(0, 2).map((pkg: any, i: number) => {
-                  const features = Array.isArray(pkg.sections) ? (typeof pkg.sections[0] === 'string' ? pkg.sections : (pkg.sections[0]?.features || [])) : [];
-                  return (
-                    <AnimatedSection key={pkg.id} className={`pricing-card ${pkg.featured ? "featured" : ""}`} delay={i * 0.15}>
-                      {pkg.featured && <div className="pricing-badge">Terpopuler</div>}
-                      <h3 className="pricing-name">{pkg.name}</h3>
-                      <div className="pricing-price">
-                        <span className="pricing-amount">{pkg.price}</span>
-                      </div>
-                      <ul className="pricing-features">
-                        {features.slice(0, 5).map((f: string, fi: number) => (
-                          <li key={fi}>✓ {f}</li>
-                        ))}
-                        {features.length > 5 && <li className="pricing-more">+ {features.length - 5} fitur lainnya</li>}
-                      </ul>
-                      <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-primary pricing-cta">
-                        Konsultasi Paket
-                      </a>
-                    </AnimatedSection>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          <div style={{ textAlign: "center", marginTop: "40px" }}>
-            <Link href="/harga" className="btn-outline">
-              Lihat Semua Paket Harga
-            </Link>
+            {/* Kartu Lengkap */}
+            {activePkgs.some((p: any) => p.type?.toLowerCase() === "lengkap") && (
+              <AnimatedSection className="category-preview-card featured" delay={0.2}>
+                <div className="cp-icon">II</div>
+                <h3 className="cp-title">Paket Lengkap</h3>
+                <p className="cp-desc">
+                  Layanan komprehensif mulai dari akad hingga resepsi megah. Mencakup dekorasi pelaminan, alat prasmanan, hingga tim Wedding Organizer profesional.
+                </p>
+                <div className="cp-price">
+                  Mulai dari
+                  <span>
+                    {activePkgs.filter((p: any) => p.type?.toLowerCase() === "lengkap").sort((a: any, b: any) => {
+                      const pA = parseInt((a.price || "").replace(/[^0-9]/g, '')) || 0;
+                      const pB = parseInt((b.price || "").replace(/[^0-9]/g, '')) || 0;
+                      return pA - pB;
+                    })[0]?.price || "Hubungi Kami"}
+                  </span>
+                </div>
+                <Link href="/harga" className="btn-primary">Lihat Detail Lengkap</Link>
+              </AnimatedSection>
+            )}
           </div>
         </div>
       </section>
