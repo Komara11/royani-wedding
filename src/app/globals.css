@@ -206,11 +206,12 @@ nav.scrolled {
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background: var(--gold); }
 
-.mobile-overlay { touch-action: none;
+.mobile-overlay { 
   position: fixed; inset: 0; background: var(--background); z-index: 1500;
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  display: flex; flex-direction: column; align-items: center; 
+  padding-top: 100px; padding-bottom: 80px; overflow-y: auto;
 }
-.mobile-nav-links { display: flex; flex-direction: column; gap: 32px; text-align: center; }
+.mobile-nav-links { display: flex; flex-direction: column; gap: 24px; text-align: center; margin: auto 0; }
 .mobile-nav-links a { font-size: 1.5rem; font-family: var(--font-playfair); color: var(--text-primary); }
 .mobile-nav-links a.active { color: var(--gold); font-style: italic; }
 .mobile-nav-footer { position: absolute; bottom: 40px; text-align: center; color: var(--text-muted); font-size: 0.875rem; }

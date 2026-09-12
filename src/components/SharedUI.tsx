@@ -52,8 +52,9 @@ export function Navbar() {
   ];
 
   return (
-    <nav className={`${navScrolled ? "scrolled" : ""} ${hamburgerActive ? "menu-open" : ""}`.trim()}>
-      <div className="nav-container">
+    <>
+      <nav className={`${navScrolled ? "scrolled" : ""} ${hamburgerActive ? "menu-open" : ""}`.trim()} style={{ zIndex: hamburgerActive ? 2000 : 1000 }}>
+        <div className="nav-container">
         <Link href="/" className="nav-logo" onClick={() => setHamburgerActive(false)}>
           <img src="/logo.png" alt="Royani Wedding" loading="eager" decoding="async" />
         </Link>
@@ -81,6 +82,7 @@ export function Navbar() {
           <span />
         </button>
       </div>
+      </nav>
 
       {/* Mobile Fullscreen Overlay */}
       <AnimatePresence>
@@ -125,7 +127,7 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 }
 
