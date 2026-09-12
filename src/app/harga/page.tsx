@@ -39,14 +39,14 @@ export default function HargaPage() {
   const lengkapPackages = packages.filter((p) => p.type?.toLowerCase() === "lengkap").sort((a, b) => (a.sort_order || a.sortOrder || 0) - (b.sort_order || b.sortOrder || 0));
 
   return (
-    <main className="page-wrapper" style={{ paddingTop: "120px", paddingBottom: "120px" }}>
+    <main className="page-wrapper" >
       <div className="container">
         <AnimatedSection className="section-header" direction="up">
           <span className="section-tag">PILIHAN PAKET</span>
           <h1 className="section-title">
             Paket <span className="gold-text">Harga</span>
           </h1>
-          <p className="section-desc" style={{ maxWidth: "600px", margin: "0 auto 40px" }}>
+          <p className="section-desc" style={{ maxWidth: "600px", margin: "0 auto 40px", textAlign: "center" }}>
             Kami menyediakan berbagai pilihan paket yang dapat disesuaikan dengan kebutuhan dan skala acara pernikahan Anda.
           </p>
         </AnimatedSection>

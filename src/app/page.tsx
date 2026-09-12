@@ -366,7 +366,7 @@ ${formData.message || '-'}
 
           {/* TAB CONTENT */}
           <div className="swipe-indicator">← Geser untuk melihat paket →</div>
-          <div className="pricing-grid">
+          <div className="pricing-preview-grid">
             {activePkgs
               .filter((p: any) => p.type?.toLowerCase() === activePricingTab)
               .slice(0, 3) // Tampilkan maksimal 3 per tab agar tidak terlalu panjang
