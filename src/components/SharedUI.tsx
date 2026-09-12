@@ -52,7 +52,7 @@ export function Navbar() {
   ];
 
   return (
-    <nav className={navScrolled ? "scrolled" : ""}>
+    <nav className={`${navScrolled ? "scrolled" : ""} ${hamburgerActive ? "menu-open" : ""}`.trim()}>
       <div className="nav-container">
         <Link href="/" className="nav-logo" onClick={() => setHamburgerActive(false)}>
           <img src="/logo.png" alt="Royani Wedding" loading="eager" decoding="async" />

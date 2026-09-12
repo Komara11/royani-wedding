@@ -458,7 +458,7 @@ nav.scrolled {
 }
 
 @media (max-width: 768px) {
-  .nav-links-desktop, .hero-actions .btn-outline { display: none; }
+  .nav-links-desktop { display: none; }
   .hamburger { display: flex; }
   .hero-title, .page-hero-title { font-size: clamp(2.5rem, 8vw, 3.5rem); }
   .about-grid, .contact-grid, .portfolio-preview-grid, .category-preview-grid { grid-template-columns: 1fr; }
@@ -476,3 +476,5 @@ nav.scrolled {
 @media (min-width: 769px) {
   .swipe-indicator { display: none !important; }
 }
+
+nav.menu-open { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: transparent !important; border-bottom: none !important; }
