@@ -30,6 +30,7 @@ type FAQ = { id: string; question: string; answer: string; sortOrder: number; is
    ══════════════════════════════════════ */
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
+  const [activePricingTab, setActivePricingTab] = useState<'akad'|'lengkap'>('akad');
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   // Dynamic data states with fallbacks
@@ -309,63 +310,81 @@ export default function HomePage() {
           </AnimatedSection>
         </div>
       </section>
-      {/* ═══════ CATEGORY PREVIEW ═══════ */}
+      {/* ═══════ TABBED PRICING PREVIEW ═══════ */}
       <section className="section section-alt" id="paket">
         <div className="container">
           <AnimatedSection className="section-header" direction="up">
-            <span className="section-tag">PAKET PERNIKAHAN</span>
+            <span className="section-tag">PAKET HARGA</span>
             <h2 className="section-title">
-              Pilihan <span className="gold-text">Kategori</span>
+              Pilihan <span className="gold-text">Terbaik</span>
             </h2>
             <p className="section-desc" style={{ margin: "0 auto", textAlign: "center" }}>
-              Kami membagi layanan kami ke dalam dua kategori utama untuk mempermudah Anda menyesuaikan dengan skala acara.
+              Silakan pilih kategori paket yang sesuai dengan kebutuhan dan skala acara pernikahan Anda.
             </p>
           </AnimatedSection>
 
-          <div className="category-preview-grid">
-            {/* Kartu Akad */}
-            {activePkgs.some((p: any) => p.type?.toLowerCase() === "akad") && (
-              <AnimatedSection className="category-preview-card" delay={0.1}>
-                <div className="cp-icon">I</div>
-                <h3 className="cp-title">Paket Akad</h3>
-                <p className="cp-desc">
-                  Solusi praktis dan elegan untuk momen suci pengesahan cinta Anda. Berfokus pada tata rias anggun, busana pengantin, dan dokumentasi esensial untuk acara yang khidmat.
-                </p>
-                <div className="cp-price">
-                  Mulai dari
-                  <span>
-                    {activePkgs.filter((p: any) => p.type?.toLowerCase() === "akad").sort((a: any, b: any) => {
-                      const pA = parseInt((a.price || "").replace(/[^0-9]/g, '')) || 0;
-                      const pB = parseInt((b.price || "").replace(/[^0-9]/g, '')) || 0;
-                      return pA - pB;
-                    })[0]?.price || "Hubungi Kami"}
-                  </span>
-                </div>
-                <Link href="/harga" className="btn-outline">Lihat Detail Akad</Link>
-              </AnimatedSection>
-            )}
+          {/* TAB BUTTONS */}
+          <AnimatedSection className="pricing-tabs" direction="up" delay={0.1}>
+            <div style={{ display: "flex", justifyContent: "center", gap: "16px", marginBottom: "48px" }}>
+              <button 
+                onClick={() => setActivePricingTab('akad')}
+                className={`btn-outline ${activePricingTab === 'akad' ? 'active-tab' : ''}`}
+                style={{ 
+                  backgroundColor: activePricingTab === 'akad' ? 'var(--gold)' : 'transparent',
+                  color: activePricingTab === 'akad' ? '#000' : 'var(--gold)',
+                  borderColor: 'var(--gold)',
+                  padding: '12px 32px'
+                }}
+              >
+                Paket Akad
+              </button>
+              <button 
+                onClick={() => setActivePricingTab('lengkap')}
+                className={`btn-outline ${activePricingTab === 'lengkap' ? 'active-tab' : ''}`}
+                style={{ 
+                  backgroundColor: activePricingTab === 'lengkap' ? 'var(--gold)' : 'transparent',
+                  color: activePricingTab === 'lengkap' ? '#000' : 'var(--gold)',
+                  borderColor: 'var(--gold)',
+                  padding: '12px 32px'
+                }}
+              >
+                Paket Lengkap
+              </button>
+            </div>
+          </AnimatedSection>
 
-            {/* Kartu Lengkap */}
-            {activePkgs.some((p: any) => p.type?.toLowerCase() === "lengkap") && (
-              <AnimatedSection className="category-preview-card featured" delay={0.2}>
-                <div className="cp-icon">II</div>
-                <h3 className="cp-title">Paket Lengkap</h3>
-                <p className="cp-desc">
-                  Layanan komprehensif mulai dari akad hingga resepsi megah. Mencakup dekorasi pelaminan, alat prasmanan, hingga tim Wedding Organizer profesional.
-                </p>
-                <div className="cp-price">
-                  Mulai dari
-                  <span>
-                    {activePkgs.filter((p: any) => p.type?.toLowerCase() === "lengkap").sort((a: any, b: any) => {
-                      const pA = parseInt((a.price || "").replace(/[^0-9]/g, '')) || 0;
-                      const pB = parseInt((b.price || "").replace(/[^0-9]/g, '')) || 0;
-                      return pA - pB;
-                    })[0]?.price || "Hubungi Kami"}
-                  </span>
-                </div>
-                <Link href="/harga" className="btn-primary">Lihat Detail Lengkap</Link>
-              </AnimatedSection>
-            )}
+          {/* TAB CONTENT */}
+          <div className="pricing-grid">
+            {activePkgs
+              .filter((p: any) => p.type?.toLowerCase() === activePricingTab)
+              .slice(0, 3) // Tampilkan maksimal 3 per tab agar tidak terlalu panjang
+              .map((pkg: any, i: number) => {
+                const features = Array.isArray(pkg.sections) ? (typeof pkg.sections[0] === 'string' ? pkg.sections : (pkg.sections[0]?.features || [])) : [];
+                return (
+                  <AnimatedSection key={pkg.id} className={`pricing-card ${pkg.featured ? "featured" : ""}`} delay={i * 0.15}>
+                    {pkg.featured && <div className="pricing-badge">Terpopuler</div>}
+                    <h3 className="pricing-name">{pkg.name}</h3>
+                    <div className="pricing-price">
+                      <span className="pricing-amount">{pkg.price}</span>
+                    </div>
+                    <ul className="pricing-features">
+                      {features.slice(0, 5).map((f: string, fi: number) => (
+                        <li key={fi}>✓ {f}</li>
+                      ))}
+                      {features.length > 5 && <li className="pricing-more">+ {features.length - 5} fitur lainnya</li>}
+                    </ul>
+                    <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-primary pricing-cta">
+                      Konsultasi Paket
+                    </a>
+                  </AnimatedSection>
+                );
+              })}
+          </div>
+
+          <div style={{ textAlign: "center", marginTop: "48px" }}>
+            <Link href="/harga" className="btn-outline">
+              Lihat Semua Detail Paket Harga
+            </Link>
           </div>
         </div>
       </section>
