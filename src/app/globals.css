@@ -402,10 +402,11 @@ nav.scrolled {
 .contact-form h3 { font-family: var(--font-playfair); font-size: 2rem; margin-bottom: 12px; }
 .form-desc { color: var(--text-secondary); margin-bottom: 32px; }
 .form-group { margin-bottom: 24px; }
-.form-group input, .form-group textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); padding: 12px 0; color: var(--text-primary); font-family: var(--font-inter); font-size: 1rem; transition: var(--transition-smooth); }
-.form-group input:focus, .form-group textarea:focus { outline: none; border-bottom-color: var(--gold); }
-.form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-muted); }
+.form-group input, .form-group textarea, .form-group select { width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); padding: 12px 0; color: var(--text-primary); font-family: var(--font-inter); font-size: 1rem; transition: var(--transition-smooth); }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-bottom-color: var(--gold); }
+.form-group input::placeholder, .form-group textarea::placeholder, .form-group select::placeholder { color: var(--text-muted); }
 .contact-form button { width: 100%; }
+.form-group select option { background-color: var(--bg-card); color: var(--text-primary); }
 
 /* ==========================================================================
    14. FOOTER & FLOATING WA & PRELOADER

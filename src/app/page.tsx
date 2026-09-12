@@ -137,11 +137,22 @@ export default function HomePage() {
   const [formData, setFormData] = useState({ name: "", date: "", paket: "", message: "" });
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `Halo Royani Wedding, saya ingin berkonsultasi:\n\n` +
-      `Nama: ${formData.name}\n` +
-      `Tanggal Acara: ${formData.date}\n` +
-      `Paket Diminati: ${formData.paket}\n` +
-      `Pesan: ${formData.message}`;
+    const text = `Halo *Royani Wedding*, saya ingin berkonsultasi mengenai rencana pernikahan saya.
+
+` +
+      `Berikut adalah data saya:
+` +
+      `👤 *Nama*: ${formData.name}
+` +
+      `📅 *Tanggal Acara*: ${formData.date || '-'}
+` +
+      `📦 *Paket Diminati*: ${formData.paket || '-'}
+` +
+      `💬 *Pesan/Pertanyaan*:
+${formData.message || '-'}
+
+` +
+      `Terima kasih.`;
     window.open(`https://wa.me/${parseWa(contactContent.whatsapp_number)}?text=${encodeURIComponent(text)}`, "_blank");
   };
 
@@ -473,7 +484,20 @@ export default function HomePage() {
                   <input type="text" placeholder="Tanggal Acara (contoh: 15 Desember 2025)" value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value })} />
                 </div>
                 <div className="form-group">
-                  <input type="text" placeholder="Paket yang Diminati (contoh: Paket Lengkap)" value={formData.paket} onChange={(e) => setFormData({ ...formData, paket: e.target.value })} />
+                  <select 
+                  value={formData.paket} 
+                  onChange={(e) => setFormData({ ...formData, paket: e.target.value })}
+                  style={{ color: formData.paket === "" ? "var(--text-muted)" : "var(--text-primary)" }}
+                  required
+                >
+                  <option value="" disabled>Pilih Paket yang Diminati</option>
+                  {activePkgs.map((pkg: any) => (
+                    <option key={pkg.id} value={pkg.name}>
+                      {pkg.name} ({pkg.type?.toLowerCase() === 'akad' ? 'Akad' : 'Lengkap'}) - {pkg.price}
+                    </option>
+                  ))}
+                  <option value="Lainnya / Belum Menentukan">Lainnya / Belum Menentukan</option>
+                </select>
                 </div>
                 <div className="form-group">
                   <textarea placeholder="Pesan tambahan..." rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} />
