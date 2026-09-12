@@ -55,9 +55,9 @@ export function Navbar() {
     <>
       <nav className={`${navScrolled ? "scrolled" : ""} ${hamburgerActive ? "menu-open" : ""}`.trim()} style={{ zIndex: hamburgerActive ? 2000 : 1000 }}>
         <div className="nav-container">
-        <Link href="/" className="nav-logo" onClick={() => setHamburgerActive(false)}>
+        <a href="/" className="nav-logo" onClick={() => setHamburgerActive(false)}>
           <img src="/logo.png" alt="Royani Wedding" loading="eager" decoding="async" />
-        </Link>
+        </a>
 
         {/* Desktop Links */}
         <ul className="nav-links-desktop">
@@ -243,6 +243,10 @@ export function Footer() {
 export function Preloader() {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    if (typeof window !== "undefined" && 'scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+    }
     const timer = setTimeout(() => setIsLoading(false), 1200);
     return () => clearTimeout(timer);
   }, []);
