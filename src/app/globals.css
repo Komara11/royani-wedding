@@ -468,8 +468,8 @@ nav.scrolled {
   .contact-form { padding: 32px 24px; }
   .footer-grid { grid-template-columns: 1fr; text-align: center; }
   .footer-bottom { flex-direction: column; gap: 16px; align-items: center; }
-  .services-grid, .pricing-preview-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; padding-bottom: 24px; padding-top: 16px; -ms-overflow-style: none; scrollbar-width: none; }
-  .services-grid::-webkit-scrollbar, .pricing-preview-grid::-webkit-scrollbar { display: none; }
+  .services-grid, .pricing-preview-grid, .pricing-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; padding-bottom: 24px; padding-top: 16px; -ms-overflow-style: none; scrollbar-width: none; }
+  .services-grid::-webkit-scrollbar, .pricing-preview-grid::-webkit-scrollbar, .pricing-grid::-webkit-scrollbar { display: none; }
   .service-card, .pricing-card { width: 85vw; max-width: 300px; scroll-snap-align: center; flex-shrink: 0; }
   .swipe-indicator { display: block; text-align: center; font-size: 0.8rem; color: var(--gold); margin-bottom: 16px; opacity: 0.8; font-style: italic; }
 }

@@ -365,6 +365,7 @@ ${formData.message || '-'}
           </AnimatedSection>
 
           {/* TAB CONTENT */}
+          <div className="swipe-indicator">← Geser untuk melihat paket →</div>
           <div className="pricing-grid">
             {activePkgs
               .filter((p: any) => p.type?.toLowerCase() === activePricingTab)
