@@ -339,11 +339,42 @@ ${formData.message || '-'}
             </p>
           </AnimatedSection>
 
+          {/* TOMBOL NAVIGASI PAKET (KAYA SEBELUMNYA) */}
+          <AnimatedSection className="pricing-tabs" direction="up" delay={0.1}>
+            <div style={{ display: "flex", justifyContent: "center", gap: "16px", marginBottom: "48px" }}>
+              <button 
+                onClick={() => { document.getElementById('paket-akad')?.scrollIntoView({ behavior: 'smooth' }) }}
+                className="btn-outline active-tab"
+                style={{ 
+                  backgroundColor: 'var(--gold)',
+                  color: '#000',
+                  borderColor: 'var(--gold)',
+                  padding: '12px 32px'
+                }}
+              >
+                Paket Akad
+              </button>
+              <button 
+                onClick={() => { document.getElementById('paket-lengkap')?.scrollIntoView({ behavior: 'smooth' }) }}
+                className="btn-outline"
+                style={{ 
+                  backgroundColor: 'transparent',
+                  color: 'var(--gold)',
+                  borderColor: 'var(--gold)',
+                  padding: '12px 32px'
+                }}
+              >
+                Paket Lengkap
+              </button>
+            </div>
+          </AnimatedSection>
+
           {/* KATEGORI: PAKET AKAD */}
           {activePkgs.filter((p: any) => p.type?.toLowerCase() === 'akad').length > 0 && (
-            <div style={{ marginBottom: "80px" }}>
+            <div id="paket-akad" style={{ marginBottom: "80px", scrollMarginTop: "100px" }}>
               <h2 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "2rem", marginBottom: "32px", textAlign: "center" }}>Paket Akad</h2>
-              <div className="pricing-grid">
+              <div className="swipe-indicator">← Geser untuk melihat paket →</div>
+              <div className="pricing-preview-grid">
                 {activePkgs
                   .filter((p: any) => p.type?.toLowerCase() === 'akad')
                   .sort((a: any, b: any) => (a.sort_order || a.sortOrder || 0) - (b.sort_order || b.sortOrder || 0))
@@ -357,10 +388,25 @@ ${formData.message || '-'}
                           <span className="pricing-amount">{pkg.price}</span>
                         </div>
                         <ul className="pricing-features">
-                          {features.map((f: string, fi: number) => (
-                            <li key={fi}>✓ {f}</li>
-                          ))}
-                        </ul>
+                      {features.map((f: string, fi: number) => {
+                        const isFree = f.toUpperCase().startsWith("FREE:");
+                        const isInclude = f.toUpperCase().startsWith("INCLUDE:");
+                        
+                        if (isFree || isInclude) {
+                          const prefix = isFree ? "FREE:" : "INCLUDE:";
+                          const items = f.substring(prefix.length).split(",").map(item => item.trim());
+                          const color = isFree ? "var(--gold)" : "var(--gold-light)";
+                          const icon = isFree ? "🎁" : "✨";
+                          return items.map((item, subIdx) => (
+                            <li key={`${fi}-${subIdx}`} style={{ color: color, fontWeight: 500 }}>
+                              {icon} {prefix} {item}
+                            </li>
+                          ));
+                        }
+                        
+                        return <li key={fi}>✓ {f}</li>;
+                      })}
+                    </ul>
                         <button onClick={() => handlePilihPaket(pkg.name)} className="btn-primary pricing-cta" style={{ border: "none", cursor: "pointer" }}>
                           Pilih Paket
                         </button>
@@ -373,9 +419,10 @@ ${formData.message || '-'}
 
           {/* KATEGORI: PAKET LENGKAP */}
           {activePkgs.filter((p: any) => p.type?.toLowerCase() === 'lengkap').length > 0 && (
-            <div>
+            <div id="paket-lengkap" style={{ scrollMarginTop: "100px" }}>
               <h2 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "2rem", marginBottom: "32px", textAlign: "center" }}>Paket Lengkap</h2>
-              <div className="pricing-grid">
+              <div className="swipe-indicator">← Geser untuk melihat paket →</div>
+              <div className="pricing-preview-grid">
                 {activePkgs
                   .filter((p: any) => p.type?.toLowerCase() === 'lengkap')
                   .sort((a: any, b: any) => (a.sort_order || a.sortOrder || 0) - (b.sort_order || b.sortOrder || 0))
@@ -389,10 +436,25 @@ ${formData.message || '-'}
                           <span className="pricing-amount">{pkg.price}</span>
                         </div>
                         <ul className="pricing-features">
-                          {features.map((f: string, fi: number) => (
-                            <li key={fi}>✓ {f}</li>
-                          ))}
-                        </ul>
+                      {features.map((f: string, fi: number) => {
+                        const isFree = f.toUpperCase().startsWith("FREE:");
+                        const isInclude = f.toUpperCase().startsWith("INCLUDE:");
+                        
+                        if (isFree || isInclude) {
+                          const prefix = isFree ? "FREE:" : "INCLUDE:";
+                          const items = f.substring(prefix.length).split(",").map(item => item.trim());
+                          const color = isFree ? "var(--gold)" : "var(--gold-light)";
+                          const icon = isFree ? "🎁" : "✨";
+                          return items.map((item, subIdx) => (
+                            <li key={`${fi}-${subIdx}`} style={{ color: color, fontWeight: 500 }}>
+                              {icon} {prefix} {item}
+                            </li>
+                          ));
+                        }
+                        
+                        return <li key={fi}>✓ {f}</li>;
+                      })}
+                    </ul>
                         <button onClick={() => handlePilihPaket(pkg.name)} className="btn-primary pricing-cta" style={{ border: "none", cursor: "pointer" }}>
                           Pilih Paket
                         </button>

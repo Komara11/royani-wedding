@@ -70,10 +70,25 @@ export default function HargaPage() {
                           <span className="pricing-amount">{pkg.price}</span>
                         </div>
                         <ul className="pricing-features">
-                          {features.map((f: string, fi: number) => (
-                            <li key={fi}>✓ {f}</li>
-                          ))}
-                        </ul>
+                      {features.map((f: string, fi: number) => {
+                        const isFree = f.toUpperCase().startsWith("FREE:");
+                        const isInclude = f.toUpperCase().startsWith("INCLUDE:");
+                        
+                        if (isFree || isInclude) {
+                          const prefix = isFree ? "FREE:" : "INCLUDE:";
+                          const items = f.substring(prefix.length).split(",").map(item => item.trim());
+                          const color = isFree ? "var(--gold)" : "var(--gold-light)";
+                          const icon = isFree ? "🎁" : "✨";
+                          return items.map((item, subIdx) => (
+                            <li key={`${fi}-${subIdx}`} style={{ color: color, fontWeight: 500 }}>
+                              {icon} {prefix} {item}
+                            </li>
+                          ));
+                        }
+                        
+                        return <li key={fi}>✓ {f}</li>;
+                      })}
+                    </ul>
                         <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-primary pricing-cta">
                           Pilih Paket
                         </a>
@@ -99,10 +114,25 @@ export default function HargaPage() {
                           <span className="pricing-amount">{pkg.price}</span>
                         </div>
                         <ul className="pricing-features">
-                          {features.map((f: string, fi: number) => (
-                            <li key={fi}>✓ {f}</li>
-                          ))}
-                        </ul>
+                      {features.map((f: string, fi: number) => {
+                        const isFree = f.toUpperCase().startsWith("FREE:");
+                        const isInclude = f.toUpperCase().startsWith("INCLUDE:");
+                        
+                        if (isFree || isInclude) {
+                          const prefix = isFree ? "FREE:" : "INCLUDE:";
+                          const items = f.substring(prefix.length).split(",").map(item => item.trim());
+                          const color = isFree ? "var(--gold)" : "var(--gold-light)";
+                          const icon = isFree ? "🎁" : "✨";
+                          return items.map((item, subIdx) => (
+                            <li key={`${fi}-${subIdx}`} style={{ color: color, fontWeight: 500 }}>
+                              {icon} {prefix} {item}
+                            </li>
+                          ));
+                        }
+                        
+                        return <li key={fi}>✓ {f}</li>;
+                      })}
+                    </ul>
                         <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-primary pricing-cta">
                           Pilih Paket
                         </a>
