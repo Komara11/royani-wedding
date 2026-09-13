@@ -30,7 +30,6 @@ type FAQ = { id: string; question: string; answer: string; sortOrder: number; is
    ══════════════════════════════════════ */
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
-  const [activePricingTab, setActivePricingTab] = useState<'akad'|'lengkap'>('akad');
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   // Dynamic data states with fallbacks
@@ -135,6 +134,12 @@ export default function HomePage() {
 
   // WhatsApp form
   const [formData, setFormData] = useState({ name: "", date: "", paket: "", message: "" });
+
+  const handlePilihPaket = (pkgName: string) => {
+    setFormData(prev => ({ ...prev, paket: pkgName }));
+    const el = document.getElementById("kontak");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const text = `Halo *Royani Wedding*, saya ingin berkonsultasi mengenai rencana pernikahan saya.
@@ -330,73 +335,34 @@ ${formData.message || '-'}
               Pilihan <span className="gold-text">Terbaik</span>
             </h2>
             <p className="section-desc" style={{ margin: "0 auto", textAlign: "center" }}>
-              Silakan pilih kategori paket yang sesuai dengan kebutuhan dan skala acara pernikahan Anda.
+              Kami menyediakan berbagai pilihan paket yang dapat disesuaikan dengan kebutuhan dan skala acara pernikahan Anda.
             </p>
           </AnimatedSection>
 
-          {/* TAB BUTTONS */}
-          <AnimatedSection className="pricing-tabs" direction="up" delay={0.1}>
-            <div style={{ display: "flex", justifyContent: "center", gap: "16px", marginBottom: "48px" }}>
-              <button 
-                onClick={() => setActivePricingTab('akad')}
-                className={`btn-outline ${activePricingTab === 'akad' ? 'active-tab' : ''}`}
-                style={{ 
-                  backgroundColor: activePricingTab === 'akad' ? 'var(--gold)' : 'transparent',
-                  color: activePricingTab === 'akad' ? '#000' : 'var(--gold)',
-                  borderColor: 'var(--gold)',
-                  padding: '12px 32px'
-                }}
-              >
-                Paket Akad
-              </button>
-              <button 
-                onClick={() => setActivePricingTab('lengkap')}
-                className={`btn-outline ${activePricingTab === 'lengkap' ? 'active-tab' : ''}`}
-                style={{ 
-                  backgroundColor: activePricingTab === 'lengkap' ? 'var(--gold)' : 'transparent',
-                  color: activePricingTab === 'lengkap' ? '#000' : 'var(--gold)',
-                  borderColor: 'var(--gold)',
-                  padding: '12px 32px'
-                }}
-              >
-                Paket Lengkap
-              </button>
-            </div>
-          </AnimatedSection>
-
-          {/* TAB CONTENT */}
-          <div className="swipe-indicator">← Geser untuk melihat paket →</div>
-          <div className="pricing-preview-grid">
+          {/* SEMUA PAKET (TIDAK DIPISAH TAB) */}
+          <div className="pricing-grid">
             {activePkgs
-              .filter((p: any) => p.type?.toLowerCase() === activePricingTab)
-              .slice(0, 3) // Tampilkan maksimal 3 per tab agar tidak terlalu panjang
+              .sort((a: any, b: any) => (a.sort_order || a.sortOrder || 0) - (b.sort_order || b.sortOrder || 0))
               .map((pkg: any, i: number) => {
                 const features = Array.isArray(pkg.sections) ? (typeof pkg.sections[0] === 'string' ? pkg.sections : (pkg.sections[0]?.features || [])) : [];
                 return (
-                  <AnimatedSection key={pkg.id} className={`pricing-card ${pkg.featured ? "featured" : ""}`} delay={i * 0.15}>
+                  <AnimatedSection key={pkg.id} className={`pricing-card ${pkg.featured ? "featured" : ""}`} delay={i * 0.1}>
                     {pkg.featured && <div className="pricing-badge">Terpopuler</div>}
                     <h3 className="pricing-name">{pkg.name}</h3>
                     <div className="pricing-price">
                       <span className="pricing-amount">{pkg.price}</span>
                     </div>
                     <ul className="pricing-features">
-                      {features.slice(0, 5).map((f: string, fi: number) => (
+                      {features.map((f: string, fi: number) => (
                         <li key={fi}>✓ {f}</li>
                       ))}
-                      {features.length > 5 && <li className="pricing-more">+ {features.length - 5} fitur lainnya</li>}
                     </ul>
-                    <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-primary pricing-cta">
-                      Konsultasi Paket
-                    </a>
+                    <button onClick={() => handlePilihPaket(pkg.name)} className="btn-primary pricing-cta" style={{ border: "none", cursor: "pointer" }}>
+                      Pilih Paket
+                    </button>
                   </AnimatedSection>
                 );
               })}
-          </div>
-
-          <div style={{ textAlign: "center", marginTop: "48px" }}>
-            <Link href="/harga" className="btn-outline">
-              Lihat Semua Detail Paket Harga
-            </Link>
           </div>
         </div>
       </section>
