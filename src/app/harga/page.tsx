@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { getPackages, getContact } from "@/app/actions";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { PricingCard } from "@/components/PricingCard";
 
 export default function HargaPage() {
   const [packages, setPackages] = useState<any[]>([]);
@@ -60,41 +61,14 @@ export default function HargaPage() {
               <div style={{ marginBottom: "80px" }}>
                 <h2 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "2rem", marginBottom: "32px", textAlign: "center" }}>Paket Akad</h2>
                 <div className="pricing-grid">
-                  {akadPackages.map((pkg, i) => {
-                    const features = Array.isArray(pkg.sections) ? (typeof pkg.sections[0] === 'string' ? pkg.sections : (pkg.sections[0]?.features || [])) : [];
-                    return (
-                      <AnimatedSection key={pkg.id} className={`pricing-card ${pkg.featured ? "featured" : ""}`} delay={i * 0.1}>
-                        {pkg.featured && <div className="pricing-badge">Terpopuler</div>}
-                        <h3 className="pricing-name">{pkg.name}</h3>
-                        <div className="pricing-price">
-                          <span className="pricing-amount">{pkg.price}</span>
-                        </div>
-                        <ul className="pricing-features">
-                      {features.map((f: string, fi: number) => {
-                        const isFree = f.toUpperCase().startsWith("FREE:");
-                        const isInclude = f.toUpperCase().startsWith("INCLUDE:");
-                        
-                        if (isFree || isInclude) {
-                          const prefix = isFree ? "FREE:" : "INCLUDE:";
-                          const items = f.substring(prefix.length).split(",").map(item => item.trim());
-                          const color = isFree ? "var(--gold)" : "var(--gold-light)";
-                          const icon = isFree ? "🎁" : "✨";
-                          return items.map((item, subIdx) => (
-                            <li key={`${fi}-${subIdx}`} style={{ color: color, fontWeight: 500 }}>
-                              {icon} {prefix} {item}
-                            </li>
-                          ));
-                        }
-                        
-                        return <li key={fi}>✓ {f}</li>;
-                      })}
-                    </ul>
-                        <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-primary pricing-cta">
-                          Pilih Paket
-                        </a>
-                      </AnimatedSection>
-                    );
-                  })}
+                  {akadPackages.map((pkg, i) => (
+                    <PricingCard 
+                      key={pkg.id} 
+                      pkg={pkg} 
+                      delay={i * 0.1} 
+                      onSelect={() => window.open(waLink, "_blank")} 
+                    />
+                  ))}
                 </div>
               </div>
             )}
@@ -104,41 +78,14 @@ export default function HargaPage() {
               <div>
                 <h2 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "2rem", marginBottom: "32px", textAlign: "center" }}>Paket Lengkap</h2>
                 <div className="pricing-grid">
-                  {lengkapPackages.map((pkg, i) => {
-                    const features = Array.isArray(pkg.sections) ? (typeof pkg.sections[0] === 'string' ? pkg.sections : (pkg.sections[0]?.features || [])) : [];
-                    return (
-                      <AnimatedSection key={pkg.id} className={`pricing-card ${pkg.featured ? "featured" : ""}`} delay={i * 0.1}>
-                        {pkg.featured && <div className="pricing-badge">Terpopuler</div>}
-                        <h3 className="pricing-name">{pkg.name}</h3>
-                        <div className="pricing-price">
-                          <span className="pricing-amount">{pkg.price}</span>
-                        </div>
-                        <ul className="pricing-features">
-                      {features.map((f: string, fi: number) => {
-                        const isFree = f.toUpperCase().startsWith("FREE:");
-                        const isInclude = f.toUpperCase().startsWith("INCLUDE:");
-                        
-                        if (isFree || isInclude) {
-                          const prefix = isFree ? "FREE:" : "INCLUDE:";
-                          const items = f.substring(prefix.length).split(",").map(item => item.trim());
-                          const color = isFree ? "var(--gold)" : "var(--gold-light)";
-                          const icon = isFree ? "🎁" : "✨";
-                          return items.map((item, subIdx) => (
-                            <li key={`${fi}-${subIdx}`} style={{ color: color, fontWeight: 500 }}>
-                              {icon} {prefix} {item}
-                            </li>
-                          ));
-                        }
-                        
-                        return <li key={fi}>✓ {f}</li>;
-                      })}
-                    </ul>
-                        <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn-primary pricing-cta">
-                          Pilih Paket
-                        </a>
-                      </AnimatedSection>
-                    );
-                  })}
+                  {lengkapPackages.map((pkg, i) => (
+                    <PricingCard 
+                      key={pkg.id} 
+                      pkg={pkg} 
+                      delay={i * 0.1} 
+                      onSelect={() => window.open(waLink, "_blank")} 
+                    />
+                  ))}
                 </div>
               </div>
             )}
