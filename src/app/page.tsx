@@ -134,6 +134,7 @@ export default function HomePage() {
 
   // WhatsApp form
   const [formData, setFormData] = useState({ name: "", date: "", paket: "", message: "" });
+  const [activePricingTab, setActivePricingTab] = useState<'akad'|'lengkap'>('akad');
 
   const handlePilihPaket = (pkgName: string) => {
     setFormData(prev => ({ ...prev, paket: pkgName }));
@@ -343,11 +344,11 @@ ${formData.message || '-'}
           <AnimatedSection className="pricing-tabs" direction="up" delay={0.1}>
             <div style={{ display: "flex", justifyContent: "center", gap: "16px", marginBottom: "48px" }}>
               <button 
-                onClick={() => { document.getElementById('paket-akad')?.scrollIntoView({ behavior: 'smooth' }) }}
-                className="btn-outline active-tab"
+                onClick={() => setActivePricingTab('akad')}
+                className={`btn-outline ${activePricingTab === 'akad' ? 'active-tab' : ''}`}
                 style={{ 
-                  backgroundColor: 'var(--gold)',
-                  color: '#000',
+                  backgroundColor: activePricingTab === 'akad' ? 'var(--gold)' : 'transparent',
+                  color: activePricingTab === 'akad' ? '#000' : 'var(--gold)',
                   borderColor: 'var(--gold)',
                   padding: '12px 32px'
                 }}
@@ -355,11 +356,11 @@ ${formData.message || '-'}
                 Paket Akad
               </button>
               <button 
-                onClick={() => { document.getElementById('paket-lengkap')?.scrollIntoView({ behavior: 'smooth' }) }}
-                className="btn-outline"
+                onClick={() => setActivePricingTab('lengkap')}
+                className={`btn-outline ${activePricingTab === 'lengkap' ? 'active-tab' : ''}`}
                 style={{ 
-                  backgroundColor: 'transparent',
-                  color: 'var(--gold)',
+                  backgroundColor: activePricingTab === 'lengkap' ? 'var(--gold)' : 'transparent',
+                  color: activePricingTab === 'lengkap' ? '#000' : 'var(--gold)',
                   borderColor: 'var(--gold)',
                   padding: '12px 32px'
                 }}
@@ -370,7 +371,7 @@ ${formData.message || '-'}
           </AnimatedSection>
 
           {/* KATEGORI: PAKET AKAD */}
-          {activePkgs.filter((p: any) => p.type?.toLowerCase() === 'akad').length > 0 && (
+          {activePricingTab === 'akad' && activePkgs.filter((p: any) => p.type?.toLowerCase() === 'akad').length > 0 && (
             <div id="paket-akad" style={{ marginBottom: "80px", scrollMarginTop: "100px" }}>
               <h2 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "2rem", marginBottom: "32px", textAlign: "center" }}>Paket Akad</h2>
               <div className="swipe-indicator">← Geser untuk melihat paket →</div>
@@ -418,7 +419,7 @@ ${formData.message || '-'}
           )}
 
           {/* KATEGORI: PAKET LENGKAP */}
-          {activePkgs.filter((p: any) => p.type?.toLowerCase() === 'lengkap').length > 0 && (
+          {activePricingTab === 'lengkap' && activePkgs.filter((p: any) => p.type?.toLowerCase() === 'lengkap').length > 0 && (
             <div id="paket-lengkap" style={{ scrollMarginTop: "100px" }}>
               <h2 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "2rem", marginBottom: "32px", textAlign: "center" }}>Paket Lengkap</h2>
               <div className="swipe-indicator">← Geser untuk melihat paket →</div>
