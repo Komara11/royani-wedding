@@ -12,13 +12,36 @@ import { motion, AnimatePresence } from "framer-motion";
 export function Navbar() {
   const [navScrolled, setNavScrolled] = useState(false);
   const [hamburgerActive, setHamburgerActive] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setNavScrolled(window.scrollY > 60);
+    const handleScroll = () => {
+      setNavScrolled(window.scrollY > 60);
+      
+      if (pathname === "/") {
+        const sections = ["kontak", "testimoni", "portfolio", "layanan", "tentang", "home"];
+        let current = "";
+        for (const section of sections) {
+          const el = document.getElementById(section);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= 200) {
+              current = section;
+              break;
+            }
+          }
+        }
+        setActiveSection(current);
+      }
+    };
+    
+    // Initial check
+    handleScroll();
+    
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -36,8 +59,15 @@ export function Navbar() {
   }, [hamburgerActive]);
 
   const getActiveClass = (path: string) => {
+    if (pathname === "/") {
+      if (path === "/" && (!activeSection || activeSection === "home")) return "active";
+      if (path.startsWith("/#") && activeSection && path.includes(activeSection)) return "active";
+      return "";
+    }
+    
+    // Non-homepage matching
     if (path === "/" && pathname === "/") return "active";
-    if (path !== "/" && pathname?.startsWith(path)) return "active";
+    if (path !== "/" && !path.startsWith("/#") && pathname?.startsWith(path)) return "active";
     return "";
   };
 
