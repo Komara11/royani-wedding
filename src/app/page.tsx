@@ -135,7 +135,16 @@ export default function HomePage() {
 
   // WhatsApp form
   const [formData, setFormData] = useState({ name: "", date: "", paket: "", message: "" });
-  const [activePricingTab, setActivePricingTab] = useState<'akad'|'lengkap'>('akad');
+  // Get unique categories and default to the first one (usually Akad)
+  const uniqueCategories = Array.from(new Set(activePkgs.map((p: any) => p.type?.trim() || 'Lainnya')));
+  const defaultTab = uniqueCategories.length > 0 ? uniqueCategories[0] : 'akad';
+  const [activePricingTab, setActivePricingTab] = useState<string>(defaultTab);
+  
+  useEffect(() => {
+    if (uniqueCategories.length > 0 && !uniqueCategories.includes(activePricingTab)) {
+      setActivePricingTab(uniqueCategories[0]);
+    }
+  }, [activePkgs]);
 
   const handlePilihPaket = (pkgName: string) => {
     setFormData(prev => ({ ...prev, paket: pkgName }));
@@ -341,37 +350,30 @@ ${formData.message || '-'}
             </p>
           </AnimatedSection>
 
-          {/* TOMBOL NAVIGASI PAKET (KAYA SEBELUMNYA) */}
+          {/* TOMBOL NAVIGASI PAKET (DINAMIS) */}
           <AnimatedSection className="pricing-tabs" direction="up" delay={0.1}>
-            <div style={{ display: "flex", justifyContent: "center", gap: "16px", marginBottom: "48px" }}>
-              <button 
-                onClick={() => setActivePricingTab('akad')}
-                className={`btn-outline ${activePricingTab === 'akad' ? 'active-tab' : ''}`}
-                style={{ 
-                  backgroundColor: activePricingTab === 'akad' ? 'var(--gold)' : 'transparent',
-                  color: activePricingTab === 'akad' ? '#000' : 'var(--gold)',
-                  borderColor: 'var(--gold)',
-                  padding: '12px 32px'
-                }}
-              >
-                Paket Akad
-              </button>
-              <button 
-                onClick={() => setActivePricingTab('lengkap')}
-                className={`btn-outline ${activePricingTab === 'lengkap' ? 'active-tab' : ''}`}
-                style={{ 
-                  backgroundColor: activePricingTab === 'lengkap' ? 'var(--gold)' : 'transparent',
-                  color: activePricingTab === 'lengkap' ? '#000' : 'var(--gold)',
-                  borderColor: 'var(--gold)',
-                  padding: '12px 32px'
-                }}
-              >
-                Paket Lengkap
-              </button>
+            <div style={{ display: "flex", justifyContent: "center", gap: "16px", marginBottom: "48px", flexWrap: "wrap" }}>
+              {uniqueCategories.map((cat: any) => (
+                <button 
+                  key={cat}
+                  onClick={() => setActivePricingTab(cat)}
+                  className={`btn-outline ${activePricingTab === cat ? 'active-tab' : ''}`}
+                  style={{ 
+                    backgroundColor: activePricingTab === cat ? 'var(--gold)' : 'transparent',
+                    color: activePricingTab === cat ? '#000' : 'var(--gold)',
+                    borderColor: 'var(--gold)',
+                    padding: '12px 32px',
+                    textTransform: 'capitalize'
+                  }}
+                >
+                  Paket {cat}
+                </button>
+              ))}
             </div>
           </AnimatedSection>
 
-          {/* KATEGORI: PAKET AKAD */}
+          {/* KATEGORI PAKET (DINAMIS) */}
+
           {activePricingTab === 'akad' && activePkgs.filter((p: any) => p.type?.toLowerCase() === 'akad').length > 0 && (
             <div id="paket-akad" style={{ marginBottom: "80px", scrollMarginTop: "100px" }}>
               <h2 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "2rem", marginBottom: "32px", textAlign: "center" }}>Paket Akad</h2>
