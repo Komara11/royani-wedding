@@ -1,6 +1,6 @@
 "use server";
 
-import { unstable_noStore as noStore } from "next/cache";
+import { connection } from "next/server";
 import prisma from "@/lib/prisma";
 
 const fallbackPackages = [
@@ -351,88 +351,97 @@ const fallbackFaqs = [
 ];
 
 export async function getHero() {
-  noStore();
+  await connection();
   try {
     const doc = await prisma.siteContent.findUnique({ where: { id: "hero" } });
     if (!doc?.data) return fallbackHero;
     return { ...fallbackHero, ...Object.fromEntries(Object.entries(doc.data as any).filter(([_, v]) => v !== "" && v !== null)) };
   } catch (e) {
+    console.error("[getHero] DB error:", e);
     return fallbackHero;
   }
 }
 
 export async function getAbout() {
-  noStore();
+  await connection();
   try {
     const doc = await prisma.siteContent.findUnique({ where: { id: "about" } });
     if (!doc?.data) return fallbackAbout;
     return { ...fallbackAbout, ...Object.fromEntries(Object.entries(doc.data as any).filter(([_, v]) => v !== "" && v !== null)) };
   } catch (e) {
+    console.error("[getAbout] DB error:", e);
     return fallbackAbout;
   }
 }
 
 export async function getContact() {
-  noStore();
+  await connection();
   try {
     const doc = await prisma.siteContent.findUnique({ where: { id: "contact" } });
     if (!doc?.data) return fallbackContact;
     return { ...fallbackContact, ...Object.fromEntries(Object.entries(doc.data as any).filter(([_, v]) => v !== "" && v !== null)) };
   } catch (e) {
+    console.error("[getContact] DB error:", e);
     return fallbackContact;
   }
 }
 
 export async function getSocialLinks() {
-  noStore();
+  await connection();
   try {
     const doc = await prisma.siteContent.findUnique({ where: { id: "social_links" } });
     if (!doc?.data) return fallbackSocialLinks;
     return { ...fallbackSocialLinks, ...Object.fromEntries(Object.entries(doc.data as any).filter(([_, v]) => v !== "" && v !== null)) };
   } catch (e) {
+    console.error("[getSocialLinks] DB error:", e);
     return fallbackSocialLinks;
   }
 }
 
 export async function getPortfolioCategories() {
-  noStore();
+  await connection();
   try {
     const doc = await prisma.siteContent.findUnique({ where: { id: "portfolio_categories" } });
     return doc?.data || null;
   } catch (e) {
+    console.error("[getPortfolioCategories] DB error:", e);
     return null;
   }
 }
 
 export async function getPortfolios() {
-  noStore();
+  await connection();
   try {
     const data = await prisma.portfolio.findMany({ orderBy: { sortOrder: 'asc' } });
     if (!data || data.length === 0) return fallbackPortfolios;
     return data;
   } catch (e) {
+    console.error("[getPortfolios] DB error:", e);
     return fallbackPortfolios;
   }
 }
 
 export async function getPackages() {
-  noStore();
+  await connection();
   try {
     const data = await prisma.package.findMany({ orderBy: { sortOrder: 'asc' } });
     if (!data || data.length === 0) return fallbackPackages;
     return data;
   } catch (e) {
+    console.error("[getPackages] DB error:", e);
     return fallbackPackages;
   }
 }
 
 export async function getFaqs() {
-  noStore();
+  await connection();
   try {
     const data = await prisma.faqItem.findMany({ orderBy: { sortOrder: 'asc' } });
     if (!data || data.length === 0) return fallbackFaqs;
     return data;
   } catch (e) {
+    console.error("[getFaqs] DB error:", e);
     return fallbackFaqs;
   }
 }
+
