@@ -374,46 +374,29 @@ ${formData.message || '-'}
 
           {/* KATEGORI PAKET (DINAMIS) */}
 
-          {activePricingTab === 'akad' && activePkgs.filter((p: any) => p.type?.toLowerCase() === 'akad').length > 0 && (
-            <div id="paket-akad" style={{ marginBottom: "80px", scrollMarginTop: "100px" }}>
-              <h2 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "2rem", marginBottom: "32px", textAlign: "center" }}>Paket Akad</h2>
-              <div className="swipe-indicator">← Geser untuk melihat paket →</div>
-              <div className="pricing-preview-grid">
-                {activePkgs
-                  .filter((p: any) => p.type?.toLowerCase() === 'akad')
-                  .sort((a: any, b: any) => (a.sort_order || a.sortOrder || 0) - (b.sort_order || b.sortOrder || 0))
-                  .map((pkg: any, i: number) => (
-                    <PricingCard 
-                      key={pkg.id} 
-                      pkg={pkg} 
-                      delay={i * 0.1} 
-                      onSelect={() => handlePilihPaket(pkg.name)} 
-                    />
-                  ))}
+          {uniqueCategories.map((cat: any) => (
+            activePricingTab === cat && activePkgs.filter((p: any) => (p.type?.trim() || 'Lainnya') === cat).length > 0 && (
+              <div key={cat} id={`paket-${cat.toLowerCase().replace(/\s+/g, '-')}`} style={{ scrollMarginTop: "100px", marginBottom: "80px" }}>
+                <h2 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "2rem", marginBottom: "32px", textAlign: "center", textTransform: 'capitalize' }}>
+                  Paket {cat}
+                </h2>
+                <div className="swipe-indicator">← Geser untuk melihat paket →</div>
+                <div className="pricing-preview-grid">
+                  {activePkgs
+                    .filter((p: any) => (p.type?.trim() || 'Lainnya') === cat)
+                    .sort((a: any, b: any) => (a.sort_order || a.sortOrder || 0) - (b.sort_order || b.sortOrder || 0))
+                    .map((pkg: any, i: number) => (
+                      <PricingCard 
+                        key={pkg.id} 
+                        pkg={pkg} 
+                        delay={i * 0.1} 
+                        onSelect={() => handlePilihPaket(pkg.name)} 
+                      />
+                    ))}
+                </div>
               </div>
-            </div>
-          )}
-
-          {/* KATEGORI: PAKET LENGKAP */}
-          {activePricingTab === 'lengkap' && activePkgs.filter((p: any) => p.type?.toLowerCase() === 'lengkap').length > 0 && (
-            <div id="paket-lengkap" style={{ scrollMarginTop: "100px" }}>
-              <h2 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "2rem", marginBottom: "32px", textAlign: "center" }}>Paket Lengkap</h2>
-              <div className="swipe-indicator">← Geser untuk melihat paket →</div>
-              <div className="pricing-preview-grid">
-                {activePkgs
-                  .filter((p: any) => p.type?.toLowerCase() === 'lengkap')
-                  .sort((a: any, b: any) => (a.sort_order || a.sortOrder || 0) - (b.sort_order || b.sortOrder || 0))
-                  .map((pkg: any, i: number) => (
-                    <PricingCard 
-                      key={pkg.id} 
-                      pkg={pkg} 
-                      delay={i * 0.1} 
-                      onSelect={() => handlePilihPaket(pkg.name)} 
-                    />
-                  ))}
-              </div>
-            </div>
-          )}
+            )
+          ))}
         </div>
       </section>
 
