@@ -10,9 +10,7 @@ type PortfolioItem = {
   category: string;
   location: string;
   imageUrl: string;
-  image_url?: string;
-  gridClass?: string;
-  grid_class?: string;
+  gridClass: string;
 };
 
 export default function DokumentasiPage() {
@@ -33,8 +31,8 @@ export default function DokumentasiPage() {
             title: d.title || "",
             category: d.category || "Resepsi",
             location: d.location || "",
-            imageUrl: d.imageUrl || d.image_url || "",
-            gridClass: d.gridClass || d.grid_class || "col-6",
+            imageUrl: d.imageUrl || "",
+            gridClass: d.gridClass || "col-6",
           })));
         }
         if (catData && (catData as any).list) {

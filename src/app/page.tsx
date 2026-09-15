@@ -107,8 +107,8 @@ export default function HomePage() {
   const waLink = `https://wa.me/${parseWa(contactContent.whatsapp_number)}?text=Halo%20Royani%20Wedding%2C%20saya%20ingin%20berkonsultasi%20mengenai%20rencana%20pernikahan%20saya.`;
 
   // Map all packages directly from the database
-  const activePkgs = packages.filter((p: any) => p.is_active !== false && p.isActive !== false)
-                             .sort((a: any, b: any) => (a.sort_order || a.sortOrder || 0) - (b.sort_order || b.sortOrder || 0));
+  const activePkgs = packages.filter((p: any) => p.isActive !== false)
+                             .sort((a: any, b: any) => (a.sortOrder || 0) - (b.sortOrder || 0));
 
   const categoryCards = activePkgs.map((p: any) => ({
       id: p.id,
@@ -319,7 +319,7 @@ ${formData.message || '-'}
             ]).slice(0, 4).map((item: any, i: number) => (
               <AnimatedSection key={item.id} className="portfolio-card" delay={i * 0.1}>
                 <div className="portfolio-card-img">
-                  <img src={item.imageUrl || item.image_url || "/images/porto-1.jpg"} alt={item.title} loading="lazy" decoding="async" />
+                  <img src={item.imageUrl || "/images/porto-1.jpg"} alt={item.title} loading="lazy" decoding="async" />
                   <div className="portfolio-card-overlay">
                     <span className="portfolio-card-category">{item.category}</span>
                     <h3>{item.title}</h3>
@@ -384,7 +384,7 @@ ${formData.message || '-'}
                 <div className="pricing-preview-grid">
                   {activePkgs
                     .filter((p: any) => (p.type?.trim() || 'Lainnya') === cat)
-                    .sort((a: any, b: any) => (a.sort_order || a.sortOrder || 0) - (b.sort_order || b.sortOrder || 0))
+                    .sort((a: any, b: any) => (a.sortOrder || 0) - (b.sortOrder || 0))
                     .map((pkg: any, i: number) => (
                       <PricingCard 
                         key={pkg.id} 

@@ -15,7 +15,7 @@ export default function HargaPage() {
     async function fetchData() {
       try {
         const [pkgData, contactData] = await Promise.all([getPackages(), getContact()]);
-        if (pkgData) setPackages((pkgData as any).filter((p: any) => p.isActive !== false && p.is_active !== false));
+        if (pkgData) setPackages((pkgData as any).filter((p: any) => p.isActive !== false));
         if (contactData) setContactContent(contactData);
       } catch (err) {
         console.error("Fetch failed:", err);
@@ -36,8 +36,9 @@ export default function HargaPage() {
     ? `https://wa.me/${parseWa(contactContent.whatsapp_number)}?text=Halo%20Royani%20Wedding%2C%20saya%20ingin%20berkonsultasi%20mengenai%20paket%20harga.`
     : "https://wa.me/6287847222209";
 
-  const akadPackages = packages.filter((p) => p.type?.toLowerCase() === "akad").sort((a, b) => (a.sort_order || a.sortOrder || 0) - (b.sort_order || b.sortOrder || 0));
-  const lengkapPackages = packages.filter((p) => p.type?.toLowerCase() === "lengkap").sort((a, b) => (a.sort_order || a.sortOrder || 0) - (b.sort_order || b.sortOrder || 0));
+  // Dynamic categories from database
+  const activePkgs = packages.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+  const uniqueCategories = Array.from(new Set(activePkgs.map((p: any) => p.type?.trim() || 'Lainnya')));
 
   return (
     <main className="page-wrapper" >
@@ -56,39 +57,27 @@ export default function HargaPage() {
           <div style={{ textAlign: "center", padding: "100px 0", color: "var(--gold)" }}>Memuat paket harga...</div>
         ) : (
           <>
-            {/* Paket Akad */}
-            {akadPackages.length > 0 && (
-              <div style={{ marginBottom: "80px" }}>
-                <h2 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "2rem", marginBottom: "32px", textAlign: "center" }}>Paket Akad</h2>
-                <div className="pricing-grid">
-                  {akadPackages.map((pkg, i) => (
-                    <PricingCard 
-                      key={pkg.id} 
-                      pkg={pkg} 
-                      delay={i * 0.1} 
-                      onSelect={() => window.open(waLink, "_blank")} 
-                    />
-                  ))}
+            {uniqueCategories.map((cat) => {
+              const catPkgs = activePkgs.filter((p) => (p.type?.trim() || 'Lainnya') === cat);
+              if (catPkgs.length === 0) return null;
+              return (
+                <div key={cat} style={{ marginBottom: "80px" }}>
+                  <h2 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "2rem", marginBottom: "32px", textAlign: "center", textTransform: "capitalize" }}>
+                    Paket {cat}
+                  </h2>
+                  <div className="pricing-grid">
+                    {catPkgs.map((pkg, i) => (
+                      <PricingCard 
+                        key={pkg.id} 
+                        pkg={pkg} 
+                        delay={i * 0.1} 
+                        onSelect={() => window.open(waLink, "_blank")} 
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
-
-            {/* Paket Lengkap */}
-            {lengkapPackages.length > 0 && (
-              <div>
-                <h2 style={{ fontFamily: "var(--font-playfair)", color: "var(--gold)", fontSize: "2rem", marginBottom: "32px", textAlign: "center" }}>Paket Lengkap</h2>
-                <div className="pricing-grid">
-                  {lengkapPackages.map((pkg, i) => (
-                    <PricingCard 
-                      key={pkg.id} 
-                      pkg={pkg} 
-                      delay={i * 0.1} 
-                      onSelect={() => window.open(waLink, "_blank")} 
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
+              );
+            })}
           </>
         )}
       </div>
