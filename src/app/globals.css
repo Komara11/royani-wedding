@@ -209,12 +209,18 @@ nav.scrolled {
 .mobile-overlay { 
   position: fixed; inset: 0; background: var(--background); z-index: 1500;
   display: flex; flex-direction: column; align-items: center; 
-  padding-top: 100px; padding-bottom: 80px; overflow-y: auto;
+  padding-top: 100px; padding-bottom: 30px; overflow-y: auto;
 }
 .mobile-nav-links { display: flex; flex-direction: column; gap: 24px; text-align: center; margin: auto 0; }
 .mobile-nav-links a { font-size: 1.5rem; font-family: var(--font-playfair); color: var(--text-primary); }
 .mobile-nav-links a.active { color: var(--gold); font-style: italic; }
-.mobile-nav-footer { position: absolute; bottom: 40px; text-align: center; color: var(--text-muted); font-size: 0.875rem; }
+.mobile-nav-footer { margin-top: auto; padding-top: 24px; padding-bottom: 16px; text-align: center; color: var(--text-muted); font-size: 0.875rem; }
+.mobile-nav-contacts { display: flex; flex-direction: column; gap: 6px; margin: 8px 0; }
+.mobile-nav-contacts p { margin: 0; }
+.mobile-nav-contacts span { color: var(--text-muted); }
+.mobile-nav-contacts a { color: var(--gold); font-weight: 600; transition: opacity 0.2s; }
+.mobile-nav-contacts a:hover { opacity: 0.8; text-decoration: underline; }
+.mobile-nav-location { margin-top: 4px; font-size: 0.8rem; color: var(--text-muted); }
 
 /* ==========================================================================
    4. HERO
@@ -423,8 +429,9 @@ nav.scrolled {
 .footer-desc { color: var(--text-secondary); font-size: 0.95rem; }
 .footer-col ul li { margin-bottom: 12px; }
 .footer-col ul a, .footer-col p { color: var(--text-secondary); font-size: 0.95rem; transition: 0.3s; }
-.footer-col ul a:hover, .footer-wa-link:hover { color: var(--gold); }
-.footer-wa-link { color: var(--gold); font-weight: 600; }
+.footer-col ul a:hover { color: var(--gold); }
+.footer-wa-link { color: var(--gold); font-weight: 600; transition: opacity 0.2s; }
+.footer-wa-link:hover { color: var(--gold); opacity: 0.8; text-decoration: underline; }
 .footer-bottom { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 0.875rem; }
 .footer-attribution a { color: var(--gold); }
 

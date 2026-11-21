@@ -322,6 +322,7 @@ const fallbackContact = {
   title_highlight: "Hari Spesial Anda",
   description: "Konsultasikan konsep pernikahan impian Anda bersama tim kami. Kami siap memberikan solusi terbaik sesuai dengan anggaran dan kebutuhan Anda.",
   whatsapp_number: "+62 878 4722 2209",
+  whatsapp_number_2: "+62 821 2228 474",
   address: "Desa Kedungsari, Kec. Ligung, Kab. Majalengka",
   maps_url: "https://www.google.com/maps/place/Royani+wedding+gallery/@-6.631259,108.3431362,17z/data=!4m6!3m5!1s0x2e6edd131e725ead:0x46b77e412f815e01!8m2!3d-6.6312202!4d108.3431383!16s%2Fg%2F11h9fjcljr?hl=id&entry=ttu&g_ep=EgoyMDI2MDYwOS4wIKXMDSoASAFQAw%3D%3D",
   maps_embed_url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.123456789!2d108.3431362!3d-6.631259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6edd131e725ead%3A0x46b77e412f815e01!2sRoyani%20wedding%20gallery!5e0!3m2!1sid!2sid!4v1234567890",

@@ -66,6 +66,7 @@ export default function HomePage() {
     title_highlight: "Hari Spesial Anda",
     description: "Konsultasikan konsep pernikahan impian Anda bersama tim kami. Kami siap memberikan solusi terbaik sesuai dengan anggaran dan kebutuhan Anda.",
     whatsapp_number: "+62 878 4722 2209",
+    whatsapp_number_2: "+62 821 2228 474",
     address: "Blok Rabu RT.03/RW.02 No.81, Beusi, Ligung, Majalengka",
     maps_embed_url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1154.5123991206124!2d108.2721081!3d-6.6669931!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6ede115166299b%3A0xe54c86e245a4ecb4!2sRoyani%20Wedding!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid",
     form_tag: "HUBUNGI KAMI",
@@ -100,11 +101,12 @@ export default function HomePage() {
   }, []);
 
   const parseWa = (n: string) => {
-    const p = n.replace(/[^0-9]/g, "").replace(/^0/, "62");
+    const p = (n || "").replace(/[^0-9]/g, "").replace(/^0/, "62");
     return p.startsWith("62") ? p : n;
   };
 
   const waLink = `https://wa.me/${parseWa(contactContent.whatsapp_number)}?text=Halo%20Royani%20Wedding%2C%20saya%20ingin%20berkonsultasi%20mengenai%20rencana%20pernikahan%20saya.`;
+  const waLink2 = `https://wa.me/${parseWa(contactContent.whatsapp_number_2 || "+62 821 2228 474")}?text=Halo%20Royani%20Wedding%2C%20saya%20ingin%20berkonsultasi%20mengenai%20rencana%20pernikahan%20saya.`;
 
   // Map all packages directly from the database
   const activePkgs = packages.filter((p: any) => p.isActive !== false)
@@ -466,7 +468,16 @@ ${formData.message || '-'}
               </div>
               <div className="contact-card">
                 <h3 style={{ fontFamily: "var(--font-inter)", fontSize: "0.875rem", textTransform: "uppercase", color: "var(--gold)", letterSpacing: "2px", marginBottom: "12px" }}>WhatsApp</h3>
-                <a href={waLink} target="_blank" rel="noopener noreferrer">{contactContent.whatsapp_number}</a>
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                  <div>
+                    <span style={{ color: "var(--text-muted)", fontSize: "0.875rem", marginRight: "6px" }}>Admin 1:</span>
+                    <a href={waLink} target="_blank" rel="noopener noreferrer">{contactContent.whatsapp_number}</a>
+                  </div>
+                  <div>
+                    <span style={{ color: "var(--text-muted)", fontSize: "0.875rem", marginRight: "6px" }}>Admin 2:</span>
+                    <a href={waLink2} target="_blank" rel="noopener noreferrer">{contactContent.whatsapp_number_2 || "+62 821 2228 474"}</a>
+                  </div>
+                </div>
               </div>
               <div className="contact-map">
                 <iframe src={contactContent.maps_embed_url} width="100%" height="400" style={{ border: 0, borderRadius: 12 }} allowFullScreen loading="lazy" />
